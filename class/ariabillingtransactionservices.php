@@ -5,7 +5,7 @@
 class AriaBillingTransactionServices extends BaseAriaBilling
 {
 
-    /**
+        /**
      * WSDL File used to SOAP API calls
      * @var string $__wsdl_name Filename of WSDL file.
      */
@@ -15,7 +15,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @var string $__wsdl_version Version of the WSDL.
      */
     protected $__wsdl_version = '6.14';
-
+    
     /**
      * Returns the invoice number associated with a specified balance transfer.
      * @param int $transaction_id The unique identifier for a given transaction
@@ -1077,6 +1077,72 @@ class AriaBillingTransactionServices extends BaseAriaBilling
                 'client_record_ids' => $client_record_ids,
                 'exclusion_reason_cd' => $exclusion_reason_cd,
                 'exclusion_comment' => $exclusion_comment
+        ));
+    }
+
+    /**
+     * Create write-off or dispute the given invoice.
+     * @param int $invoice_no The unique identifer of a given invoice.
+     * @param double $amount The amount to writeoff/dispute.
+     * @param int $reason_code Reason code to writeoff/dispute.
+     * @param string $comments Comments to writeoff/dispute.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $do_dispute Specifies whether to dispute or not.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute created date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int dispute_ind Specifies Write-off or dispute.<br>string can_unsettle Specifies if this dispute can be unsettled.
+     */
+    public function create_writeoff_or_dispute($invoice_no, $amount, $reason_code, $comments, $acct_no = null, $do_dispute = null)
+    {
+        return $this->__ws_call('create_writeoff_or_dispute', Array(
+                'invoice_no' => $invoice_no,
+                'amount' => $amount,
+                'reason_code' => $reason_code,
+                'comments' => $comments,
+                'acct_no' => $acct_no,
+                'do_dispute' => $do_dispute
+        ));
+    }
+
+    /**
+     * Retrieve the write-offs and disputes made on the account.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $dispute_or_writeoff_flag Specifies if the api should return write off details or dispute details or both
+     * @param int $details_flag Flag to indicate whether the api will return writeoff invoices or not.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array write_off_info 
+     */
+    public function get_acct_writeoff_or_disputes($acct_no = null, $dispute_or_writeoff_flag = null, $details_flag = null)
+    {
+        return $this->__ws_call('get_acct_writeoff_or_disputes', Array(
+                'acct_no' => $acct_no,
+                'dispute_or_writeoff_flag' => $dispute_or_writeoff_flag,
+                'details_flag' => $details_flag
+        ));
+    }
+
+    /**
+     * Get the eligible invoices to write-off or dispute.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_details 
+     */
+    public function get_invoices_to_writeoff_or_dispute($acct_no = null)
+    {
+        return $this->__ws_call('get_invoices_to_writeoff_or_dispute', Array(
+                'acct_no' => $acct_no
+        ));
+    }
+
+    /**
+     * Settle dispute for the given dispute number.
+     * @param int $dispute_no Dispute number.
+     * @param int $settlement_action The amount need to be writeoff/dispute.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute create date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int dispute_ind Specifies dispute or writeoff<br>string can_unsettle Specifies if this dispute can be unsettled.
+     */
+    public function settle_dispute_hold($dispute_no, $settlement_action, $acct_no = null)
+    {
+        return $this->__ws_call('settle_dispute_hold', Array(
+                'dispute_no' => $dispute_no,
+                'settlement_action' => $settlement_action,
+                'acct_no' => $acct_no
         ));
     }
 

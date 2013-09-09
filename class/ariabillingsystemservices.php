@@ -5,7 +5,7 @@
 class AriaBillingSystemServices extends BaseAriaBilling
 {
 
-    /**
+        /**
      * WSDL File used to SOAP API calls
      * @var string $__wsdl_name Filename of WSDL file.
      */
@@ -15,7 +15,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @var string $__wsdl_version Version of the WSDL.
      */
     protected $__wsdl_version = '6.14';
-
+    
     /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
      * @param int $plan_no Aria assigned unique plan identifier

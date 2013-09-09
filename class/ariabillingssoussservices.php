@@ -5,7 +5,7 @@
 class AriaBillingSsoussServices extends BaseAriaBilling
 {
 
-    /**
+        /**
      * WSDL File used to SOAP API calls
      * @var string $__wsdl_name Filename of WSDL file.
      */
@@ -15,7 +15,7 @@ class AriaBillingSsoussServices extends BaseAriaBilling
      * @var string $__wsdl_version Version of the WSDL.
      */
     protected $__wsdl_version = '6.14';
-
+    
     /**
      * Authenticates a customer who logs into a User Self Service application with a user ID and password. Starts an Aria session for the customer that is logged in. Within the Aria session, you can perform functions such as securely processing payment transactions or securely retrieving account information.
      * @param string $user_id Account&#039;s user ID. Alternative to using acct_no.

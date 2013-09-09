@@ -5,7 +5,7 @@
 class AriaBillingAccountServices extends BaseAriaBilling
 {
 
-    /**
+        /**
      * WSDL File used to SOAP API calls
      * @var string $__wsdl_name Filename of WSDL file.
      */
@@ -15,7 +15,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @var string $__wsdl_version Version of the WSDL.
      */
     protected $__wsdl_version = '6.14';
-
+    
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts. If passed, only the coupons assigned to this account will be returned.
@@ -557,12 +557,16 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Cancels all plan changes scheduled to go into effect for a specified account.
      * @param int $account_number Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param array $plan_no_to_remove 
+     * @param string $remove_all_queued_plan_no Boolean &#039;true&#039; or &#039;false&#039; indicator informing user whether or not to actually perform all plans cancellation at the account level. If &#039;false&#039; is passed in this field, the queued_plan_no should be populated with Aria plan number(s).
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function cancel_queued_service_plan($account_number)
+    public function cancel_queued_service_plan($account_number, $plan_no_to_remove = null, $remove_all_queued_plan_no = null)
     {
         return $this->__ws_call('cancel_queued_service_plan', Array(
-                'account_number' => $account_number
+                'account_number' => $account_number,
+                'plan_no_to_remove' => $plan_no_to_remove,
+                'remove_all_queued_plan_no' => $remove_all_queued_plan_no
         ));
     }
 
@@ -3518,10 +3522,11 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $acct_user_id Client (or user)-assigned unique account identifier.
      * @param string $client_acct_id This is the client-assigned identifier for the account.
      * @param int $override_template_no Aria assigned unique template identifier for the message template.
+     * @param int $behavioral_option Specifies the distillation behavioral option that is to be used for this template class. The possible values are 1, 2, and 3. Value of 1 is Distill and send message. Value of 2 is Distill message but do not send. Value of 3 is Produce no message.
      * @param int $override_template_option Specifies the template override options.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function set_acct_notify_override($template_class, $acct_no = null, $acct_user_id = null, $client_acct_id = null, $override_template_no = null, $override_template_option = null)
+    public function set_acct_notify_override($template_class, $acct_no = null, $acct_user_id = null, $client_acct_id = null, $override_template_no = null, $behavioral_option = null, $override_template_option = null)
     {
         return $this->__ws_call('set_acct_notify_override', Array(
                 'template_class' => $template_class,
@@ -3529,7 +3534,42 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'acct_user_id' => $acct_user_id,
                 'client_acct_id' => $client_acct_id,
                 'override_template_no' => $override_template_no,
+                'behavioral_option' => $behavioral_option,
                 'override_template_option' => $override_template_option
+        ));
+    }
+
+    /**
+     * Assign or de_assign notification template group at the account level.
+     * @param string $notification_template_group_id Client-defined, case-insensitive unique ID of up to 50 characters in length (with no &quot;withespace&quot;) to designate a notification template group.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param string $acct_user_id Client (or user)-assigned unique account identifier.
+     * @param string $client_acct_id This is the client-assigned identifier for the account.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function set_acct_notify_tmplt_grp($notification_template_group_id, $acct_no = null, $acct_user_id = null, $client_acct_id = null)
+    {
+        return $this->__ws_call('set_acct_notify_tmplt_grp', Array(
+                'notification_template_group_id' => $notification_template_group_id,
+                'acct_no' => $acct_no,
+                'acct_user_id' => $acct_user_id,
+                'client_acct_id' => $client_acct_id
+        ));
+    }
+
+    /**
+     * Retrieve notification template groups assigned at various levels on the account.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param string $acct_user_id Client (or user)-assigned unique account identifier.
+     * @param string $client_acct_id This is the client-assigned identifier for the account.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array acct_notification_details 
+     */
+    public function get_acct_notification_details($acct_no = null, $acct_user_id = null, $client_acct_id = null)
+    {
+        return $this->__ws_call('get_acct_notification_details', Array(
+                'acct_no' => $acct_no,
+                'acct_user_id' => $acct_user_id,
+                'client_acct_id' => $client_acct_id
         ));
     }
 

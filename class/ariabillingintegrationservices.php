@@ -5,7 +5,7 @@
 class AriaBillingIntegrationServices extends BaseAriaBilling
 {
 
-    /**
+        /**
      * WSDL File used to SOAP API calls
      * @var string $__wsdl_name Filename of WSDL file.
      */
@@ -15,7 +15,7 @@ class AriaBillingIntegrationServices extends BaseAriaBilling
      * @var string $__wsdl_version Version of the WSDL.
      */
     protected $__wsdl_version = '6.14';
-
+    
     /**
      * Gets detailed account level information for all accounts matching specified query.
      * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.

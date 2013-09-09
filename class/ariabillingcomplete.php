@@ -1347,12 +1347,16 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Cancels all plan changes scheduled to go into effect for a specified account.
      * @param long $account_number Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param hash $plan_no_to_remove 
+     * @param string $remove_all_queued_plan_no Boolean &#039;true&#039; or &#039;false&#039; indicator informing user whether or not to actually perform all plans cancellation at the account level. If &#039;false&#039; is passed in this field, the queued_plan_no should be populated with Aria plan number(s).
      * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function cancel_queued_service_plan($account_number)
+    public function cancel_queued_service_plan($account_number, $plan_no_to_remove = null, $remove_all_queued_plan_no = null)
     {
         return $this->__ws_call('cancel_queued_service_plan', Array(
-                'account_number' => $account_number
+                'account_number' => $account_number,
+                'plan_no_to_remove' => $plan_no_to_remove,
+                'remove_all_queued_plan_no' => $remove_all_queued_plan_no
         ));
     }
 
@@ -4308,10 +4312,11 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $acct_user_id Client (or user)-assigned unique account identifier.
      * @param string $client_acct_id This is the client-assigned identifier for the account.
      * @param long $override_template_no Aria assigned unique template identifier for the message template.
+     * @param long $behavioral_option Specifies the distillation behavioral option that is to be used for this template class. The possible values are 1, 2, and 3. Value of 1 is Distill and send message. Value of 2 is Distill message but do not send. Value of 3 is Produce no message.
      * @param long $override_template_option Specifies the template override options.
      * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function set_acct_notify_override($template_class, $acct_no = null, $acct_user_id = null, $client_acct_id = null, $override_template_no = null, $override_template_option = null)
+    public function set_acct_notify_override($template_class, $acct_no = null, $acct_user_id = null, $client_acct_id = null, $override_template_no = null, $behavioral_option = null, $override_template_option = null)
     {
         return $this->__ws_call('set_acct_notify_override', Array(
                 'template_class' => $template_class,
@@ -4319,7 +4324,42 @@ class AriaBillingComplete extends BaseAriaBilling
                 'acct_user_id' => $acct_user_id,
                 'client_acct_id' => $client_acct_id,
                 'override_template_no' => $override_template_no,
+                'behavioral_option' => $behavioral_option,
                 'override_template_option' => $override_template_option
+        ));
+    }
+
+    /**
+     * Assign or de_assign notification template group at the account level.
+     * @param string $notification_template_group_id Client-defined, case-insensitive unique ID of up to 50 characters in length (with no &quot;withespace&quot;) to designate a notification template group.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param string $acct_user_id Client (or user)-assigned unique account identifier.
+     * @param string $client_acct_id This is the client-assigned identifier for the account.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function set_acct_notify_tmplt_grp($notification_template_group_id, $acct_no = null, $acct_user_id = null, $client_acct_id = null)
+    {
+        return $this->__ws_call('set_acct_notify_tmplt_grp', Array(
+                'notification_template_group_id' => $notification_template_group_id,
+                'acct_no' => $acct_no,
+                'acct_user_id' => $acct_user_id,
+                'client_acct_id' => $client_acct_id
+        ));
+    }
+
+    /**
+     * Retrieve notification template groups assigned at various levels on the account.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param string $acct_user_id Client (or user)-assigned unique account identifier.
+     * @param string $client_acct_id This is the client-assigned identifier for the account.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>hash acct_notification_details 
+     */
+    public function get_acct_notification_details($acct_no = null, $acct_user_id = null, $client_acct_id = null)
+    {
+        return $this->__ws_call('get_acct_notification_details', Array(
+                'acct_no' => $acct_no,
+                'acct_user_id' => $acct_user_id,
+                'client_acct_id' => $client_acct_id
         ));
     }
 
@@ -5473,6 +5513,72 @@ class AriaBillingComplete extends BaseAriaBilling
                 'client_record_ids' => $client_record_ids,
                 'exclusion_reason_cd' => $exclusion_reason_cd,
                 'exclusion_comment' => $exclusion_comment
+        ));
+    }
+
+    /**
+     * Create write-off or dispute the given invoice.
+     * @param long $invoice_no The unique identifer of a given invoice.
+     * @param double $amount The amount to writeoff/dispute.
+     * @param long $reason_code Reason code to writeoff/dispute.
+     * @param string $comments Comments to writeoff/dispute.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param long $do_dispute Specifies whether to dispute or not.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>long rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>long invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute created date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>long reason_code Write-off/dispute reason code.<br>long dispute_ind Specifies Write-off or dispute.<br>string can_unsettle Specifies if this dispute can be unsettled.
+     */
+    public function create_writeoff_or_dispute($invoice_no, $amount, $reason_code, $comments, $acct_no = null, $do_dispute = null)
+    {
+        return $this->__ws_call('create_writeoff_or_dispute', Array(
+                'invoice_no' => $invoice_no,
+                'amount' => $amount,
+                'reason_code' => $reason_code,
+                'comments' => $comments,
+                'acct_no' => $acct_no,
+                'do_dispute' => $do_dispute
+        ));
+    }
+
+    /**
+     * Retrieve the write-offs and disputes made on the account.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param long $dispute_or_writeoff_flag Specifies if the api should return write off details or dispute details or both
+     * @param long $details_flag Flag to indicate whether the api will return writeoff invoices or not.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>hash write_off_info 
+     */
+    public function get_acct_writeoff_or_disputes($acct_no = null, $dispute_or_writeoff_flag = null, $details_flag = null)
+    {
+        return $this->__ws_call('get_acct_writeoff_or_disputes', Array(
+                'acct_no' => $acct_no,
+                'dispute_or_writeoff_flag' => $dispute_or_writeoff_flag,
+                'details_flag' => $details_flag
+        ));
+    }
+
+    /**
+     * Get the eligible invoices to write-off or dispute.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>hash invoice_details 
+     */
+    public function get_invoices_to_writeoff_or_dispute($acct_no = null)
+    {
+        return $this->__ws_call('get_invoices_to_writeoff_or_dispute', Array(
+                'acct_no' => $acct_no
+        ));
+    }
+
+    /**
+     * Settle dispute for the given dispute number.
+     * @param long $dispute_no Dispute number.
+     * @param long $settlement_action The amount need to be writeoff/dispute.
+     * @param long $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] long error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>long rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>long invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute create date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>long reason_code Write-off/dispute reason code.<br>long dispute_ind Specifies dispute or writeoff<br>string can_unsettle Specifies if this dispute can be unsettled.
+     */
+    public function settle_dispute_hold($dispute_no, $settlement_action, $acct_no = null)
+    {
+        return $this->__ws_call('settle_dispute_hold', Array(
+                'dispute_no' => $dispute_no,
+                'settlement_action' => $settlement_action,
+                'acct_no' => $acct_no
         ));
     }
 
