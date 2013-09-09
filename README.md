@@ -1,6 +1,6 @@
 #Aria PHP SDK
 
-PHP SDK to work with Aria's APIs.
+PHP SDK to work with Aria's APIs. For more information and examples go to [Aria Developer Central](http://developer.ariasystems.net).
 
 ##Usage
 
