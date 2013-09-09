@@ -1,4 +1,7 @@
 <?php
+
+require_once('baseariabilling.class.php');
+
 /**
  * @package AriaBillingSsoussServices
  */
