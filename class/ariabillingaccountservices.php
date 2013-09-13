@@ -17,11 +17,11 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.14';
+    protected $__wsdl_version = '6.13';
     
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts. If passed, only the coupons assigned to this account will be returned.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $coupon_cd If passed, only the details for the coupon specified will be returned.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array coupons 
      */
@@ -138,7 +138,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Changes the value of a particular supplemental field associated with a specified account.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param string $field_name The supplemental field name.
+     * @param string $field_name The machine-readable name of this field
      * @param string $value_text The string value of the named supplemental field.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
@@ -154,6 +154,9 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Updates the billing contact information for a specified account. To delete a piece of billing contact information, set the corresponding field to &quot;~&quot;. Leaving a field blank will retain the existing information in the field.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param string $first_name Contact Fist name
      * @param string $last_name Contact Last name
      * @param string $middle_initial The Middle Initial of the contact.
@@ -167,16 +170,16 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $zip The contact&#039;s zip/postal code.
      * @param string $intl_phone This is the international phone number of the contact
      * @param string $email Email of the contact
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_acct_billing_contact($account_no, $do_collect, $change_status_after_coll, $reset_dates_after_status, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $address3 = null)
     {
         return $this->__ws_call('update_acct_billing_contact', Array(
                 'account_no' => $account_no,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'middle_initial' => $middle_initial,
@@ -190,9 +193,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'zip' => $zip,
                 'intl_phone' => $intl_phone,
                 'email' => $email,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'address3' => $address3
         ));
     }
@@ -226,22 +226,22 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Sets a validated bank account as the payment method of a specified account.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param string $bank_routing_num The ABA routing number for the bank holding &#039;bank_acct_num&#039;
      * @param string $bank_acct_num The bank account number.
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_bank_draft($account_no, $do_collect, $change_status_after_coll, $reset_dates_after_status, $bank_routing_num = null, $bank_acct_num = null)
     {
         return $this->__ws_call('set_pay_method_bank_draft', Array(
                 'account_no' => $account_no,
-                'bank_routing_num' => $bank_routing_num,
-                'bank_acct_num' => $bank_acct_num,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'bank_routing_num' => $bank_routing_num,
+                'bank_acct_num' => $bank_acct_num
         ));
     }
 
@@ -250,22 +250,22 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $cc_expire_mm Expiration month for the credit card payment instrument.
      * @param int $cc_expire_yyyy Expiration year for the credit card payment instrument.
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param string $cc_number Credit card number.
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $do_collect, $change_status_after_coll, $reset_dates_after_status, $cc_number = null)
     {
         return $this->__ws_call('set_pay_method_cc', Array(
                 'account_no' => $account_no,
                 'cc_expire_mm' => $cc_expire_mm,
                 'cc_expire_yyyy' => $cc_expire_yyyy,
-                'cc_number' => $cc_number,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'cc_number' => $cc_number
         ));
     }
 
@@ -452,6 +452,9 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * This API is used to update the payment method on an account.  Newly recorded payment methods are automatically made the default payment method on the account.
      * @param int $account_number Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param string $first_name Billing address first name
      * @param string $last_name Billing address last name
      * @param string $middle_initial Billing address middle initial
@@ -475,16 +478,16 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $cc_expire_yyyy Credit card expiration year, 4-digit
      * @param string $bank_routing_num Bank account routing number
      * @param string $bank_acct_num Bank account number
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @return mixed[] int seq_no The sequence number of this payment, as it appears on the account<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code The error code for the collection portion of this call, if a collection was attempted<br>string collection_error_msg The error message for the collection portion of this call, if a collection was attempted<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_payment_method($account_number, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_extension = null, $email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
+    public function update_payment_method($account_number, $do_collect, $change_status_after_coll, $reset_dates_after_status, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_extension = null, $email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_payment_method', Array(
                 'account_number' => $account_number,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'middle_initial' => $middle_initial,
@@ -508,9 +511,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'cc_expire_yyyy' => $cc_expire_yyyy,
                 'bank_routing_num' => $bank_routing_num,
                 'bank_acct_num' => $bank_acct_num,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'client_receipt_id' => $client_receipt_id
         ));
     }
@@ -600,7 +600,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns a list of current and previous supplemental plans assigned to an account.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier.
+     * @param int $plan_no Aria assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array supp_plan_hist 
      */
     public function get_acct_supp_plan_history($acct_no = null, $plan_no = null)
@@ -637,7 +637,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Returns a summary list of plans associated with a specified promotion code.
-     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction.A promotion generally provides  access to a custom set of reduced-rate plans.
+     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides  access to a custom set of reduced-rate plans.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array plans This return value is a multidimensional array describing the detail of all available plans on this promo code.
      */
     public function get_plans_by_promo_code($promo_code = null)
@@ -649,7 +649,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Returns a detailed list of plans associated with a specified promotion code. The information returned includes the services and rate schedules associated with the plans.
-     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction.A promotion generally provides access to a custom set of reduced-rate plans.
+     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides  access to a custom set of reduced-rate plans.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array all_plans This return value is a multidimensional array describing the detail of all available plans.
      */
     public function get_plans_by_promo_code_all($promo_code = null)
@@ -662,7 +662,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns all available information about an account such as contact information, demographic information, dates associated with the account, account status, plan, notification method, password, and billing information.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] string first_name Contact Fist name<br>string mi Middle initial of the contact<br>string last_name Contact Last name<br>string userid The users unique identifier.<br>string birthdate Contact date of birth<br>string job_title The job title of the contact.<br>string salutation The contact&#039;s salutation (such as Mr., Ms., Dr., etc.)<br>string senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.<br>string client_acct_id This is the client-assigned identifier for the account.<br>string resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.<br>string is_test_acct A Boolean value indicating that the account is a test account.<br>string alt_email Alternate email address for contact.<br>string address1 First address line of the contact<br>string address2 Second address line of the contact<br>string city City of the contact<br>string state_prov State or Province of the contact<br>string locality Locality of the contact<br>string postal_code Postal/Zip code for the contact address.<br>string country Country of the contact<br>string company_name Company name of the contact<br>string cell_phone_npa Cell phone Numbering Plan Area value (also known as area code).<br>string cell_phone_nxx Cell phone Exchange (first 3 numbers following the area code/NPA).<br>string cell_phone_suffix Cell phone number (this is the number on the exchange/NXX for the target phone).<br>string fax_phone The FAX phone number for the contact.<br>string intl_cell_phone The international cell phone number of the contact.<br>string intl_phone This is the international phone number of the contact<br>string phone_extension The extension for the contact&#039;s phone number.<br>string phone_npa Phone Numbering Plan Area value (also known as area code).<br>string phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string work_phone The full work phone number<br>string work_phone_extension The office/desk extension of the contact&#039;s work phone, if any.<br>string work_phone_npa Phone Numbering Plan Area value (also known as area code).<br>string work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string bill_day The billing anniversary day.<br>string created Date the account was created.<br>string date_to_expire The date the account is scheduled to expire.<br>string date_to_suspend The date the account is scheduled to be suspended.<br>string last_arrears_bill_thru_date The most recent date at which the account was fully billed in arrears<br>string last_bill_date The last date the account was billed<br>string last_bill_thru_date The date through which the account has been billed.<br>string next_bill_date The next bill date for the account.<br>string plan_date The date the plan assigned to the account.<br>string status_date This is the date the status on the account was set.<br>string status_degrade_date The date the account status was degraded.<br>string status_cd This is the status of the object inquestion for the current API call.<br>string status_label This is the human-readbale status of the account.<br>string plan_no The unique plan identifier.<br>string plan_name Name of the Master Subscription Plan for this account<br>string plan_units The number of plan units to assign.<br>string notify_method If notification method is not provided, value will default to 1 (HTML email).<br>string notify_method_name The name of the notify method to be used in communicating with the account holder.<br>string PASSWORD The account&#039;s reg/uss password<br>string pin Persinal Identification number<br>string secret_question The users secret question recorded to recover a password.<br>string secret_question_answer The response to a users &#039;secret_question&#039;<br>string pay_method This is the method_id corresponding to a payment method such as credit card, Electronic Check, Pre-Paid, Net Terms, etc.<br>string pay_method_name The human-readable name of the payment method.<br>string currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.<br>string tax_id This is the Tax Identification Number or EIN of the account holder.<br>string billing_email The email address of the billing contact, or the general billing email address.<br>string billing_first_name The first name of the billing contact for the account.<br>string billing_middle_initial The middle initial of the billing contact.<br>string billing_last_name The last name of the billing contact.<br>string billing_address1 Street address (number and name) of the billing contact address.<br>string billing_address2 The second billing address line (for example: bldg, suite, apt., etc.)<br>string billing_city The city name of the billing contact address.<br>string billing_state The state or province of the billing contact&#039;s address.<br>string billing_locality The billing contact&#039;s locality (for example: county, rural unincorporated area name).<br>string billing_zip The zip or postal code for the billing contact&#039;s address.<br>string billing_country The country for the billing contact&#039;s address.<br>string cc_suffix The last 4 digits of the credit card number<br>string cc_expire_mm Expiration month for the credit card payment instrument.<br>string cc_expire_yyyy Expiration year for the credit card payment instrument.<br>string cc_id A numeric code indicating the type of credit card<br>string bank_acct_suffix The last 4 digits of the bank account<br>string bank_routing_no This is the ABA (American Banking Association) unique identifier for the fincancial institution.<br>string billing_cell_phone The billing cell phone area code.<br>string billing_cell_phone_npa The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_nxx The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_suffix The cell phone number. Digits following the NXX exchange digits.<br>string billing_company_name The company or DBA name of the billing contact.<br>string billing_intl_phone The international phone number of the billing contact.<br>string billing_phone_extension The office, desk or group extension for the billing contact&#039;s phone number.<br>string billing_phone_npa The billing contact&#039;s area code.<br>string billing_phone_nxx The exchange number for the billing contact phone. (The NXX follows the NPA and preceeds the phone number).<br>string billing_phone_suffix The last digits of the billing contact&#039;s phone number, immediately following the NPA and NXX (also referred to as the phone number).<br>string billing_work_phone The full billing work phone number<br>string billing_work_phone_extension The extension of the billing contact work phone.<br>string billing_work_phone_npa The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_nxx The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_suffix The last digits of the billing contact&#039;s work phone (immediately follows the NPA and NXX), also referred to as the &quot;phone number&quot;.<br>string balance The outstanding balance for this account.<br>string acct_create_client_receipt_id The client-specified receipt ID, returned for this account creation in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string plan_client_receipt_id The client-specified receipt ID, returned for this plan creation or assignment in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string status_client_receipt_id The client-specified receipt ID, returned for this account status change in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string taxpayer_id Taxpayer Identification number.<br>int alt_msg_template_no Email template number assigned to this account.<br>int seq_func_group_no Functional account group number specifically designated for statement sequence number assignment.<br>string promo_cd This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides access to a custom set of reduced-rate plans.<br>string address3 The third line of the address<br>string billing_address3 The third line of the billing address<br>string address_verification_code The address verification code for account contact address<br>double address_match_score The score of match for account contact address verification code<br>string billing_address_verification_code The address verification code for account billing address<br>double billing_address_match_score The score of match for account billing address verification code<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] string first_name Contact Fist name<br>string mi Middle initial of the contact<br>string last_name Contact Last name<br>string userid The users unique identifier.<br>string birthdate Contact date of birth<br>string job_title The job title of the contact.<br>string salutation The contact&#039;s salutation (such as Mr., Ms., Dr., etc.)<br>string senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.<br>string client_acct_id This is the client-assigned identifier for the account.<br>string resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.<br>string is_test_acct A Boolean value indicating that the account is a test account.<br>string alt_email Alternate email address for contact.<br>string address1 First address line of the contact<br>string address2 Second address line of the contact<br>string city City of the contact<br>string state_prov State or Province of the contact<br>string locality Locality of the contact<br>string postal_code Postal/Zip code for the contact address.<br>string country Country of the contact<br>string company_name Company name of the contact<br>string cell_phone_npa Cell phone Numbering Plan Area value (also known as area code).<br>string cell_phone_nxx Cell phone Exchange (first 3 numbers following the area code/NPA).<br>string cell_phone_suffix Cell phone number (this is the number on the exchange/NXX for the target phone).<br>string fax_phone The FAX phone number for the contact.<br>string intl_cell_phone The international cell phone number of the contact.<br>string intl_phone This is the international phone number of the contact<br>string phone_extension The extension for the contact&#039;s phone number.<br>string phone_npa Phone Numbering Plan Area value (also known as area code).<br>string phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string work_phone The full work phone number<br>string work_phone_extension The office/desk extension of the contact&#039;s work phone, if any.<br>string work_phone_npa Phone Numbering Plan Area value (also known as area code).<br>string work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string bill_day The billing anniversary day.<br>string created Date the account was created.<br>string date_to_expire The date the account is scheduled to expire.<br>string date_to_suspend The date the account is scheduled to be suspended.<br>string last_arrears_bill_thru_date The most recent date at which the account was fully billed in arrears<br>string last_bill_date The last date the account was billed<br>string last_bill_thru_date The date through which the account has been billed.<br>string next_bill_date The next bill date for the account.<br>string plan_date The date the plan assigned to the account.<br>string status_date This is the date the status on the account was set.<br>string status_degrade_date The date the account status was degraded.<br>string status_cd This is the status of the object inquestion for the current API call.<br>string status_label This is the human-readbale status of the account.<br>int plan_no Aria assigned unique plan identifier<br>string plan_name Name of the Master Subscription Plan for this account<br>string plan_units The number of plan units to assign.<br>string notify_method If notification method is not provided, value will default to 1 (HTML email).<br>string notify_method_name The name of the notify method to be used in communicating with the account holder.<br>string PASSWORD The account&#039;s reg/uss password<br>string pin Persinal Identification number<br>string secret_question The users secret question recorded to recover a password.<br>string secret_question_answer The response to a users &#039;secret_question&#039;<br>string pay_method This is the method_id corresponding to a payment method such as credit card, Electronic Check, Pre-Paid, Net Terms, etc.<br>string pay_method_name The human-readable name of the payment method.<br>string currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.<br>string tax_id This is the Tax Identification Number or EIN of the account holder.<br>string billing_email The email address of the billing contact, or the general billing email address.<br>string billing_first_name The first name of the billing contact for the account.<br>string billing_middle_initial The middle initial of the billing contact.<br>string billing_last_name The last name of the billing contact.<br>string billing_address1 Street address (number and name) of the billing contact address.<br>string billing_address2 The second billing address line (for example: bldg, suite, apt., etc.)<br>string billing_city The city name of the billing contact address.<br>string billing_state The state or province of the billing contact&#039;s address.<br>string billing_locality The billing contact&#039;s locality (for example: county, rural unincorporated area name).<br>string billing_zip The zip or postal code for the billing contact&#039;s address.<br>string billing_country The country for the billing contact&#039;s address.<br>string cc_suffix The last 4 digits of the credit card number<br>string cc_expire_mm Expiration month for the credit card payment instrument.<br>string cc_expire_yyyy Expiration year for the credit card payment instrument.<br>string cc_id A numeric code indicating the type of credit card<br>string bank_acct_suffix The last 4 digits of the bank account<br>string bank_routing_no This is the ABA (American Banking Association) unique identifier for the fincancial institution.<br>string billing_cell_phone The billing cell phone area code.<br>string billing_cell_phone_npa The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_nxx The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_suffix The cell phone number. Digits following the NXX exchange digits.<br>string billing_company_name The company or DBA name of the billing contact.<br>string billing_intl_phone The international phone number of the billing contact.<br>string billing_phone_extension The office, desk or group extension for the billing contact&#039;s phone number.<br>string billing_phone_npa The billing contact&#039;s area code.<br>string billing_phone_nxx The exchange number for the billing contact phone. (The NXX follows the NPA and preceeds the phone number).<br>string billing_phone_suffix The last digits of the billing contact&#039;s phone number, immediately following the NPA and NXX (also referred to as the phone number).<br>string billing_work_phone The full billing work phone number<br>string billing_work_phone_extension The extension of the billing contact work phone.<br>string billing_work_phone_npa The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_nxx The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_suffix The last digits of the billing contact&#039;s work phone (immediately follows the NPA and NXX), also referred to as the &quot;phone number&quot;.<br>string balance The outstanding balance for this account.<br>string acct_create_client_receipt_id The client-specified receipt ID, returned for this account creation in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string plan_client_receipt_id The client-specified receipt ID, returned for this plan creation or assignment in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string status_client_receipt_id The client-specified receipt ID, returned for this account status change in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string taxpayer_id Taxpayer Identification number.<br>int alt_msg_template_no Email template number assigned to this account.<br>int seq_func_group_no Functional account group number specifically designated for statement sequence number assignment.<br>string promo_cd This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides access to a custom set of reduced-rate plans.<br>string address3 The third line of the address<br>string billing_address3 The third line of the billing address<br>string address_verification_code The address verification code for account contact address<br>double address_match_score The score of match for account contact address verification code<br>string billing_address_verification_code The address verification code for account billing address<br>double billing_address_match_score The score of match for account billing address verification code<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_acct_details_all($acct_no = null)
     {
@@ -711,6 +711,9 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * updates some billing info including contact info and credit card expiration
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $seq_no The unique bill sequence number
      * @param string $address1 First address line of the contact
@@ -736,15 +739,15 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).
      * @param string $work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).
      * @param string $work_phone_ext The extension for the contact work phone
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_existing_billing_info($acct_no = null, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_existing_billing_info($do_collect, $change_status_after_coll, $reset_dates_after_status, $acct_no = null, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $address3 = null)
     {
         return $this->__ws_call('update_existing_billing_info', Array(
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'acct_no' => $acct_no,
                 'seq_no' => $seq_no,
                 'address1' => $address1,
@@ -770,9 +773,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'work_phone_nxx' => $work_phone_nxx,
                 'work_phone_suffix' => $work_phone_suffix,
                 'work_phone_ext' => $work_phone_ext,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'address3' => $address3
         ));
     }
@@ -838,7 +838,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param double $usage_units The volume of usage consumed by the account holder.
      * @param string $next_usage_date The next date usage will be recorded
      * @param string $alt_desc Alternate description of the usage being recorded
-     * @param int $plan_no The unique plan identifier
+     * @param int $plan_no Aria assigned unique plan identifier
      * @param string $first_usage_date The date of the first usage to record
      * @param string $recurring_ind Indicates whether or not this service is a recurring service
      * @param string $usage_type_code The ID of the usage type associated with this line
@@ -878,7 +878,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * disable all standing_usage recs for gievn acct_no
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier
+     * @param int $plan_no Aria assigned unique plan identifier
      * @param string $comments Additional explanitory text relating to this API call.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
@@ -944,7 +944,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns the values for a particular supplemental field associated with a specified account.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param string $field_name The supplemental field name.
+     * @param string $field_name The machine-readable name of this field
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array supp_field_values 
      */
     public function get_supp_field_values($acct_no = null, $field_name = null)
@@ -957,7 +957,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Returns a summary list of supplemental plans associated with a specified promotion code.
-     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction.A promotion generally provides access to a custom set of reduced-rate plans.
+     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides  access to a custom set of reduced-rate plans.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array plans 
      */
     public function get_supp_plans_by_promo_code($promo_code = null)
@@ -969,7 +969,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Returns a detailed list of supplemental plans associated with a specified promotion code. The information returned includes the services and rate schedules associated with the plans.
-     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction.A promotion generally provides access to a custom set of reduced-rate plans.
+     * @param string $promo_code This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides  access to a custom set of reduced-rate plans.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array all_plans This return value is a multidimensional array describing the detail of all available plans.
      */
     public function get_supp_plans_by_promo_code_all($promo_code = null)
@@ -982,13 +982,14 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Assigns one supplemental plan to a specified account. To assign multiple supplemental plans to an account, use the assign_supp_plan_multi method.
      * @param int $supp_plan_no The Aria-assigned identifier for a supplemental service plan. Allowable values are limited to valid custom plan numbers for client.
+     * @param  $offset_interval 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $alt_rate_schedule_no Alternative Rate Schedule Number. The alt_rate_schedule_no is the unique identifier for an alternative rate schedule that can be assigned to the account holder in place of the default rate schedule. This is often done by CSR&#039;s to provide special compensation or discounts as incentives to account holders.
      * @param int $num_plan_units The factor by which all future recurring fees for this plan will be multiplied on future invoices for this account. EXAMPLE: An account wishes to have the supplemental plan titled Seats of XYZ Application assigned to them, with a monthly flat cost of $10.00 per seat. To assign 5 seats of this plan to the account, resulting in a monthly charge of $50.00 to the account, a value of 5 should be passed in this field.
      * @param string $coupon_code The code of the coupon to which to apply the discount.  If code is not valid for any reason, an appropriate error code is returned and the entire transaction (including the supp plan assignment and any possible invoice creation) is rolled back.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
      * @param string $comments Additional explanitory text relating to this API call.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param int $contract_type_no The Aria Contract Type number.
      * @param double $contract_alt_recur_fee Alternate contract recurring fee to assign.
@@ -1002,14 +1003,14 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $alt_client_acct_group_id The one-time collections account group  to use for this particular call.  The default on the account is not changed.
      * @param array $new_acct_custom_rates 
      * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
-     * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
      * @param string $contract_end_date Allows the caller to set a specific end date when creating or modifying plan contracts.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int invoice_no The unique identifer of a given invoice.<br>array supp_plan_line_items <br>double total_charges_before_tax Total amount to be charged to the account before taxes have been calculated.<br>double total_tax_charges Total taxes as calculated for the amount of the transaction.<br>double total_charges_after_tax Total amount to be charged to the account after taxes have been calculated.<br>double total_credit The total amount of the credit to be applied to the account<br>double total_tax_credit The tax amount of the credit to be applies<br>double total_credit_before_tax The credit to be applied before tax is taken into account<br>double total The grand total of this invoice<br>double expectd_activation_fee The predicted activation fee based on activation fee charges on supplemental plans on this invoice<br>double expectd_mthly_recurring_cost The predicted monthly recurring cost of the items and plans on this invoice<br>double expectd_annu_recurring_cost The predicted annual recurring cost of the items and plans on this invoice<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function assign_supp_plan($supp_plan_no, $acct_no = null, $alt_rate_schedule_no = null, $num_plan_units = null, $coupon_code = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $contract_type_no = null, $contract_alt_recur_fee = null, $contract_length_months = null, $contract_cancel_fee = null, $contract_comments = null, $contract_start_date = null, $offset_months = null, $auto_offset_months_option = null, $alt_proration_start_date = null, $alt_client_acct_group_id = null, $new_acct_custom_rates = null, $effective_date = null, $offset_interval = null, $contract_end_date = null)
+    public function assign_supp_plan($supp_plan_no, $offset_interval, $acct_no = null, $alt_rate_schedule_no = null, $num_plan_units = null, $coupon_code = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $contract_type_no = null, $contract_alt_recur_fee = null, $contract_length_months = null, $contract_cancel_fee = null, $contract_comments = null, $contract_start_date = null, $offset_months = null, $auto_offset_months_option = null, $alt_proration_start_date = null, $alt_client_acct_group_id = null, $new_acct_custom_rates = null, $effective_date = null, $contract_end_date = null)
     {
         return $this->__ws_call('assign_supp_plan', Array(
                 'supp_plan_no' => $supp_plan_no,
+                'offset_interval' => $offset_interval,
                 'acct_no' => $acct_no,
                 'alt_rate_schedule_no' => $alt_rate_schedule_no,
                 'num_plan_units' => $num_plan_units,
@@ -1030,7 +1031,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'alt_client_acct_group_id' => $alt_client_acct_group_id,
                 'new_acct_custom_rates' => $new_acct_custom_rates,
                 'effective_date' => $effective_date,
-                'offset_interval' => $offset_interval,
                 'contract_end_date' => $contract_end_date
         ));
     }
@@ -1038,21 +1038,22 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Cancels the supplemental plans assigned to a specified account.
      * @param int $supp_plan_no The Aria-assigned identifier for a supplemental service plan. Allowable values are limited to valid custom plan numbers for client.
+     * @param  $offset_interval 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
      * @param string $comments Additional explanitory text relating to this API call.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $alt_proration_start_date This argument specifies and alternate proration start date.
-     * @param string $effective_date If set, the date on which this change should happen
-     * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
+     * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
      * @param string $invoice_unbilled_usage Specifies the unbilled usage to be invoiced or not.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int invoice_no The unique identifer of a given invoice.<br>array supp_plan_line_items <br>double total_charges_before_tax Total amount to be charged to the account before taxes have been calculated.<br>double total_tax_charges Total taxes as calculated for the amount of the transaction.<br>double total_charges_after_tax Total amount to be charged to the account after taxes have been calculated.<br>double total_credit The total amount of the credit to be applied to the account<br>double total_tax_credit The tax amount of the credit to be applies<br>double total_credit_before_tax The credit to be applied before tax is taken into account<br>double total The grand total of this invoice<br>double proration_credit_result_amount The total proration credit granted to the account<br>double proration_credit_amount The non-tax proration credit granted to the account<br>double proration_tax_amount The prorated refund of the initial tax amount<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function cancel_supp_plan($supp_plan_no, $acct_no = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $alt_proration_start_date = null, $effective_date = null, $offset_interval = null, $invoice_unbilled_usage = null)
+    public function cancel_supp_plan($supp_plan_no, $offset_interval, $acct_no = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $alt_proration_start_date = null, $effective_date = null, $invoice_unbilled_usage = null)
     {
         return $this->__ws_call('cancel_supp_plan', Array(
                 'supp_plan_no' => $supp_plan_no,
+                'offset_interval' => $offset_interval,
                 'acct_no' => $acct_no,
                 'assignment_directive' => $assignment_directive,
                 'comments' => $comments,
@@ -1060,7 +1061,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'client_receipt_id' => $client_receipt_id,
                 'alt_proration_start_date' => $alt_proration_start_date,
                 'effective_date' => $effective_date,
-                'offset_interval' => $offset_interval,
                 'invoice_unbilled_usage' => $invoice_unbilled_usage
         ));
     }
@@ -1074,10 +1074,10 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $coupon_code The code of the coupon to which to apply the discount.  If code is not valid for any reason, an appropriate error code is returned and the entire transaction (including the supp plan assignment and any possible invoice creation) is rolled back.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
      * @param string $comments Additional explanitory text relating to this API call.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param array $new_acct_custom_rates 
-     * @param string $effective_date If passed, the date on which this change will take effect
+     * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
      * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int invoice_no The unique identifer of a given invoice.<br>array supp_plan_line_items <br>double total_charges_before_tax Total amount to be charged to the account before taxes have been calculated.<br>double total_tax_charges Total taxes as calculated for the amount of the transaction.<br>double total_charges_after_tax Total amount to be charged to the account after taxes have been calculated.<br>double total_credit The total amount of the credit to be applied to the account<br>double total_tax_credit The tax amount of the credit to be applies<br>double total_credit_before_tax The credit to be applied before tax is taken into account<br>double total The grand total of this invoice<br>double proration_credit_result_amount The pro-rated credit amount for this invoice<br>double proration_credit_amount The pro-rated credit amount for this invoice<br>double proration_tax_amount The pro-rated tax credit amount for this invoice<br>double expectd_activation_fee The predicted activation fee based on activation fee charges on supplemental plans on this invoice<br>double expectd_mthly_recurring_cost The predicted monthly recurring cost of the items and plans on this invoice<br>double expectd_annu_recurring_cost The predicted annual recurring cost of the items and plans on this invoice<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
@@ -1109,7 +1109,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $coupon_code The code of the coupon to which to apply the discount.  If code is not valid for any reason, an appropriate error code is returned and the entire transaction (including the supp plan assignment and any possible invoice creation) is rolled back.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
      * @param string $comments Additional explanitory text relating to this API call.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param int $offset_months Number of months to add to the prorated period.
      * @param int $auto_offset_months_option Automatically set offset months
@@ -1335,7 +1335,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $master_plan_alt_rate_sched_no The alternate rate schedule number for the master subscription plan being considered.
      * @param array $supp_plan_alt_rate_sched_no 
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
-     * @param string $currency_cd The ISO-compliant 3-digit currency code to use as the default currency for this account
+     * @param string $currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
      * @param string $cvv Card Verification Value, used to help verify a transaction is being requested by the card holder since this value is physically printed on the credit card.
      * @param string $taxpayer_id Taxpayer Identification number.
      * @param string $bill_agreement_id Unique ID of the bill agreement.
@@ -2415,7 +2415,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns any single-plan contract currently associated with a specified account and plan.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier.
+     * @param int $plan_no Aria assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array acct_plan_contract 
      */
     public function get_acct_plan_contract($acct_no = null, $plan_no = null)
@@ -2429,7 +2429,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Creates a single-plan contract for a specified account holder and plan. The plan can be a master plan or a supplemental plan.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier.
+     * @param int $plan_no Aria assigned unique plan identifier
      * @param int $type_no The type of contract end action to be enforced by this contract.
      * @param double $alt_recur_fee The alternate recurring fee.
      * @param int $length_months The number of months (for example in reference to a contract).
@@ -2549,7 +2549,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns the size in bytes of the body of a particular email message sent to a specified account holder.
      * @param int $message_id Unique identifier of the message sent during provisioning to the account
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts..
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $do_encoding True indicates to acquire the message size after doing MIME encoding, False acquires message size without MIME encoding.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int num_chars The number of characters of the message_id requested.
      */
@@ -2564,18 +2564,18 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Changes the master plan assigned to a specified account holder. This call also has the ability to cancel the supplemental plans associated with the account holder&#039;s previous master plan.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts..
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $master_plan_no The Master Subscription plan number.
      * @param int $alt_rate_schedule_no Alternative Rate Schedule Number. The alt_rate_schedule_no is the unique identifier for an alternative rate schedule that can be assigned to the account holder in place of the default rate schedule. This is often done by CSR&#039;s to provide special compensation or discounts as incentives to account holders.
      * @param int $num_plan_units The factor by which all future recurring fees for this plan will be multiplied on future invoices for this account. EXAMPLE: An account wishes to have the supplemental plan titled Seats of XYZ Application assigned to them, with a monthly flat cost of $10.00 per seat. To assign 5 seats of this plan to the account, resulting in a monthly charge of $50.00 to the account, a value of 5 should be passed in this field.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment /de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $force_currency_change Force currency change during update. Generally  this is necessary when the update is taking  place to accommodate for an account holder  moving from one area to another where the  local currency is different.
      * @param string $auto_cancel_supp_plans This boolean asserts that supplemental plans are automatically cancelled if necessary.
      * @param int $offset_months Number of months to add to the prorated period.
      * @param string $alt_proration_start_date This argument specifies and alternate proration start date.
-     * @param string $alt_client_acct_group_id The one-time collections account group for this account for this API call only
+     * @param string $alt_client_acct_group_id The one-time collections account group  to use for this particular call.  The default on the account is not changed.
      * @param array $new_acct_custom_rates 
      * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
      * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
@@ -2608,6 +2608,9 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * 
+     * @param  $do_collect 
+     * @param  $change_status_after_coll 
+     * @param  $reset_dates_after_status 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $first_name Contact Fist name
      * @param string $last_name Contact Last name
@@ -2667,9 +2670,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.
      * @param int $senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.
      * @param string $client_acct_id This is the client-assigned identifier for the account.
-     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
-     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
-     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $alt_do_dunning If you are changing the account&#039;s status, AND the new status is part of the account&#039;s dunning plan, the account can go through the full dunning process which includes dunning fees, dunning notifications, and queuing the account for the next dunning step. If this value is NULL, the clients default setting will be honored. If true or false, this input will be honored instead of the clients default setting. If the status change is being queued for a future date, this value will be ignored and ONLY the clients default setting will be honored.
      * @param string $force_currency_change Force a currency change on update. This is generally necesary when an account moves from one country to another and the new country has a different monetary currency.
@@ -2697,9 +2697,12 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $coupon_code A coupon code to apply to this account
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int parent_child_sync_error_code The result of the synchronization of the parent/child billing dates (if attempted).<br>string parent_child_sync_error_msg The corresponding text error message for the parent_child_sync_error_code value.<br>int master_plan_error_code Error code returned upon failure when attempting to update the master plan<br>string master_plan_error_msg Human-readable error message corresponding to master_plan_error_code<br>int master_plan_coll_error_code Error code for master plan collection errors.<br>string master_plan_coll_error_msg Human-readable error text corresponding to the master_plan_coll_error_code<br>int master_plan_stmt_error_code Error code returned upon failure to update the master plan statement<br>string master_plan_stmt_error_msg Human-readable error message corresponding to master_plan_stmt_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int invoice_no The unique identifer of a given invoice.<br>array cancelled_supp_plans <br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function update_acct_complete($acct_no = null, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state_prov = null, $country = null, $postal_cd = null, $phone = null, $phone_ext = null, $cell_phone = null, $work_phone = null, $work_phone_ext = null, $email = null, $birthdate = null, $bill_first_name = null, $bill_last_name = null, $bill_middle_initial = null, $bill_company_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_country = null, $bill_postal_cd = null, $bill_phone = null, $bill_phone_ext = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_ext = null, $bill_email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $master_plan_no = null, $master_plan_alt_rate_sched_no = null, $master_plan_units = null, $master_plan_assign_directive = null, $update_acct_supp_field = null, $update_acct_func_group = null, $update_acct_coll_group = null, $status_cd = null, $notify_method = null, $password = null, $secret_question = null, $secret_question_answer = null, $pin = null, $test_acct_ind = null, $resp_level_cd = null, $senior_acct_no = null, $client_acct_id = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null, $alt_do_dunning = null, $force_currency_change = null, $cvv = null, $taxpayer_id = null, $bill_agreement_id = null, $auto_cancel_supp_plans = null, $offset_months = null, $alt_proration_start_date = null, $alt_msg_template_no = null, $seq_func_group_no = null, $address3 = null, $bill_address3 = null, $usage_accumulation_config = null, $enable_usage_pooling_plan_no = null, $disable_usage_pooling_plan_no = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $offset_interval = null, $tax_exemption_level = null, $cn_alt_msg_template_no = null, $promo_cd = null, $invoice_unbilled_usage = null, $coupon_code = null)
+    public function update_acct_complete($do_collect, $change_status_after_coll, $reset_dates_after_status, $acct_no = null, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state_prov = null, $country = null, $postal_cd = null, $phone = null, $phone_ext = null, $cell_phone = null, $work_phone = null, $work_phone_ext = null, $email = null, $birthdate = null, $bill_first_name = null, $bill_last_name = null, $bill_middle_initial = null, $bill_company_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_country = null, $bill_postal_cd = null, $bill_phone = null, $bill_phone_ext = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_ext = null, $bill_email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $master_plan_no = null, $master_plan_alt_rate_sched_no = null, $master_plan_units = null, $master_plan_assign_directive = null, $update_acct_supp_field = null, $update_acct_func_group = null, $update_acct_coll_group = null, $status_cd = null, $notify_method = null, $password = null, $secret_question = null, $secret_question_answer = null, $pin = null, $test_acct_ind = null, $resp_level_cd = null, $senior_acct_no = null, $client_acct_id = null, $client_receipt_id = null, $alt_do_dunning = null, $force_currency_change = null, $cvv = null, $taxpayer_id = null, $bill_agreement_id = null, $auto_cancel_supp_plans = null, $offset_months = null, $alt_proration_start_date = null, $alt_msg_template_no = null, $seq_func_group_no = null, $address3 = null, $bill_address3 = null, $usage_accumulation_config = null, $enable_usage_pooling_plan_no = null, $disable_usage_pooling_plan_no = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $offset_interval = null, $tax_exemption_level = null, $cn_alt_msg_template_no = null, $promo_cd = null, $invoice_unbilled_usage = null, $coupon_code = null)
     {
         return $this->__ws_call('update_acct_complete', Array(
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'acct_no' => $acct_no,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
@@ -2759,9 +2762,6 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'resp_level_cd' => $resp_level_cd,
                 'senior_acct_no' => $senior_acct_no,
                 'client_acct_id' => $client_acct_id,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'client_receipt_id' => $client_receipt_id,
                 'alt_do_dunning' => $alt_do_dunning,
                 'force_currency_change' => $force_currency_change,
@@ -2810,7 +2810,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * send account holder email message using client&#039;s configured template for class &#039;Z&#039;
      * @param int $resource_threshold_level The value at which resources should be replenished.
      * @param int $resource_balance The remaining units left of the resource
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts..
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $resource_name The human-readable resource name (e.g.money, time, access, etc.)
      * @param string $resource_units_label The label for resource units (e.g. peices, tokens, credits, etc.)
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
@@ -2923,7 +2923,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $service_no Aria assigned unique service identifier
      * @param array $custom_acct_rates This is a multidimensional array containing elements with the attributes rate_seq_no, rate_per_unit, from_unit, to_unit.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier.
+     * @param int $plan_no Aria assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function assign_custom_acct_rates($service_no, $custom_acct_rates, $acct_no = null, $plan_no = null)
@@ -3019,7 +3019,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Removes the alternate rate schedule assigned to a specified account.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $plan_no The unique plan identifier.
+     * @param int $plan_no Aria assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function remove_custom_acct_rates($acct_no = null, $plan_no = null)
@@ -3118,7 +3118,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * Inidicates whether a user ID has ever ordered or paid for a specified inventory item (SKU).
      * @param string $user_id The user ID of the account in question
      * @param string $sku Client-assigned SKU code for product or service being referenced.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int acct_no The unique account number of the account which has ordered the item<br>int ordered_ind Boolean value indicating the SKU has been ordered<br>int billed_ind Boolean value indicating the SKU has been billed to the customer.<br>int paid_ind Boolean value indicating the product or service has been paid for.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.<br>int ordered_ind Boolean value indicating the SKU has been ordered<br>int billed_ind Boolean value indicating the SKU has been billed to the customer.<br>int paid_ind Boolean value indicating the product or service has been paid for.
      */
     public function get_userid_has_ordered_sku($user_id, $sku)
     {
@@ -3133,7 +3133,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param array $supp_plans_to_assign 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to  assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $comments Additional explanitory text relating to this API call.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $alt_proration_start_date This argument specifies and alternate proration start date.
@@ -3187,7 +3187,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Deletes all unused credits associated with a particular coupon.
      * @param string $coupon_cd Client-defined unqique coupon code.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts..
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function cancel_unconsumed_credit($coupon_cd, $acct_no = null)
@@ -3320,7 +3320,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * Returns any multi-plan contract currently associated with a specified account.
      * @param int $contract_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int type_no The type of contract end action to be enforced by this contract.<br>int length_months The number of months, starting from start_date, that the given contract will be in effect.<br>string create_comments CSR or API-provided comments provided at time of contract creation.<br>string update_comments Comments provided at time of last contract update.<br>string create_date The date the contract was created.<br>string update_date The date the contract was last modified.<br>string start_date Specifies contract start date. The date is in the format yyyy-mm-dd<br>string end_date Contract end date<br>string status_code Status code of this contract.<br>array plan_no Aria assigned unique plan identifier<br>array plan_name 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int type_no The type of contract end action to be enforced by this contract.<br>int length_months The number of months, starting from start_date, that the given contract will be in effect.<br>string create_comments CSR or API-provided comments provided at time of contract creation.<br>string update_comments Comments provided at time of last contract update.<br>string create_date The date the contract was created.<br>string update_date The date the contract was last modified.<br>string start_date Specifies contract start date. The date is in the format yyyy-mm-dd<br>string end_date Contract end date<br>string status_code Status code of this contract.<br>int plan_no Aria assigned unique plan identifier<br>array plan_name 
      */
     public function get_acct_multiplan_contract($contract_no, $acct_no = null)
     {
@@ -3333,7 +3333,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Creates a multi-plan contract for a specified account holder and specified list of plans. The plans can be master plans or supplemental plans.
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param array $plan_no Aria assigned unique plan identifier
+     * @param int $plan_no Aria assigned unique plan identifier
      * @param int $type_no The type of contract end action to be enforced by this contract.
      * @param int $length_months The number of months, starting from start_date, that the given contract will be in effect.
      * @param string $create_comments CSR or API-provided comments provided at time of contract creation.
@@ -3631,7 +3631,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
 
     /**
      * Creates a session with PayPal so that an account user can set up a billing agreement with an Aria client. The call returns a session token from PayPal, plus a client configured return_url (aka PayPal Agreement Confirmation URL) to instruct the USS/Reg software where it should direct the end user for the next step. PayPal will consider the token valid for 15 minutes. This API call does not store any information in the Aria database, but requires that the followup call to save_paypal_bill_agreement call is made while the token is valid.
-     * @param int $acct_no Aria-assigned unique account identifier.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string return_url Client configured return_url (aka PayPal Agreement Confirmation URL) to instruct the USS/Reg software what PayPal link it should use to direct the end user to the next step<br>string token PayPal supplied token that maintains the billing agreement session. Valid only for 15 minutes.
      */
     public function init_paypal_bill_agreement($acct_no = null)

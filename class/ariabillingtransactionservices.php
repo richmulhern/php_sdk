@@ -17,7 +17,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.14';
+    protected $__wsdl_version = '6.13';
     
     /**
      * Returns the invoice number associated with a specified balance transfer.
@@ -116,7 +116,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address3 The third line of the billing address
      * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $coupon_cd A coupon code to apply to this order
-     * @param string $alt_client_acct_group_id The alternate collections account group to use with a passed alternate form of payment
+     * @param string $alt_client_acct_group_id The one-time collections account group  to use for this particular call.  The default on the account is not changed.
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param int $alt_inv_template_no The statement template to use when generating a statement for this order
@@ -317,7 +317,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * Records a payment transaction for a payment collected from an account holder without using Aria.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $payment_amount The amount of the payment being/to-be made against the outstanding account balance
-     * @param string $reference_code This code provides a reference correlation to the external payment.
+     * @param string $reference_code The external reference code for this object, such as a check number or an ID assigned by an external system
      * @param string $comments Additional explanitory text relating to this API call.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param array $specific_charge_transaction_id A list of specific charges, see below
@@ -859,7 +859,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $client_order_id This is the client-assigned order identifier.
      * @param string $coupon_code The code of the coupon to which to apply the discount.  If code is not valid for any reason, an appropriate error code is returned and the entire transaction (including the supp plan assignment and any possible invoice creation) is rolled back.
      * @param string $comments Additional explanitory text relating to this API call.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param int $bill_seq The billing sequence number
      * @param int $alt_pay_method If you wish to use the account&#039;s current form of payment, leave this value empty. If you wish to use an alternate credit card, enter &#039;1&#039; for this value.
@@ -969,7 +969,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param double $total_refund_amount The total amount intended to refund. If it is null and auto is set to &#039;true&#039;, the refund amount is calculated based on line items reversed.
      * @param string $refund_check_number The check number associated to the refund.
      * @param string $comments The user comment on the refund.
-     * @param string $do_write If is is set to &#039;FALSE&#039;, this API will function as in preview mode. No refund and/or reversal will be written to database. The function will merely return the reversal line items including calculated taxes.  If it is set to &#039;true&#039;, the refund and reversal, if any, will be commited.
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $auto_calc_refund This indicates if the refund amount is to be calculated based on reversal line itmes. If auto_calc_refund is set to &#039;true&#039; and if do_write is &#039;true&#039;, if the total_refund_amount is not null, process will use the input total_refund_amount, but if the total_refund_amount is null, then the total_refund_amount will be equal to the calculated total reversal amount.  However, do_write = &#039;true&#039; and auto_calc_refund = &#039;false&#039; is not a valid combination and will error out.
      * @param array $invoices_to_reverse 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double applied_total_refund_amount The total amount that has been refunded.  If inAuto is TRUE, this amount will equal to the total reversal amount.<br>double applied_total_reversal_amount The total amount that has been reversed on this invoice line. This amount is calculated for relevant tax lines.<br>array reversed_invoice_lines 
@@ -992,7 +992,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the writeoff details of an account.
      * @param int $aria_event_no Aria Event number of the writeoff event
-     * @param int $acct_no Aria-assigned unique identifier indicating each email template created in Aria.
+     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array writeoff_details A multidimensional array containing the details of all writeoffs applied to an account.
      */
     public function get_writeoff_details($aria_event_no, $acct_no = null)
