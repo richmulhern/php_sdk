@@ -120,6 +120,122 @@ class AriaBillingComplete extends BaseAriaBilling
     }
 
     /**
+     * Gets transactional details for all accounts matching specified query.
+     * @param  $username 
+     * @param  $password 
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array transaction_information 
+     */
+    public function get_transaction_information($username, $password, $limit, $offset, $query_string)
+    {
+        return $this->__ws_call('get_transaction_information', Array(
+                'username' => $username,
+                'password' => $password,
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
+     * This object includes information about a refund disbursement. Recommended query parameters include acct_no and aria_event_no for optimal performance.
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array refund_information 
+     */
+    public function get_refund_information($username, $password, $limit, $offset, $query_string)
+    {
+        return $this->__ws_call('get_refund_information', Array(
+                'username' => $username,
+                'password' => $password,
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
+     * Returns a list of coupons applied to an account.
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array coupon_history 
+     */
+    public function get_coupon_history($limit, $offset, $query_string)
+    {
+        return $this->__ws_call('get_coupon_history', Array(
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
+     * Retrieves list of payment methods known by Aria Systems.
+     * @param  $username 
+     * @param  $password 
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     */
+    public function list_payment_methods($username, $password, $limit, $offset, $query_string)
+    {
+        return $this->__ws_call('list_payment_methods', Array(
+                'username' => $username,
+                'password' => $password,
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
+     * Retrieves list of payment processors supported by Aria Systems.
+     * @param  $username 
+     * @param  $password 
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     */
+    public function list_payment_processors($username, $password, $limit, $offset, $query_string)
+    {
+        return $this->__ws_call('list_payment_processors', Array(
+                'username' => $username,
+                'password' => $password,
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
+     * Retrieves list of transaction types recorded by Aria Systems.
+     * @param  $username 
+     * @param  $password 
+     * @param  $limit 
+     * @param  $offset 
+     * @param  $query_string 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     */
+    public function list_transaction_types($username, $password, $limit, $offset, $query_string)
+    {
+        return $this->__ws_call('list_transaction_types', Array(
+                'username' => $username,
+                'password' => $password,
+                'limit' => $limit,
+                'offset' => $offset,
+                'query_string' => $query_string
+        ));
+    }
+
+    /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
      * @param int $plan_no Aria assigned unique plan identifier
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
