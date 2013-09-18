@@ -21,121 +21,121 @@ class AriaBillingComplete extends BaseAriaBilling
 
     /**
      * Gets detailed account level information for all accounts matching specified query.
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array account_details 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array account_details 
      */
-    public function get_account_details($username, $password, $limit, $offset, $query_string)
+    public function get_account_details($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_account_details', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Gets account status history for all accounts matching specified query
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array account_status_history 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array account_status_history 
      */
-    public function get_account_status_history($username, $password, $limit, $offset, $query_string)
+    public function get_account_status_history($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_account_status_history', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Gets account plan history for all accounts matching specified query
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array account_plan_history 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array account_plan_history 
      */
-    public function get_account_plan_history($username, $password, $limit, $offset, $query_string)
+    public function get_account_plan_history($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_account_plan_history', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Gets payment details for all accounts matching specified query
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array payment_details 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array payment_details 
      */
-    public function get_payment_details($username, $password, $limit, $offset, $query_string)
+    public function get_payment_details($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_payment_details', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Gets order details for all accounts matching specified query
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array order_details 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array order_details 
      */
-    public function get_order_details($username, $password, $limit, $offset, $query_string)
+    public function get_order_details($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_order_details', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Gets transactional details for all accounts matching specified query.
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array transaction_information 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array transaction_information 
      */
-    public function get_transaction_information($username, $password, $limit, $offset, $query_string)
+    public function get_transaction_information($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_transaction_information', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
@@ -143,95 +143,95 @@ class AriaBillingComplete extends BaseAriaBilling
      * This object includes information about a refund disbursement. Recommended query parameters include acct_no and aria_event_no for optimal performance.
      * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
      * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array refund_information 
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array refund_information 
      */
-    public function get_refund_information($username, $password, $limit, $offset, $query_string)
+    public function get_refund_information($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_refund_information', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Returns a list of coupons applied to an account.
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array coupon_history 
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array coupon_history 
      */
-    public function get_coupon_history($limit, $offset, $query_string)
+    public function get_coupon_history($query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('get_coupon_history', Array(
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Retrieves list of payment methods known by Aria Systems.
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
      */
-    public function list_payment_methods($username, $password, $limit, $offset, $query_string)
+    public function list_payment_methods($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('list_payment_methods', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Retrieves list of payment processors supported by Aria Systems.
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
      */
-    public function list_payment_processors($username, $password, $limit, $offset, $query_string)
+    public function list_payment_processors($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('list_payment_processors', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
     /**
      * Retrieves list of transaction types recorded by Aria Systems.
-     * @param  $username 
-     * @param  $password 
-     * @param  $limit 
-     * @param  $offset 
-     * @param  $query_string 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br> total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
+     * @param string $username The login name of the user making this request. It is the same name that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $password The password of the user making this request. It is the same password that is used to log in to the Aria Administration and Configuration Tool.
+     * @param string $query_string The criteria which all returned objects must match. Different objects have a different set of searchable criteria.Fields marked with &quot;*Query&quot; in the returns section can be used as part of the query_string. Valid operations for the query string include &quot;=&quot;, &quot;!=&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;=&quot;, &quot;&gt;&quot;, &quot;IS NULL&quot;, &quot;IS NOT NULL&quot;, &quot;LIKE&quot;, and &quot;NOT LIKE&quot;. The first operand must always be a field name, and the second operand must always be a value (except for &quot;IS NULL&quot; and &quot;IS NOT NULL&quot;, where the second operand is implicitly &quot;NULL&quot;). If the second operand contains a space, less than, greater than, or equals sign, then it must be enclosed in double quotes. The second operand may not contain double quotes. Multiple conditions must be joined with either &quot;AND&quot; or &quot;OR&quot;. Additionally, any queryable field can also be used to order the results, by appending &quot;ORDER BY&quot; to the query, followed by a field name and either &quot;ASC&quot; or &quot;DESC&quot;.
+     * @param int $limit The maximum number of objects that should be returned by this call.
+     * @param int $offset The number of records to skip. Note that both &quot;0&quot; and NULL will cause the interface not to skip any records.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int starting_record This indicates the number of objects that were (or would be) skipped before beginning output.<br>int total_records This is the total number of objects that matched the provided criteria.<br>array map_record 
      */
-    public function list_transaction_types($username, $password, $limit, $offset, $query_string)
+    public function list_transaction_types($username, $password, $query_string, $limit = null, $offset = null)
     {
         return $this->__ws_call('list_transaction_types', Array(
                 'username' => $username,
                 'password' => $password,
+                'query_string' => $query_string,
                 'limit' => $limit,
-                'offset' => $offset,
-                'query_string' => $query_string
+                'offset' => $offset
         ));
     }
 
@@ -1060,9 +1060,6 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Updates the billing contact information for a specified account. To delete a piece of billing contact information, set the corresponding field to &quot;~&quot;. Leaving a field blank will retain the existing information in the field.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param string $first_name Contact Fist name
      * @param string $last_name Contact Last name
      * @param string $middle_initial The Middle Initial of the contact.
@@ -1076,16 +1073,16 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $zip The contact&#039;s zip/postal code.
      * @param string $intl_phone This is the international phone number of the contact
      * @param string $email Email of the contact
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_acct_billing_contact($account_no, $do_collect, $change_status_after_coll, $reset_dates_after_status, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $address3 = null)
+    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
     {
         return $this->__ws_call('update_acct_billing_contact', Array(
                 'account_no' => $account_no,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'middle_initial' => $middle_initial,
@@ -1099,6 +1096,9 @@ class AriaBillingComplete extends BaseAriaBilling
                 'zip' => $zip,
                 'intl_phone' => $intl_phone,
                 'email' => $email,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'address3' => $address3
         ));
     }
@@ -1132,22 +1132,22 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Sets a validated bank account as the payment method of a specified account.
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param string $bank_routing_num The ABA routing number for the bank holding &#039;bank_acct_num&#039;
      * @param string $bank_acct_num The bank account number.
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_bank_draft($account_no, $do_collect, $change_status_after_coll, $reset_dates_after_status, $bank_routing_num = null, $bank_acct_num = null)
+    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
     {
         return $this->__ws_call('set_pay_method_bank_draft', Array(
                 'account_no' => $account_no,
+                'bank_routing_num' => $bank_routing_num,
+                'bank_acct_num' => $bank_acct_num,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
-                'bank_routing_num' => $bank_routing_num,
-                'bank_acct_num' => $bank_acct_num
+                'reset_dates_after_status' => $reset_dates_after_status
         ));
     }
 
@@ -1156,22 +1156,22 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $cc_expire_mm Expiration month for the credit card payment instrument.
      * @param int $cc_expire_yyyy Expiration year for the credit card payment instrument.
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param string $cc_number Credit card number.
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $do_collect, $change_status_after_coll, $reset_dates_after_status, $cc_number = null)
+    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
     {
         return $this->__ws_call('set_pay_method_cc', Array(
                 'account_no' => $account_no,
                 'cc_expire_mm' => $cc_expire_mm,
                 'cc_expire_yyyy' => $cc_expire_yyyy,
+                'cc_number' => $cc_number,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
-                'cc_number' => $cc_number
+                'reset_dates_after_status' => $reset_dates_after_status
         ));
     }
 
@@ -1358,9 +1358,6 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * This API is used to update the payment method on an account.  Newly recorded payment methods are automatically made the default payment method on the account.
      * @param int $account_number Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param string $first_name Billing address first name
      * @param string $last_name Billing address last name
      * @param string $middle_initial Billing address middle initial
@@ -1384,16 +1381,16 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $cc_expire_yyyy Credit card expiration year, 4-digit
      * @param string $bank_routing_num Bank account routing number
      * @param string $bank_acct_num Bank account number
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @return mixed[] int seq_no The sequence number of this payment, as it appears on the account<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code The error code for the collection portion of this call, if a collection was attempted<br>string collection_error_msg The error message for the collection portion of this call, if a collection was attempted<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_payment_method($account_number, $do_collect, $change_status_after_coll, $reset_dates_after_status, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_extension = null, $email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $client_receipt_id = null)
+    public function update_payment_method($account_number, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_extension = null, $email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_payment_method', Array(
                 'account_number' => $account_number,
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'middle_initial' => $middle_initial,
@@ -1417,6 +1414,9 @@ class AriaBillingComplete extends BaseAriaBilling
                 'cc_expire_yyyy' => $cc_expire_yyyy,
                 'bank_routing_num' => $bank_routing_num,
                 'bank_acct_num' => $bank_acct_num,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'client_receipt_id' => $client_receipt_id
         ));
     }
@@ -1617,9 +1617,6 @@ class AriaBillingComplete extends BaseAriaBilling
 
     /**
      * updates some billing info including contact info and credit card expiration
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $seq_no The unique bill sequence number
      * @param string $address1 First address line of the contact
@@ -1645,15 +1642,15 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).
      * @param string $work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).
      * @param string $work_phone_ext The extension for the contact work phone
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_existing_billing_info($do_collect, $change_status_after_coll, $reset_dates_after_status, $acct_no = null, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $address3 = null)
+    public function update_existing_billing_info($acct_no = null, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
     {
         return $this->__ws_call('update_existing_billing_info', Array(
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'acct_no' => $acct_no,
                 'seq_no' => $seq_no,
                 'address1' => $address1,
@@ -1679,6 +1676,9 @@ class AriaBillingComplete extends BaseAriaBilling
                 'work_phone_nxx' => $work_phone_nxx,
                 'work_phone_suffix' => $work_phone_suffix,
                 'work_phone_ext' => $work_phone_ext,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'address3' => $address3
         ));
     }
@@ -1888,7 +1888,6 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Assigns one supplemental plan to a specified account. To assign multiple supplemental plans to an account, use the assign_supp_plan_multi method.
      * @param int $supp_plan_no The Aria-assigned identifier for a supplemental service plan. Allowable values are limited to valid custom plan numbers for client.
-     * @param  $offset_interval 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $alt_rate_schedule_no Alternative Rate Schedule Number. The alt_rate_schedule_no is the unique identifier for an alternative rate schedule that can be assigned to the account holder in place of the default rate schedule. This is often done by CSR&#039;s to provide special compensation or discounts as incentives to account holders.
      * @param int $num_plan_units The factor by which all future recurring fees for this plan will be multiplied on future invoices for this account. EXAMPLE: An account wishes to have the supplemental plan titled Seats of XYZ Application assigned to them, with a monthly flat cost of $10.00 per seat. To assign 5 seats of this plan to the account, resulting in a monthly charge of $50.00 to the account, a value of 5 should be passed in this field.
@@ -1909,14 +1908,14 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $alt_client_acct_group_id The one-time collections account group  to use for this particular call.  The default on the account is not changed.
      * @param array $new_acct_custom_rates 
      * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
+     * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
      * @param string $contract_end_date Allows the caller to set a specific end date when creating or modifying plan contracts.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int invoice_no The unique identifer of a given invoice.<br>array supp_plan_line_items <br>double total_charges_before_tax Total amount to be charged to the account before taxes have been calculated.<br>double total_tax_charges Total taxes as calculated for the amount of the transaction.<br>double total_charges_after_tax Total amount to be charged to the account after taxes have been calculated.<br>double total_credit The total amount of the credit to be applied to the account<br>double total_tax_credit The tax amount of the credit to be applies<br>double total_credit_before_tax The credit to be applied before tax is taken into account<br>double total The grand total of this invoice<br>double expectd_activation_fee The predicted activation fee based on activation fee charges on supplemental plans on this invoice<br>double expectd_mthly_recurring_cost The predicted monthly recurring cost of the items and plans on this invoice<br>double expectd_annu_recurring_cost The predicted annual recurring cost of the items and plans on this invoice<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function assign_supp_plan($supp_plan_no, $offset_interval, $acct_no = null, $alt_rate_schedule_no = null, $num_plan_units = null, $coupon_code = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $contract_type_no = null, $contract_alt_recur_fee = null, $contract_length_months = null, $contract_cancel_fee = null, $contract_comments = null, $contract_start_date = null, $offset_months = null, $auto_offset_months_option = null, $alt_proration_start_date = null, $alt_client_acct_group_id = null, $new_acct_custom_rates = null, $effective_date = null, $contract_end_date = null)
+    public function assign_supp_plan($supp_plan_no, $acct_no = null, $alt_rate_schedule_no = null, $num_plan_units = null, $coupon_code = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $contract_type_no = null, $contract_alt_recur_fee = null, $contract_length_months = null, $contract_cancel_fee = null, $contract_comments = null, $contract_start_date = null, $offset_months = null, $auto_offset_months_option = null, $alt_proration_start_date = null, $alt_client_acct_group_id = null, $new_acct_custom_rates = null, $effective_date = null, $offset_interval = null, $contract_end_date = null)
     {
         return $this->__ws_call('assign_supp_plan', Array(
                 'supp_plan_no' => $supp_plan_no,
-                'offset_interval' => $offset_interval,
                 'acct_no' => $acct_no,
                 'alt_rate_schedule_no' => $alt_rate_schedule_no,
                 'num_plan_units' => $num_plan_units,
@@ -1937,6 +1936,7 @@ class AriaBillingComplete extends BaseAriaBilling
                 'alt_client_acct_group_id' => $alt_client_acct_group_id,
                 'new_acct_custom_rates' => $new_acct_custom_rates,
                 'effective_date' => $effective_date,
+                'offset_interval' => $offset_interval,
                 'contract_end_date' => $contract_end_date
         ));
     }
@@ -1944,7 +1944,6 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Cancels the supplemental plans assigned to a specified account.
      * @param int $supp_plan_no The Aria-assigned identifier for a supplemental service plan. Allowable values are limited to valid custom plan numbers for client.
-     * @param  $offset_interval 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $assignment_directive The scope rule to be applied to this assignment/de-assignment request, governing both the date upon which the assignment should take place (immediately or on the account&#039;s anniversary date) and the proration rule that should be applied (per client&#039;s default rules for proration on plan assignment v. forcing proration on or off for this request only). Default behavior is to assign plan to account on the account&#039;s anniversary date, resulting in no proration effect.
      * @param string $comments Additional explanitory text relating to this API call.
@@ -1952,14 +1951,14 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $alt_proration_start_date This argument specifies and alternate proration start date.
      * @param string $effective_date If the assignment directive is for future date assignment, this is the effective date for that assignment
+     * @param int $offset_interval If assigning a change on an anniversary day, the number of billing periods by which to delay that change
      * @param string $invoice_unbilled_usage Specifies the unbilled usage to be invoiced or not.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int invoice_no The unique identifer of a given invoice.<br>array supp_plan_line_items <br>double total_charges_before_tax Total amount to be charged to the account before taxes have been calculated.<br>double total_tax_charges Total taxes as calculated for the amount of the transaction.<br>double total_charges_after_tax Total amount to be charged to the account after taxes have been calculated.<br>double total_credit The total amount of the credit to be applied to the account<br>double total_tax_credit The tax amount of the credit to be applies<br>double total_credit_before_tax The credit to be applied before tax is taken into account<br>double total The grand total of this invoice<br>double proration_credit_result_amount The total proration credit granted to the account<br>double proration_credit_amount The non-tax proration credit granted to the account<br>double proration_tax_amount The prorated refund of the initial tax amount<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function cancel_supp_plan($supp_plan_no, $offset_interval, $acct_no = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $alt_proration_start_date = null, $effective_date = null, $invoice_unbilled_usage = null)
+    public function cancel_supp_plan($supp_plan_no, $acct_no = null, $assignment_directive = null, $comments = null, $do_write = null, $client_receipt_id = null, $alt_proration_start_date = null, $effective_date = null, $offset_interval = null, $invoice_unbilled_usage = null)
     {
         return $this->__ws_call('cancel_supp_plan', Array(
                 'supp_plan_no' => $supp_plan_no,
-                'offset_interval' => $offset_interval,
                 'acct_no' => $acct_no,
                 'assignment_directive' => $assignment_directive,
                 'comments' => $comments,
@@ -1967,6 +1966,7 @@ class AriaBillingComplete extends BaseAriaBilling
                 'client_receipt_id' => $client_receipt_id,
                 'alt_proration_start_date' => $alt_proration_start_date,
                 'effective_date' => $effective_date,
+                'offset_interval' => $offset_interval,
                 'invoice_unbilled_usage' => $invoice_unbilled_usage
         ));
     }
@@ -3514,9 +3514,6 @@ class AriaBillingComplete extends BaseAriaBilling
 
     /**
      * 
-     * @param  $do_collect 
-     * @param  $change_status_after_coll 
-     * @param  $reset_dates_after_status 
      * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $first_name Contact Fist name
      * @param string $last_name Contact Last name
@@ -3576,6 +3573,9 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.
      * @param int $senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.
      * @param string $client_acct_id This is the client-assigned identifier for the account.
+     * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
+     * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
+     * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param string $alt_do_dunning If you are changing the account&#039;s status, AND the new status is part of the account&#039;s dunning plan, the account can go through the full dunning process which includes dunning fees, dunning notifications, and queuing the account for the next dunning step. If this value is NULL, the clients default setting will be honored. If true or false, this input will be honored instead of the clients default setting. If the status change is being queued for a future date, this value will be ignored and ONLY the clients default setting will be honored.
      * @param string $force_currency_change Force a currency change on update. This is generally necesary when an account moves from one country to another and the new country has a different monetary currency.
@@ -3603,12 +3603,9 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $coupon_code A coupon code to apply to this account
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double proration_result_amount The currency amount of any resulting proration action performed as a result of the requested plan change. For plan assignments with an assignment directive of &#039;1&#039; (perform on anniversary date), or &#039;2&#039; (honor client default proration action) when the default configuration is to not do proration, or &#039;3&#039; (force no proration), the value returned in this field will always be &#039;0&#039;. When proration is performed the value returned in this field will either be a positive currency value (indicating a resulting charge to the account) or a negative currency value (indicating a credit to the account). If the value passed in field do_write is false then any positive or negative value returned in this field is notational only, demonstrating what proration effect would be applied to the account if the requested plan assignment/de-assignment were to be actually performed.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int parent_child_sync_error_code The result of the synchronization of the parent/child billing dates (if attempted).<br>string parent_child_sync_error_msg The corresponding text error message for the parent_child_sync_error_code value.<br>int master_plan_error_code Error code returned upon failure when attempting to update the master plan<br>string master_plan_error_msg Human-readable error message corresponding to master_plan_error_code<br>int master_plan_coll_error_code Error code for master plan collection errors.<br>string master_plan_coll_error_msg Human-readable error text corresponding to the master_plan_coll_error_code<br>int master_plan_stmt_error_code Error code returned upon failure to update the master plan statement<br>string master_plan_stmt_error_msg Human-readable error message corresponding to master_plan_stmt_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int invoice_no The unique identifer of a given invoice.<br>array cancelled_supp_plans <br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
-    public function update_acct_complete($do_collect, $change_status_after_coll, $reset_dates_after_status, $acct_no = null, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state_prov = null, $country = null, $postal_cd = null, $phone = null, $phone_ext = null, $cell_phone = null, $work_phone = null, $work_phone_ext = null, $email = null, $birthdate = null, $bill_first_name = null, $bill_last_name = null, $bill_middle_initial = null, $bill_company_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_country = null, $bill_postal_cd = null, $bill_phone = null, $bill_phone_ext = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_ext = null, $bill_email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $master_plan_no = null, $master_plan_alt_rate_sched_no = null, $master_plan_units = null, $master_plan_assign_directive = null, $update_acct_supp_field = null, $update_acct_func_group = null, $update_acct_coll_group = null, $status_cd = null, $notify_method = null, $password = null, $secret_question = null, $secret_question_answer = null, $pin = null, $test_acct_ind = null, $resp_level_cd = null, $senior_acct_no = null, $client_acct_id = null, $client_receipt_id = null, $alt_do_dunning = null, $force_currency_change = null, $cvv = null, $taxpayer_id = null, $bill_agreement_id = null, $auto_cancel_supp_plans = null, $offset_months = null, $alt_proration_start_date = null, $alt_msg_template_no = null, $seq_func_group_no = null, $address3 = null, $bill_address3 = null, $usage_accumulation_config = null, $enable_usage_pooling_plan_no = null, $disable_usage_pooling_plan_no = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $offset_interval = null, $tax_exemption_level = null, $cn_alt_msg_template_no = null, $promo_cd = null, $invoice_unbilled_usage = null, $coupon_code = null)
+    public function update_acct_complete($acct_no = null, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state_prov = null, $country = null, $postal_cd = null, $phone = null, $phone_ext = null, $cell_phone = null, $work_phone = null, $work_phone_ext = null, $email = null, $birthdate = null, $bill_first_name = null, $bill_last_name = null, $bill_middle_initial = null, $bill_company_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_country = null, $bill_postal_cd = null, $bill_phone = null, $bill_phone_ext = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_ext = null, $bill_email = null, $pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $master_plan_no = null, $master_plan_alt_rate_sched_no = null, $master_plan_units = null, $master_plan_assign_directive = null, $update_acct_supp_field = null, $update_acct_func_group = null, $update_acct_coll_group = null, $status_cd = null, $notify_method = null, $password = null, $secret_question = null, $secret_question_answer = null, $pin = null, $test_acct_ind = null, $resp_level_cd = null, $senior_acct_no = null, $client_acct_id = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null, $alt_do_dunning = null, $force_currency_change = null, $cvv = null, $taxpayer_id = null, $bill_agreement_id = null, $auto_cancel_supp_plans = null, $offset_months = null, $alt_proration_start_date = null, $alt_msg_template_no = null, $seq_func_group_no = null, $address3 = null, $bill_address3 = null, $usage_accumulation_config = null, $enable_usage_pooling_plan_no = null, $disable_usage_pooling_plan_no = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $offset_interval = null, $tax_exemption_level = null, $cn_alt_msg_template_no = null, $promo_cd = null, $invoice_unbilled_usage = null, $coupon_code = null)
     {
         return $this->__ws_call('update_acct_complete', Array(
-                'do_collect' => $do_collect,
-                'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status,
                 'acct_no' => $acct_no,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
@@ -3668,6 +3665,9 @@ class AriaBillingComplete extends BaseAriaBilling
                 'resp_level_cd' => $resp_level_cd,
                 'senior_acct_no' => $senior_acct_no,
                 'client_acct_id' => $client_acct_id,
+                'do_collect' => $do_collect,
+                'change_status_after_coll' => $change_status_after_coll,
+                'reset_dates_after_status' => $reset_dates_after_status,
                 'client_receipt_id' => $client_receipt_id,
                 'alt_do_dunning' => $alt_do_dunning,
                 'force_currency_change' => $force_currency_change,
