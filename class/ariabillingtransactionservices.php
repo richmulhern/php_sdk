@@ -22,7 +22,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the invoice number associated with a specified balance transfer.
      * @param int $transaction_id The unique identifier for a given transaction
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int invoice_no The unique identifer of a given invoice.<br>int acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int invoice_no The unique identifer of a given invoice.<br>int acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      */
     public function get_inv_no_from_bal_xfer($transaction_id)
     {
@@ -33,12 +33,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Voids a particular transaction associated with a specified account.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $transaction_id The unique identifier for a given transaction
      * @param int $reason_code The reason a given credt was/is to be applied to the account.
      * @param string $comments Additional explanatory text relating to this API call. NOTE:  For this API method, comments are required (normally comments are not required).
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
-     * @return mixed[] int new_transaction_id This is the resulting transaction ID from the void action.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int new_transaction_id This is the resulting transaction ID from the void action.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function void_transaction($account_no, $transaction_id, $reason_code, $comments = null, $client_receipt_id = null)
     {
@@ -53,10 +53,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Reinstates a previously voided transaction associated with a specified account number and transaction ID.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $transaction_id The unique identifier for a given transaction
-     * @param string $comments Additional explanitory text relating to this API call.
-     * @return mixed[] int new_transaction_id This is the new transaction ID returned after successfully reinstating the transaction.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @param string $comments Additional explanatory text relating to this API call.
+     * @return mixed[] int new_transaction_id This is the new transaction ID returned after successfully reinstating the transaction.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function reinstate_transaction($account_no, $transaction_id, $comments = null)
     {
@@ -71,7 +71,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * Transfers the balance from one account to another account.
      * @param int $source_account_no The Source account is the account who&#039;s entire balance will be credited and a the amount applied to the specified Target account.
      * @param int $target_account_no The Target account is the account that will received a debit for the entire balance of the Source account.
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>double balance_transferred The amount of money transferred from the Source to the Target account for this transaction.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>double balance_transferred The amount of money transferred from the Source to the Target account for this transaction.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function transfer_account_balance($source_account_no, $target_account_no)
     {
@@ -83,7 +83,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Creates an invoice for one or more inventory items ordered by a specified account holder. This call also has the ability to collect a payment for the invoice by specifying &quot;true&quot; (1) in the bill_immediately field.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $bill_immediately Indicates whether to bill the account holder immediately or, if not set bill on next billing anniversary date.
      * @param array $order_line_items This is an array of line items appearing on the order. The Array elements for this argument immediately follow and are indicated as elements with a right-arrow icon.
      * @param int $bill_seq The unique identifier of the bill sequence number.
@@ -120,7 +120,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param int $alt_inv_template_no The statement template to use when generating a statement for this order
-     * @return mixed[] int order_no The unique identifier for an order in the context of an client_no and account_no.<br>int transaction_id The unique identifier for a given transaction<br>int invoicing_error_code The error code generated by Aria when Aria attempted to generate a invoice<br>string invoicing_error_msg The text message associated with &#039;invoicing_error_code&#039;<br>int statement_error_cd Error code produced when statement generation has failed.<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int invoice_no The unique identifer of a given invoice.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double total_charges_before_tax Total charges on this invoice before taxes are applied<br>double total_tax_charges Total amount of taxes charged<br>double total_charges_after_tax Subtotal combining the total pre-tax charges and the total taxes charged<br>double total_credit Sum of all the credits on the invoice<br>array cart_invoice_line_items All of the items on this order. If do_write was FALSE, these are the line items which would be on the eventual invoice<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
+     * @return mixed[] int order_no The unique identifier for an order in the context of an client_no and account_no.<br>int transaction_id The unique identifier for a given transaction<br>int invoicing_error_code The error code generated by Aria when Aria attempted to generate a invoice<br>string invoicing_error_msg The text message associated with &#039;invoicing_error_code&#039;<br>int statement_error_cd Error code produced when statement generation has failed.<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int invoice_no The unique identifer of a given invoice.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double total_charges_before_tax Total charges on this invoice before taxes are applied<br>double total_tax_charges Total amount of taxes charged<br>double total_charges_after_tax Subtotal combining the total pre-tax charges and the total taxes charged<br>double total_credit Sum of all the credits on the invoice<br>array cart_invoice_line_items All of the items on this order. If do_write was FALSE, these are the line items which would be on the eventual invoice<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
     public function create_order($account_no, $bill_immediately, $order_line_items = null, $bill_seq = null, $client_order_id = null, $client_receipt_id = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $do_write = null, $coupon_cd = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $alt_inv_template_no = null)
     {
@@ -167,7 +167,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Collects the outsanding balance from a specified account holder.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $alt_pay_method If you wish to use the account&#039;s current form of payment, leave this value empty. If you wish to use an alternate credit card, enter &#039;1&#039; for this value.
      * @param string $cc_number Credit card number.
      * @param int $cc_expire_mm Expiration month for the credit card payment instrument.
@@ -197,7 +197,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $force_balance_scope Determines what constitutes the account collectible balance for this transaction
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function settle_account_balance($account_no, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $force_balance_scope = null)
     {
@@ -237,7 +237,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Collects a specified amount from a specified account holder using the electronic method of payment on file.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $amount_to_collect The amount of money to collect from the account.
      * @param int $bill_seq The unique identifier of the bill sequence number.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
@@ -271,7 +271,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param int $payment_application_method Possible values are 1, 2, or NULL. 1 is FIFO.  2 is First-DUE-First-Out.  If NULL, defaults to FIFO
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function collect_from_account($account_no, $amount_to_collect, $bill_seq = null, $client_receipt_id = null, $specific_charge_transaction_id = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $payment_application_method = null)
     {
@@ -315,15 +315,15 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Records a payment transaction for a payment collected from an account holder without using Aria.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $payment_amount The amount of the payment being/to-be made against the outstanding account balance
      * @param string $reference_code The external reference code for this object, such as a check number or an ID assigned by an external system
-     * @param string $comments Additional explanitory text relating to this API call.
+     * @param string $comments Additional explanatory text relating to this API call.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param array $specific_charge_transaction_id A list of specific charges, see below
      * @param int $external_destination_id The external system from which this payment originated
      * @param string $external_id The ID of the corresponding record to this payment in the external system
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function record_external_payment($account_no, $payment_amount, $reference_code = null, $comments = null, $client_receipt_id = null, $specific_charge_transaction_id = null, $external_destination_id = null, $external_id = null)
     {
@@ -341,11 +341,11 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * record remittance to net terms accounts
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $payment_amount The amount of the payment being/to-be made against the outstanding account balance
      * @param string $reference_code The external reference code for this object, such as a check number or an ID assigned by an external system
-     * @param string $comments Additional explanitory text relating to this API call.
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @param string $comments Additional explanatory text relating to this API call.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function record_out_going_payment($account_no, $payment_amount, $reference_code = null, $comments = null)
     {
@@ -359,11 +359,11 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Applies a credit to a future invoice.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $credit_amount The amount of credit to be applied to the account.
      * @param int $credit_reason_code The reason a given credt was/is to be applied to the account.
-     * @param string $comments Additional explanitory text relating to this API call.
-     * @return mixed[] int credit_id This identifier is returned upon successful application of credit and indicates the specific credit transaction executed against the account.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @param string $comments Additional explanatory text relating to this API call.
+     * @return mixed[] int credit_id This identifier is returned upon successful application of credit and indicates the specific credit transaction executed against the account.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function apply_service_credit($account_no, $credit_amount, $credit_reason_code, $comments = null)
     {
@@ -377,12 +377,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Issues a credit to a specified account.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $credit_amount The amount of credit to be applied to the account.
      * @param int $credit_reason_code The reason a given credt was/is to be applied to the account.
-     * @param string $comments Additional explanitory text relating to this API call.
+     * @param string $comments Additional explanatory text relating to this API call.
      * @param array $specific_charge_transaction_id A list of specific charges, see below
-     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function apply_cash_credit($account_no, $credit_amount, $credit_reason_code, $comments = null, $specific_charge_transaction_id = null)
     {
@@ -397,7 +397,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Creates a pre-defined, recurring order called a standing order. A standing order will automatically generate order transactions for a specified account and a specified number of iterations with a specified time interval between iterations.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $billing_interval_units Number of times &quot;billing_interval_type&quot; should be multiplied by in order to determine time to elapse between orders generated from this standing order (e.g. a &quot;billing_interval_type&quot; value of &quot;M&quot; combined with a &quot;billing_interval_units value of &quot;2 indicates that two months should elapse between each order generated from this standing order.
      * @param int $times_to_bill Indicator specifying the total number of orders to be generated from this standing order. Value must be &gt;0.To create an &quot;indefinite&quot; standing order, specify -1.
      * @param string $billing_interval_type Indicator specifying the type of time unit multiplied by the value provided in parameter billing_interval_units, determining the time to elapse between each order generated from this standing order.
@@ -405,7 +405,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param array $standing_order Multidimensional array &quot;standing_order&quot;: The standing_order array represent order-based (i.e. one-time purchased) items, and valid values must be pre-defined in Aria&#039;s inventory table structure.
      * @param string $client_order_id This is the client-assigned order identifier.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
-     * @return mixed[] int standing_order_no Aria-assigned unique identifier for the standing order record created.<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int standing_order_no Aria assigned unique identifier for the standing order record created.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function record_standing_order($account_no, $billing_interval_units, $times_to_bill, $billing_interval_type = null, $first_bill_date = null, $standing_order = null, $client_order_id = null, $client_receipt_id = null)
     {
@@ -423,8 +423,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Cancels all future orders in a standing order. This does not cancel previously generated orders in a standing order. Please note: The cancellation goes into effect immediately and is not reversible.
-     * @param int $standing_order_no Aria-assigned unique identifier for the standing order record created.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @param int $standing_order_no Aria assigned unique identifier for the standing order record created.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function cancel_standing_order($standing_order_no)
     {
@@ -435,10 +435,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Move a payment from one invoice to another.
-     * @param int $account_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $payment_id Aria Event number of payment event.
      * @param array $specific_charge_transaction_id A list of specific charges, see below
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function move_payment($account_no, $payment_id, $specific_charge_transaction_id)
     {
@@ -452,7 +452,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Creates bulk usage records for a specified client for inclusion in a future invoice. This API should not be used unless there are more than 100 records being inserted for performance reasons.
      * @param array $usage_records 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array error_records If client record IDs are provided, an array of error codes and error messages for individual records
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array error_records If client record IDs are provided, an array of error codes and error messages for individual records
      */
     public function bulk_record_usage($usage_records)
     {
@@ -464,27 +464,27 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Creates a usage record for for a specified account for inclusion in a future invoice.
      * @param double $usage_units The volume of usage consumed by the account holder.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $userid Client(or user)-assigned account identifier. If &quot;acct_no&quot; is not provided, must correctly identify the account to which the given usage record is to be assigned. All usage records must identify either an &quot;acct_no&quot; or a &quot;userid&quot;.
-     * @param int $usage_type Aria-assigned identifier for the type of usage being recorded. Please consult Aria support representatives for a list of allowable usage_type values for the given client.
+     * @param int $usage_type Aria assigned identifier for the type of usage being recorded. Please consult Aria support representatives for a list of allowable usage_type values for the given client.
      * @param string $usage_date The date the usage was consumed by the account holder.
      * @param double $billable_units If the number of units of usage incurred differs from the number of units to be accrued for billing purposes, this fields provides for the optional designation of the billable units. If null, the number of units provided in &quot;usage_units&quot; will be billed.
      * @param double $amt Optional currency value (with up to 2 positions after the decimal) denoting a specific total amount for which the account holder should be charged for this specific usage record. If this field (and field &quot;&quot;rate&quot;&quot;) are null (the standard case) the system will aggregate the number of units on this usage record with all other usage records of the same type on this account within the same billing period at invoicing time and bill the account holder for the aggregate total per the rate structures defined by their applicable service plans.This field should not be used under normal circumstances.&quot;
      * @param double $rate Optional currency value (with up to 5 positions after the decimal) denoting a specific amount per unit for which the account holder should be charged for each unit of usage denoted on this specific usage record. This field is ignored if a value is provided in field &quot;&quot;amt&quot;&quot;. If this field (and field &quot;&quot;amt&quot;&quot;) are null (the standard case) the system will aggregate the number of units on this usage record with all other usage records of the same type on this account within the same billing period at invoicing time and bill the account holder for the aggregate total per the rate structures defined by their applicable service plans. This field should not be used under normal circumstances.&quot;
      * @param string $telco_from The unconstrained string identifying the &quot;sender&quot; of the message represented by this usage record. Intended for usage records that represent a telecom-based form of usage whereby the sender/originator and the recipient/terminator of the message/usage record are desired to be recorded as notational-only elements (e.g. a phone call whereby the &quot;from&quot; telephone number and the &quot;to&quot; telephone number are desired as notational elements). Does not effect assignment, categorization, rating, or billing/invoicing in any way.
      * @param string $telco_to The unconstrained string identifying the &quot;recipient&quot; of the message represented by this usage record. Intended for usage records that represent a telecom-based form of usage whereby the sender/originator and the recipient/terminator of the message/usage record are desired to be recorded as notational-only elements (e.g. a phone call whereby the &quot;from&quot; telephone number and the &quot;to&quot; telephone number are desired as notational elements). Does not effect assignment, categorization, rating, or billing/invoicing in any way.
-     * @param string $comments Additional explanitory text relating to this API call.
+     * @param string $comments Additional explanatory text relating to this API call.
      * @param string $exclude_from_billing Determines whether or not the given usage record should be entirely and permanently excluded from inclusion in any future billing (invoicing) process. Setting this value to &quot;true&quot; results in the usage record being recorded for notational purposes only.
      * @param string $exclusion_comments Free text comments intended to explain the decision to exclude this record from billing. Only honored/recorded if value passed to &quot;exclude_from_billing&quot; = &quot;true&quot;.
      * @param string $qualifier_1 Client-defined string of any value meant for internal use and/or display to customers in statements.
      * @param string $qualifier_2 Client-defined string of any value meant for internal use and/or display to customers in statements.
      * @param string $qualifier_3 Client-defined string of any value meant for internal use and/or display to customers in statements.
      * @param string $qualifier_4 Client-defined string of any value meant for internal use and/or display to customers in statements.
-     * @param int $parent_usage_rec_no The Aria-assigned parent usage record identifier for a child account.
+     * @param int $parent_usage_rec_no The Aria assigned parent usage record identifier for a child account.
      * @param string $usage_type_code Client-assigned identifier for the type of usage being recorded.
      * @param string $client_record_id Client-provided unique identifier for a given usage record
      * @param string $caller_id Client-provided unique identifier for a given account
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int usage_rec_no Aria-assigned usage record identifier
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int usage_rec_no Aria assigned usage record identifier
      */
     public function record_usage($usage_units, $acct_no = null, $userid = null, $usage_type = null, $usage_date = null, $billable_units = null, $amt = null, $rate = null, $telco_from = null, $telco_to = null, $comments = null, $exclude_from_billing = null, $exclusion_comments = null, $qualifier_1 = null, $qualifier_2 = null, $qualifier_3 = null, $qualifier_4 = null, $parent_usage_rec_no = null, $usage_type_code = null, $client_record_id = null, $caller_id = null)
     {
@@ -515,12 +515,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns information about the orders associated with a specified account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $my_order_no If this value is not null, then information about this specific order number will be retrieved. If null, then all orders for the given acct_no will be retrieved.
      * @param string $my_client_order_id Client specified order id.
      * @param int $limit_records Limits the number of records which are returned.
      * @param int $details_flag If 1, also returns the order line items
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order An array containing the order record
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order An array containing the order record
      */
     public function get_order($acct_no = null, $my_order_no = null, $my_client_order_id = null, $limit_records = null, $details_flag = null)
     {
@@ -535,10 +535,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Provides information about one or more standing orders associated with a speficied account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $my_standing_order If this value is not null, then information about this specific standing order number will be retrieved. If null, then all standing order for the given acct_no will be retrieved.
      * @param string $my_client_order_id Client defined order id.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array so 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array so 
      */
     public function get_standing_order($acct_no = null, $my_standing_order = null, $my_client_order_id = null)
     {
@@ -552,7 +552,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Provides information about the line items in a specified standing order.
      * @param int $standing_order_no Standing Order number to query.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array so_items An array containing the standing order items.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array so_items An array containing the standing order items.
      */
     public function get_standing_order_items($standing_order_no)
     {
@@ -564,7 +564,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Provides information about the orders that have been created using a specified standing order.
      * @param int $standing_order_no Unique ID for this standing order.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order An array containing related order history records.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order An array containing related order history records.
      */
     public function get_standing_order_hist($standing_order_no)
     {
@@ -590,7 +590,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param array $pre_calc_sku 
      * @param int $tax_exempt_cd Tax exemption status (this is not part of the above arrays). For Aria taxes, 0=not exempt, 1=exempt from state taxes, 2=exempt from country taxes, 3=exempt from state and country taxes. Values may be different for client&#039;s custom tax servers.
      * @param string $address3 The third line of the address
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array inv_calc_out <br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array inv_calc_out <br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
     public function pre_calc_invoice($log_id = null, $first_name = null, $mi = null, $last_name = null, $address1 = null, $address2 = null, $city = null, $state_prov_code = null, $zip_code = null, $country_code = null, $currency_code = null, $pre_calc_plan = null, $pre_calc_sku = null, $tax_exempt_cd = null, $address3 = null)
     {
@@ -616,7 +616,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns information about the items in a particular order associated with a specified account.
      * @param int $order_no The unique identifier for an order in the context of an client_no and account_no.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order_items 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array order_items 
      */
     public function get_order_items($order_no)
     {
@@ -627,11 +627,11 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Generates an invoice for a specified account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $force_pending Determines whether or not to create the invoice as a pending invoice (if client is not already configured to do so). Note: if client is configured for pending invoices, passing &quot;false&quot; here will NOT override the client setting.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param int $alt_bill_day Alternate bill day.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int invoice_no The unique identifer of a given invoice.<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int invoice_no The unique identifer of a given invoice.<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
     public function gen_invoice($acct_no = null, $force_pending = null, $client_receipt_id = null, $alt_bill_day = null)
     {
@@ -645,8 +645,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Get account&#039;s preview statement.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string out_statement The returned account statement.<br>string mime_type MIME type for statement encoding.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string out_statement The returned account statement.<br>string mime_type MIME type for statement encoding.
      */
     public function get_acct_preview_statement($acct_no = null)
     {
@@ -658,9 +658,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * eturns a statement associated with a specified account and invoice.
      * @param int $invoice_no The unique identifer of a given invoice.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $do_encoding True indicates to acquire the message size after doing MIME encoding, False acquires message size without MIME encoding.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string out_statement The returned account statement.<br>string mime_type MIME type for statement encoding.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string out_statement The returned account statement.<br>string mime_type MIME type for statement encoding.
      */
     public function get_statement_for_invoice($invoice_no, $acct_no = null, $do_encoding = null)
     {
@@ -674,9 +674,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the number of characters in a statement associated with a specified account and invoice. You can use this call to determine the size of a statement before trying to capture the statement in a variable.
      * @param int $invoice_no The unique identifer of a given invoice.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $do_encoding True indicates to acquire the message size after doing MIME encoding, False acquires message size without MIME encoding.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int num_chars The number of the characters in the statement.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int num_chars The number of the characters in the statement.
      */
     public function get_statement_for_inv_size($invoice_no, $acct_no = null, $do_encoding = null)
     {
@@ -690,8 +690,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the line items of a specified invoice.
      * @param int $src_transaction_id Either the Aria transaction ID or the Aria invoice number for the invoice
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_line_items Array of invoice line items for this invoice.<br>int is_pending_ind Whether or not this invoice is pending
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_line_items Array of invoice line items for this invoice.<br>int is_pending_ind Whether or not this invoice is pending
      */
     public function get_invoice_details($src_transaction_id, $acct_no = null)
     {
@@ -703,9 +703,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns a list of credit transactions that have been applied against a particular charge transaction for a specified account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $src_transaction_id Either the Aria transaction ID or the Aria invoice number for the invoice
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_payments Array of invoice payments returned upon succesful completion of the API call.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_payments Array of invoice payments returned upon succesful completion of the API call.
      */
     public function get_payments_on_invoice($acct_no = null, $src_transaction_id = null)
     {
@@ -717,9 +717,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns a list of charge transactions against which a particular credit transaction has been applied for a specified account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $src_transaction_id Aria transaction ID for the credit transaction (e.g., Payment)
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_applications An Array of payment applications.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_applications An Array of payment applications.
      */
     public function get_payment_applications($acct_no = null, $src_transaction_id = null)
     {
@@ -731,9 +731,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns a list of actions associated with a particular combination of client receipt ID and account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array receipt_action 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array receipt_action 
      */
     public function get_all_actions_by_receipt_id($acct_no = null, $client_receipt_id = null)
     {
@@ -746,7 +746,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Approves, discards, or regenerates a pending invoice. A pending invoice can be retrieved based on the invoice number or account number. After a pending invoice is approved, this call can also collect a payment and send a statement.If the collection fails, the pending invoice will automatically be voided provided the system setting &quot;Auto Void Pending Invoice on Collection Failure&quot; is set to True.
      * @param int $invoice_no The unique identifer of a given invoice.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $action_directive Identifies which action to take on the pending invoice. If null, defaults to &quot;approve pending invoice&quot;.
      * @param int $bill_seq The unique identifier of the bill sequence number.
      * @param int $alt_pay_method If you wish to use the account&#039;s current form of payment, leave this value empty. If you wish to use an alternate credit card, enter &#039;1&#039; for this value.
@@ -779,7 +779,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address3 The third line of the billing address
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
-     * @return mixed[] int new_invoice_no The new invoice number generated.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int statement_error_code Error code for statement generation failure.<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int new_invoice_no The new invoice number generated.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int statement_error_code Error code for statement generation failure.<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function manage_pending_invoice($invoice_no = null, $acct_no = null, $action_directive = null, $bill_seq = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $alt_collect_on_approve = null, $alt_send_statement_on_approve = null, $cancel_orders_on_discard = null, $bill_address3 = null, $track_data1 = null, $track_data2 = null)
     {
@@ -824,8 +824,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Cancels an account holder&#039;s order and stops all billing related to the order if the following are true: The order has not yet been billed and the order has not already been canceled.
      * @param int $order_no The unique identifier for an order in the context of an client_no and account_no.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function cancel_order($order_no, $acct_no = null)
     {
@@ -837,10 +837,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns refund information, including invoice reversals, for a specified account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $include_voided Include voided invoices in the search results.
      * @param int $aria_event_no Aria Event number of the writeoff event
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array refund_details 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array refund_details 
      */
     public function get_refund_details($acct_no = null, $include_voided = null, $aria_event_no = null)
     {
@@ -853,12 +853,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * allows creation of order and plan changes on a single invoice
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param array $order_line_items 
      * @param array $cart_supp_plans 
      * @param string $client_order_id This is the client-assigned order identifier.
      * @param string $coupon_code The code of the coupon to which to apply the discount.  If code is not valid for any reason, an appropriate error code is returned and the entire transaction (including the supp plan assignment and any possible invoice creation) is rolled back.
-     * @param string $comments Additional explanitory text relating to this API call.
+     * @param string $comments Additional explanatory text relating to this API call.
      * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param int $bill_seq The billing sequence number
@@ -890,7 +890,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param int $alt_inv_template_no The invoice template number to use for this order, if different from the default template
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int order_no The unique identifier for an order in the context of an client_no and account_no.<br>int invoice_no The unique identifer of a given invoice.<br>array cart_invoice_line_items <br>int invoicing_error_code The error code generated by Aria when Aria attempted to generate a invoice<br>string invoicing_error_msg The text message associated with &#039;invoicing_error_code&#039;<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int statement_error_code The error code generated by Aria when Aria attempted to generate a statement<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int order_no The unique identifier for an order in the context of an client_no and account_no.<br>int invoice_no The unique identifer of a given invoice.<br>array cart_invoice_line_items <br>int invoicing_error_code The error code generated by Aria when Aria attempted to generate a invoice<br>string invoicing_error_msg The text message associated with &#039;invoicing_error_code&#039;<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int statement_error_code The error code generated by Aria when Aria attempted to generate a statement<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>array third_party_errors Errors from third-party systems like taxation engines are returned here, whereas the Aria-generated error codes are returned in the error_code and error_msg fields at the root level of the API return.
      */
     public function create_order_with_plans($acct_no = null, $order_line_items = null, $cart_supp_plans = null, $client_order_id = null, $coupon_code = null, $comments = null, $do_write = null, $client_receipt_id = null, $bill_seq = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $track_data1 = null, $track_data2 = null, $alt_inv_template_no = null)
     {
@@ -937,8 +937,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns an array of payment records for a a given acct_no that are considered refundable.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array refundable_payments 
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array refundable_payments 
      */
     public function get_refundable_payments($acct_no = null)
     {
@@ -950,8 +950,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the list of invoice line items that were fully or partially paid. The purpose of this is to provide the information necessary to complete invoice line item refunds.
      * @param int $payment_transaction_id The payment transaction by which to search for invoices
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array reversible_invoices 
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array reversible_invoices 
      */
     public function get_reversible_invs_by_payment($payment_transaction_id, $acct_no = null)
     {
@@ -965,14 +965,14 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * Isues refunds of payment amounts and any invoice line items to be reversed for a specified account.
      * @param int $payment_transaction_id The Aria-generated transaction ID of the payment made.
      * @param int $reason_code The refund reason code.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param double $total_refund_amount The total amount intended to refund. If it is null and auto is set to &#039;true&#039;, the refund amount is calculated based on line items reversed.
      * @param string $refund_check_number The check number associated to the refund.
      * @param string $comments The user comment on the refund.
      * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
      * @param string $auto_calc_refund This indicates if the refund amount is to be calculated based on reversal line itmes. If auto_calc_refund is set to &#039;true&#039; and if do_write is &#039;true&#039;, if the total_refund_amount is not null, process will use the input total_refund_amount, but if the total_refund_amount is null, then the total_refund_amount will be equal to the calculated total reversal amount.  However, do_write = &#039;true&#039; and auto_calc_refund = &#039;false&#039; is not a valid combination and will error out.
      * @param array $invoices_to_reverse 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double applied_total_refund_amount The total amount that has been refunded.  If inAuto is TRUE, this amount will equal to the total reversal amount.<br>double applied_total_reversal_amount The total amount that has been reversed on this invoice line. This amount is calculated for relevant tax lines.<br>int transaction_id Event number that was recorded in the account transaction table for this refund.<br>array reversed_invoice_lines 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double applied_total_refund_amount The total amount that has been refunded.  If inAuto is TRUE, this amount will equal to the total reversal amount.<br>double applied_total_reversal_amount The total amount that has been reversed on this invoice line. This amount is calculated for relevant tax lines.<br>int transaction_id Event number that was recorded in the account transaction table for this refund.<br>array reversed_invoice_lines 
      */
     public function issue_refund_to_acct($payment_transaction_id, $reason_code, $acct_no = null, $total_refund_amount = null, $refund_check_number = null, $comments = null, $do_write = null, $auto_calc_refund = null, $invoices_to_reverse = null)
     {
@@ -993,10 +993,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * Update the refund check number on a refund processed without a check number earlier.
      * @param int $transaction_id The unique identifier for a given transaction
      * @param int $refund_check_number The check number associated to the refund.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $acct_user_id Client (or user)-assigned unique account identifier.
      * @param string $client_acct_id This is the client-assigned identifier for the account.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function update_refund_check_no($transaction_id, $refund_check_number, $acct_no = null, $acct_user_id = null, $client_acct_id = null)
     {
@@ -1012,8 +1012,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the writeoff details of an account.
      * @param int $aria_event_no Aria Event number of the writeoff event
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array writeoff_details A multidimensional array containing the details of all writeoffs applied to an account.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array writeoff_details A multidimensional array containing the details of all writeoffs applied to an account.
      */
     public function get_writeoff_details($aria_event_no, $acct_no = null)
     {
@@ -1026,8 +1026,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the contents of a particular xml statement associated with a specified account.
      * @param int $xml_statement_no The unique xml statement number.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string xml_statement_content The xml statement content.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string xml_statement_content The xml statement content.
      */
     public function get_aria_xml_statement($xml_statement_no, $acct_no = null)
     {
@@ -1039,12 +1039,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Returns a list of payments associated with an account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $start_date Specifies start date. The date is in the format yyyy-mm-dd
      * @param string $end_date Specifies end date. The date is in the format yyyy-mm-dd
      * @param int $limit_records Specifies the number of payment transactions to be returned. There will be no limits if not specified.
      * @param int $details_flag If 1, also return the details for the payments
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_history An Array of payment details.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_history An Array of payment details.
      */
     public function get_acct_payment_history($acct_no = null, $start_date = null, $end_date = null, $limit_records = null, $details_flag = null)
     {
@@ -1060,8 +1060,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the list of invoices on which the payment has been applied.
      * @param int $transaction_id Payment transaction ID for which the application details are to be retrieved.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_application_details An Array of account payment application details.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array payment_application_details An Array of account payment application details.
      */
     public function get_payment_application_dtls($transaction_id, $acct_no = null)
     {
@@ -1074,8 +1074,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Returns the list of optional transaction qualifiers submitted for the given Transaction ID.
      * @param int $transaction_id Transaction ID for which the optional transaction qualifiers are to be  retrieved.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string trans_create_user Specifies the user ID that created the transaction.<br>string trans_create_date Specifies the date/time on which the transaction was created. The date is in the format yyyy-mm-dd hh24:mi:ss.<br>array extended_transaction_qualifiers An  Array of optional transaction qualifiers for the given transaction ID.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string trans_create_user Specifies the user ID that created the transaction.<br>string trans_create_date Specifies the date/time on which the transaction was created. The date is in the format yyyy-mm-dd hh24:mi:ss.<br>array extended_transaction_qualifiers An  Array of optional transaction qualifiers for the given transaction ID.
      */
     public function get_extended_transaction_info($transaction_id, $acct_no = null)
     {
@@ -1091,7 +1091,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param array $client_record_ids 
      * @param int $exclusion_reason_cd The exclude reason code, defining why these usage records are being removed
      * @param string $exclusion_comment Optional comment on the reason behind this API call
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array failed_records 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array failed_records 
      */
     public function discard_usage($usage_record_nos = null, $client_record_ids = null, $exclusion_reason_cd = null, $exclusion_comment = null)
     {
@@ -1109,9 +1109,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param double $amount The amount to writeoff/dispute.
      * @param int $reason_code Reason code to writeoff/dispute.
      * @param string $comments Comments to writeoff/dispute.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $do_dispute Specifies whether to dispute or not.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute created date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies Write-off or dispute.<br>string can_unsettle Specifies if this dispute can be unsettled.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute created date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies Write-off or dispute.<br>string can_unsettle Specifies if this dispute can be unsettled.
      */
     public function create_writeoff_or_dispute($invoice_no, $amount, $reason_code, $comments, $acct_no = null, $do_dispute = null)
     {
@@ -1127,10 +1127,10 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Retrieve the write-offs and disputes made on the account.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $dispute_or_writeoff_flag Specifies if the api should return write off details or dispute details or both
      * @param int $details_flag Flag to indicate whether the api will return writeoff invoices or not.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array write_off_info 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array write_off_info 
      */
     public function get_acct_writeoff_or_disputes($acct_no = null, $dispute_or_writeoff_flag = null, $details_flag = null)
     {
@@ -1143,8 +1143,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
 
     /**
      * Get the eligible invoices to write-off or dispute.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_details 
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array invoice_details 
      */
     public function get_invoices_to_writeoff_or_dispute($acct_no = null)
     {
@@ -1157,9 +1157,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * Settle dispute for the given dispute number.
      * @param int $dispute_no Dispute number.
      * @param int $settlement_action The amount need to be writeoff/dispute.
-     * @param int $acct_no Aria-assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $comments Comments to settle dispute.
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute create date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies dispute or writeoff<br>string can_unsettle Specifies if this dispute can be unsettled.
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute create date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies dispute or writeoff<br>string can_unsettle Specifies if this dispute can be unsettled.
      */
     public function settle_dispute_hold($dispute_no, $settlement_action, $acct_no = null, $comments = null)
     {
