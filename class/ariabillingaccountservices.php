@@ -17,7 +17,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.13';
+    protected $__wsdl_version = '6.14';
     
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
