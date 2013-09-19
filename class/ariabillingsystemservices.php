@@ -169,7 +169,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns a summary list of all plans associated with a client.
-     * @param int $plan_no Aria assigned unique plan identifier
+     * @param int $plan_no The unique plan identifier, if only one plan is desired.
      * @return mixed[] array plans_basic <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_client_plans_basic($plan_no = null)
@@ -181,10 +181,10 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns information about the rates for a particular service in a specified plan.
-     * @param int $plan_no Aria assigned unique plan identifier
+     * @param int $plan_no The unique plan identifier.
      * @return mixed[] array plan_services <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_plan_services($plan_no = null)
+    public function get_client_plan_services($plan_no)
     {
         return $this->__ws_call('get_client_plan_services', Array(
                 'plan_no' => $plan_no
@@ -193,16 +193,16 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns information about the rates for a particular service in a specified plan.
+     * @param int $plan_no The unique plan identifier.
      * @param int $service_no Aria assigned unique service identifier
-     * @param int $plan_no Aria assigned unique plan identifier
      * @param int $alt_rate_schedule_no Alternative Rate Schedule Number. The alt_rate_schedule_no is the unique identifier for an alternative rate schedule that can be assigned to the account holder in place of the default rate schedule. This is often done by CSR&#039;s to provide special compensation or discounts as incentives to account holders.
      * @return mixed[] array plan_service_rates Represents the rates for the default rate schedule for the default currency for the plan<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_plan_service_rates($service_no, $plan_no = null, $alt_rate_schedule_no = null)
+    public function get_client_plan_service_rates($plan_no, $service_no, $alt_rate_schedule_no = null)
     {
         return $this->__ws_call('get_client_plan_service_rates', Array(
-                'service_no' => $service_no,
                 'plan_no' => $plan_no,
+                'service_no' => $service_no,
                 'alt_rate_schedule_no' => $alt_rate_schedule_no
         ));
     }
@@ -221,7 +221,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
     /**
      * Subscribes a client to a specified event class.
      * @param int $class_no The class to assign to the client
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array events An array of events returned from the successful completion of this API call
      */
     public function subscribe_event_class($class_no, $do_write = null)
@@ -235,7 +235,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
     /**
      * Unsubscribes a client from a specified event class.
      * @param int $class_no The event class number to unsubscribe from.
-     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested operation. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential effects stemming from this call such as pro-ration, plan assignments, etc. and return all relevant data  without actually performing the requested operation or making any changes to the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.  Do_write defaults to &#039;true&#039;
+     * @param string $do_write Boolean indicator informing Aria whether or not to actually perform the requested plan assignment/de-assignment. If &#039;false&#039; is passed in this field Aria will, if applicable, calculate any potential proration effect that would result from this call and return that value in the output field &#039;proration_result_amount&#039; described below without actually performing the requested operation or charging/crediting the account. This is useful to interfaces that wish to present the user with a &#039;confirmation page&#039; informing of the would-be effects of the requested operation prior to actually performing it.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array events An Array of events being unsubscribed to.
      */
     public function unsubscribe_event_class($class_no, $do_write = null)
@@ -324,11 +324,11 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns a list of rate schedules associated with a specified plan. The plan&#039;s default rate schedule will always be the first rate schedule returned and the remaining rate schedules will be sorted by schedule number.
-     * @param int $plan_no Aria assigned unique plan identifier
+     * @param int $plan_no The unique plan identifier.
      * @param string $currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array rate_sched An array of the rate schedules for the requested plan
      */
-    public function get_rate_schedules_for_plan($plan_no = null, $currency_cd = null)
+    public function get_rate_schedules_for_plan($plan_no, $currency_cd = null)
     {
         return $this->__ws_call('get_rate_schedules_for_plan', Array(
                 'plan_no' => $plan_no,
@@ -603,7 +603,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * Returns the master plans associated with a particular value for a supplemental object field.
      * @param string $field_val The value of the supplemental field which all returned plans should possess
      * @param int $field_no The plan supplemental field number which is being searched against
-     * @param string $field_name The machine-readable name of this field
+     * @param string $field_name The optional name of this supplemental field, if the number is not known
      * @return mixed[] array master_plans_by_supp_field <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_master_plans_by_supp_field($field_val, $field_no = null, $field_name = null)
@@ -619,7 +619,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * Returns a list of supplemental plans associated with a specified value for a supplemental object field.
      * @param string $field_val The value of the supplemental field which all returned plans should possess
      * @param int $field_no The plan supplemental field number which is being searched against
-     * @param string $field_name The machine-readable name of this field
+     * @param string $field_name The optional name of this supplemental field, if the number is not known
      * @return mixed[] array supp_plans_by_supp_field <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_supp_plans_by_supp_field($field_val, $field_no = null, $field_name = null)
@@ -635,7 +635,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * Returns the inventory items associated with a particular value for a supplemental object field.
      * @param string $field_val The value of the supplemental field which all returned plans should possess
      * @param int $field_no The plan supplemental field number which is being searched against
-     * @param string $field_name The machine-readable name of this field
+     * @param string $field_name The optional name of this supplemental field, if the number is not known
      * @return mixed[] array items_by_supp_field <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_items_by_supp_field($field_val, $field_no = null, $field_name = null)

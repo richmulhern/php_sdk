@@ -36,10 +36,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * 
      * @param string $promo_plan_set_name 
      * @param string $promo_plan_set_desc 
-     * @param int $plan_no Aria-assigned unique plan identifier
+     * @param string $plan_no Aria-assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int promo_plan_set_no 
      */
-    public function create_promo_plan_set($promo_plan_set_name, $promo_plan_set_desc, $plan_no = null)
+    public function create_promo_plan_set($promo_plan_set_name, $promo_plan_set_desc, $plan_no)
     {
         return $this->__ws_call('create_promo_plan_set', Array(
                 'promo_plan_set_name' => $promo_plan_set_name,
@@ -53,10 +53,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $promo_plan_set_no 
      * @param string $promo_plan_set_name 
      * @param string $promo_plan_set_desc 
-     * @param int $plan_no Aria-assigned unique plan identifier
+     * @param string $plan_no Aria-assigned unique plan identifier
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int promo_plan_set_no 
      */
-    public function update_promo_plan_set($promo_plan_set_no, $promo_plan_set_name, $promo_plan_set_desc, $plan_no = null)
+    public function update_promo_plan_set($promo_plan_set_no, $promo_plan_set_name, $promo_plan_set_desc, $plan_no)
     {
         return $this->__ws_call('update_promo_plan_set', Array(
                 'promo_plan_set_no' => $promo_plan_set_no,
@@ -195,7 +195,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns details of specified inventory item
      * @param int $item_no Specifies the Inventory item number
      * @param string $currency_cd 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int item_no Specifies the Inventory item number<br>int item_type Item Type for the inventory item. Valid values are: 0 - Inventory Item, 1 - Months To Stack, 2 - Resource Item<br>string item_name Specifies the inventory item name<br>string item_desc Specifies description of Inventory item<br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>int service_no Specifies Service number for the Inventory item<br>int invoice_advancement_months Specifies months of invoice advancement for the Inventory item<br>int plan_no Aria-assigned unique plan identifier<br>string client_sku SKU specified by client for the inventory item<br>array pricing <br>string modify_price_ind Specifies if CSR&#039;s may modify Inventory item price. Valid values are: Y - Yes and N - No<br>double subunit_qty Subunit Quantity<br>string subunit_label Subunit Label<br>int days_to_expiry Specifies the number of days to expiration for resources on this SKU<br>array resources <br>double stock_level <br>array image <br>array supplemental_obj_fields 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int item_no Specifies the Inventory item number<br>int item_type Item Type for the inventory item. Valid values are: 0 - Inventory Item, 1 - Months To Stack, 2 - Resource Item<br>string item_name Specifies the inventory item name<br>string item_desc Specifies description of Inventory item<br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>int service_no Specifies Service number for the Inventory item<br>int invoice_advancement_months Specifies months of invoice advancement for the Inventory item<br>int plan_no Specifies Master Plan number for the Inventory item<br>string client_sku SKU specified by client for the inventory item<br>array pricing <br>string modify_price_ind Specifies if CSR&#039;s may modify Inventory item price. Valid values are: Y - Yes and N - No<br>double subunit_qty Subunit Quantity<br>string subunit_label Subunit Label<br>int days_to_expiry Specifies the number of days to expiration for resources on this SKU<br>array resources <br>double stock_level <br>array image <br>array supplemental_obj_fields 
      */
     public function get_inventory_item_details($item_no, $currency_cd)
     {
@@ -216,7 +216,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $item_price Specifies the price for Inventory item for currencies.. REST input arrays are &quot;|&quot; separated lists of a single data type Count of value passed for the &#039;price_per_unit&#039; parameter should be the same as &#039;currency_cd&#039;.
      * @param int $active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active
      * @param int $invoice_advancement_months Specifies months of invoice advancement for the Inventory item
-     * @param int $plan_no Aria-assigned unique plan identifier
+     * @param int $plan_no Specifies Master Plan number for the Inventory item
      * @param string $modify_price_ind Specifies if CSR&#039;s may modify Inventory item price. Valid values are: Y - Yes and N - No
      * @param int $subunit_qty Subunit Quantity If item_type=0 and subunit_label is not null then this field is required
      * @param string $subunit_label Subunit Label If item_type=0 and quantity_per_item is not null then this field is required
@@ -267,7 +267,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $item_price Specifies the price for Inventory item for currencies.. REST input arrays are &quot;|&quot; separated lists of a single data type Count of value passed for the &#039;price_per_unit&#039; parameter should be the same as &#039;currency_cd&#039;.
      * @param int $active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active
      * @param int $invoice_advancement_months Specifies months of invoice advancement for the Inventory item
-     * @param int $plan_no Aria-assigned unique plan identifier
+     * @param int $plan_no Specifies Master Plan number for the Inventory item
      * @param string $modify_price_ind Specifies if CSR&#039;s may modify Inventory item price. Valid values are: Y - Yes and N - No
      * @param int $subunit_qty Subunit Quantity If item_type=0 and subunit_label is not null then this field is required
      * @param string $subunit_label Subunit Label If item_type=0 and quantity_per_item is not null then this field is required
@@ -396,8 +396,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     /**
      * Retrieve details on specified service that is on a specified plan
      * @param int $service_no Specifies the Service number
-     * @param int $plan_no Aria-assigned unique plan identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Aria-assigned unique plan identifier<br>string currency_cd Specifies the currency code of plan<br>int service_no Specifies the Service number<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>int taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string gl_cd Specified chart of access code<br>int usage_type Specifies usage type associated with service<br>string rate_type Specifies the rate type. Valid values are:&#039;Flat Rate&#039; and &#039;Tiered Pricing&#039;<br>array rate_schedules <br>array parent_plans <br>array exclusion_plans <br>array supplemental_obj_fields 
+     * @param int $plan_no Plan Number
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string currency_cd Specifies the currency code of plan<br>int service_no Specifies the Service number<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>int taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string gl_cd Specified chart of access code<br>int usage_type Specifies usage type associated with service<br>string rate_type Specifies the rate type. Valid values are:&#039;Flat Rate&#039; and &#039;Tiered Pricing&#039;<br>array rate_schedules <br>array parent_plans <br>array exclusion_plans <br>array supplemental_obj_fields 
      */
     public function get_plan_service_details($service_no, $plan_no = null)
     {
@@ -767,10 +767,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
 
     /**
      * Returns details for specified service plan
-     * @param int $plan_no Aria-assigned unique plan identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Aria-assigned unique plan identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array exclusion_plans <br>array supplemental_obj_fields 
+     * @param int $plan_no Plan Number
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array exclusion_plans <br>array supplemental_obj_fields 
      */
-    public function get_plan_details($plan_no = null)
+    public function get_plan_details($plan_no)
     {
         return $this->__ws_call('get_plan_details', Array(
                 'plan_no' => $plan_no
@@ -817,7 +817,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $parent_plans 
      * @param array $exclusion_plans 
      * @param array $supplemental_obj_field 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Aria-assigned unique plan identifier
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
     public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $plan_groups = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $template_no = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
     {
@@ -854,11 +854,11 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
 
     /**
      * Edit a service plan for specified client
+     * @param string $plan_no Specifies Plan Number
      * @param string $plan_name Specifies Plan Name
      * @param int $plan_type Specifies Plan Type. Valid values are [ &#039;Master Recurring Plan&#039;, &#039;Master Pre-paid Plan&#039;, &#039;Master Free Plan&#039;, &#039;Supplemental Recurring Plan&#039;, &#039;Supplemental Free Plan&#039;]
      * @param string $billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually
      * @param string $currency Specifies the currency code
-     * @param int $plan_no Aria-assigned unique plan identifier
      * @param string $plan_description Specifies plan description
      * @param array $plan_groups 
      * @param int $active Specifies Plan Status.Valid values are &quot;1&quot; or &quot;0&quot; 1 - Active 0 - Inactive
@@ -883,16 +883,16 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $parent_plans 
      * @param array $exclusion_plans 
      * @param array $supplemental_obj_field 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Aria-assigned unique plan identifier
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function edit_plan($plan_name, $plan_type, $billing_interval, $currency, $plan_no = null, $plan_description = null, $plan_groups = null, $active = null, $usage_billing_interval = null, $template_no = null, $rollover_months = null, $rollover_plan = null, $dunning_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
+    public function edit_plan($plan_no, $plan_name, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_groups = null, $active = null, $usage_billing_interval = null, $template_no = null, $rollover_months = null, $rollover_plan = null, $dunning_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
     {
         return $this->__ws_call('edit_plan', Array(
+                'plan_no' => $plan_no,
                 'plan_name' => $plan_name,
                 'plan_type' => $plan_type,
                 'billing_interval' => $billing_interval,
                 'currency' => $currency,
-                'plan_no' => $plan_no,
                 'plan_description' => $plan_description,
                 'plan_groups' => $plan_groups,
                 'active' => $active,
@@ -922,10 +922,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
 
     /**
      * Updates the plan service details of an existing plan. For the list of schedules and services, those specified will be modified, those not specified but were previously associated with the plan will be deleted. Note that the default schedule for each currency already supported must be provided
-     * @param int $plan_no Aria-assigned unique plan identifier
+     * @param int $plan_no Specifies the Plan number
      * @param array $schedule 
      * @param array $service 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Service number<br>int plan_no Aria-assigned unique plan identifier
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Service number<br>int plan_no Plan Number
      */
     public function edit_plan_service_details($plan_no = null, $schedule = null, $service = null)
     {
@@ -954,7 +954,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $plan_name 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Aria-assigned unique plan identifier
      */
-    public function copy_plan($plan_no = null, $plan_name = null)
+    public function copy_plan($plan_no, $plan_name = null)
     {
         return $this->__ws_call('copy_plan', Array(
                 'plan_no' => $plan_no,
