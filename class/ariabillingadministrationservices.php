@@ -572,7 +572,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     /**
      * Returns details of specified coupon
      * @param string $coupon_cd Coupon Code
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Specifies Coupon Code<br>string coupon_desc Specifies Coupon description<br>string coupon_msg Specifies Coupon Message<br>int status_ind Specifies Coupon status. Valid values are [0, 1]1 indicates coupon is Active. 0 indicates coupon Inactive<br>int no_of_uses Specifies number of uses after which coupon get expires.Related to coupon expiry detail<br>string start_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>string end_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>array credit_template <br>int eligible_plan_no Eligible service plan number. If eligible_plan_no is present then eligible_service_no is also set and vice-versa. This means that coupon can only be applied against a specific type of charge. But If both values are null then it means that coupon can be applied against any change.<br>int eligible_service_no Eligible service number<br>int no_of_credits This parameter is related to information about generation frequency. i.e. Number of credits If this value is set along with time_between_credits, then it means that generation frequency is multiple.<br>int time_between_credits Time interval between credits<br>int discount_type Specifies discount type. Valid values are [1 or 2] 1 - Indicates flat rate 2 - Indicates percentage<br>double discount_amt Specifies discount amount. If discount_type is set to 1, then this range of valid values of this parameter is &gt; 0 to 9999, but if its set to &quot;2&quot; then its range is &gt; 0 to 100&#039;<br>int percentage_plan_no Specifies Percentage plan number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int percentage_service_no Specifies Percentage service number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int alt_service_no Specifies Alternative service number. If this value is null, then for coupon can be Service code to use is standard
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Specifies Coupon Code<br>string coupon_desc Specifies Coupon description<br>string coupon_msg Specifies Coupon Message<br>int status_ind Specifies Coupon status. Valid values are [0, 1]1 indicates coupon is Active. 0 indicates coupon Inactive<br>int no_of_uses Specifies number of uses after which coupon get expires.Related to coupon expiry detail<br>string start_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>string end_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>array credit_template <br>int eligible_plan_no Eligible service plan number. If eligible_plan_no is present then eligible_service_no is also set and vice-versa. This means that coupon can only be applied against a specific type of charge. But If both values are null then it means that coupon can be applied against any change.<br>int eligible_service_no Eligible service number<br>int no_of_credits This parameter is related to information about generation frequency. i.e. Number of credits If this value is set along with time_between_credits, then it means that generation frequency is multiple.<br>int time_between_credits Time interval between credits<br>int discount_type Specifies discount type. Valid values are [1 or 2] 1 - Indicates flat rate 2 - Indicates percentage<br>double discount_amt Specifies discount amount. If discount_type is set to 1, then this range of valid values of this parameter is &gt; 0 to 9999, but if its set to &quot;2&quot; then its range is &gt; 0 to 100&#039;<br>int percentage_plan_no Specifies Percentage plan number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int percentage_service_no Specifies Percentage service number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int alt_service_no Specifies Alternative service number. If this value is null, then for coupon can be Service code to use is standard<br>array discount_rule <br>array discount_bundle 
      */
     public function get_coupon_details($coupon_cd)
     {
@@ -592,9 +592,13 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $no_of_uses Specifies number of uses after which coupon get expires.Related to coupon expiry detail
      * @param array $template 
      * @param array $existing_template 
+     * @param array $discount_rule 
+     * @param array $existing_discount_rule 
+     * @param array $discount_bundle 
+     * @param array $existing_discount_bundle 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Coupon Code
      */
-    public function create_coupon($coupon_cd, $status_ind, $start_date, $end_date, $coupon_desc = null, $coupon_msg = null, $no_of_uses = null, $template = null, $existing_template = null)
+    public function create_coupon($coupon_cd, $status_ind, $start_date, $end_date, $coupon_desc = null, $coupon_msg = null, $no_of_uses = null, $template = null, $existing_template = null, $discount_rule = null, $existing_discount_rule = null, $discount_bundle = null, $existing_discount_bundle = null)
     {
         return $this->__ws_call('create_coupon', Array(
                 'coupon_cd' => $coupon_cd,
@@ -605,7 +609,11 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'coupon_msg' => $coupon_msg,
                 'no_of_uses' => $no_of_uses,
                 'template' => $template,
-                'existing_template' => $existing_template
+                'existing_template' => $existing_template,
+                'discount_rule' => $discount_rule,
+                'existing_discount_rule' => $existing_discount_rule,
+                'discount_bundle' => $discount_bundle,
+                'existing_discount_bundle' => $existing_discount_bundle
         ));
     }
 
@@ -620,9 +628,13 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $no_of_uses Specifies number of uses after which coupon get expires. Related to coupon expiry detail
      * @param array $template Specifies existing templates to be associated with the coupon. REST input arrays should passed in the following format: existing_template[0]=1243&amp;existing_template[1]=1002 etc.
      * @param array $existing_template 
+     * @param array $discount_rule 
+     * @param array $existing_discount_rule 
+     * @param array $discount_bundle 
+     * @param array $existing_discount_bundle 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Coupon code
      */
-    public function update_coupon($coupon_cd, $status_ind, $start_date, $end_date, $coupon_desc = null, $coupon_msg = null, $no_of_uses = null, $template = null, $existing_template = null)
+    public function update_coupon($coupon_cd, $status_ind, $start_date, $end_date, $coupon_desc = null, $coupon_msg = null, $no_of_uses = null, $template = null, $existing_template = null, $discount_rule = null, $existing_discount_rule = null, $discount_bundle = null, $existing_discount_bundle = null)
     {
         return $this->__ws_call('update_coupon', Array(
                 'coupon_cd' => $coupon_cd,
@@ -633,7 +645,11 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'coupon_msg' => $coupon_msg,
                 'no_of_uses' => $no_of_uses,
                 'template' => $template,
-                'existing_template' => $existing_template
+                'existing_template' => $existing_template,
+                'discount_rule' => $discount_rule,
+                'existing_discount_rule' => $existing_discount_rule,
+                'discount_bundle' => $discount_bundle,
+                'existing_discount_bundle' => $existing_discount_bundle
         ));
     }
 
@@ -755,6 +771,144 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     }
 
     /**
+     * Creates a discount rule
+     * @param string $label Specifies Discount Rule Name
+     * @param string $rule_id Specifies client rule id for Discount Rule
+     * @param string $description Specifies description for the Discount Rule
+     * @param string $ext_description Specifies description that can be added to invoice/statment and is visible to account holder.
+     * @param int $flat_percent_ind Specifies whether the discount is going to be flat or percentage based.
+     * @param double $amount Specifies the amount of discount.
+     * @param string $currency Specifies the currency code of the rule
+     * @param string $duration_type_ind Specifies the duration type. Valid values are [ U, M] for uses and months
+     * @param string $inline_offset_ind Specifies how the discount will be displayed in the invoice.Valid values are [I, O]
+     * @param int $scope_no Specifies the charges eligible for the discount.
+     * @param int $max_applicable_months Specifies the duration of the discount in months.
+     * @param int $max_applications_per_acct Specifies the number of times the discount can be applied.
+     * @param int $service_code_to_use Specifies which service code to use. Valid values are [0,1] where 0 uses the same service as the &#039;charge&#039; line item and 1 uses a specific service
+     * @param int $alt_service_no_2_apply Specifies the specific service code to use.
+     * @param string $applicable_trans_scope Specifies whether the discount is applied to each or all transactions.
+     * @param array $plan_no Aria-assigned unique plan identifier
+     * @param array $service_no 
+     * @param array $item_no 
+     * @param string $use_all_or_nth_subs_rule Specifies whether to apply discount when &#039;all&#039; the plans are under the account or &#039;some&#039; of the plans are are under the account.
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string rule_no Rule No
+     */
+    public function create_discount_rule($label, $rule_id, $description, $ext_description, $flat_percent_ind, $amount, $currency, $duration_type_ind, $inline_offset_ind, $scope_no, $max_applicable_months = null, $max_applications_per_acct = null, $service_code_to_use = null, $alt_service_no_2_apply = null, $applicable_trans_scope = null, $plan_no = null, $service_no = null, $item_no = null, $use_all_or_nth_subs_rule = null)
+    {
+        return $this->__ws_call('create_discount_rule', Array(
+                'label' => $label,
+                'rule_id' => $rule_id,
+                'description' => $description,
+                'ext_description' => $ext_description,
+                'flat_percent_ind' => $flat_percent_ind,
+                'amount' => $amount,
+                'currency' => $currency,
+                'duration_type_ind' => $duration_type_ind,
+                'inline_offset_ind' => $inline_offset_ind,
+                'scope_no' => $scope_no,
+                'max_applicable_months' => $max_applicable_months,
+                'max_applications_per_acct' => $max_applications_per_acct,
+                'service_code_to_use' => $service_code_to_use,
+                'alt_service_no_2_apply' => $alt_service_no_2_apply,
+                'applicable_trans_scope' => $applicable_trans_scope,
+                'plan_no' => $plan_no,
+                'service_no' => $service_no,
+                'item_no' => $item_no,
+                'use_all_or_nth_subs_rule' => $use_all_or_nth_subs_rule
+        ));
+    }
+
+    /**
+     * Creates a discount bundle
+     * @param string $bundle_name Specifies the name for the discount bundle.
+     * @param string $bundle_id Specifies bundle id for discount Bundle
+     * @param string $bundle_description Specifies description for the discount Bundle
+     * @param string $allow_overlap_ind Specifies if the rules in the bundle can overlap or not.
+     * @param array $rules 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string rule_no Rule No
+     */
+    public function create_discount_bundle($bundle_name, $bundle_id, $bundle_description, $allow_overlap_ind, $rules = null)
+    {
+        return $this->__ws_call('create_discount_bundle', Array(
+                'bundle_name' => $bundle_name,
+                'bundle_id' => $bundle_id,
+                'bundle_description' => $bundle_description,
+                'allow_overlap_ind' => $allow_overlap_ind,
+                'rules' => $rules
+        ));
+    }
+
+    /**
+     * Lists all the discount bundles for the client
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int bundle_no Specifies the no for the discount bundle.<br>string bundle_name Specifies the name for the discount bundle.<br>string bundle_id Specifies bundle id for discount Bundle<br>string description Specifies description for the discount Bundle
+     */
+    public function get_discount_bundles()
+    {
+        return $this->__ws_call('get_discount_bundles', Array(
+                
+        ));
+    }
+
+    /**
+     * Lists all the details of a given discount bundle
+     * @param int $bundle_no Specifies the bundle number
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int bundle_no Specifies the no for the discount bundle.<br>string bundle_name Specifies the name for the discount bundle.<br>string bundle_id Specifies bundle id for discount Bundle<br>string description Specifies description for the discount Bundle<br>string allow_overlap_ind Specifies if the rules in the bundle can overlap or not.<br>array rules 
+     */
+    public function get_discount_bundle_details($bundle_no)
+    {
+        return $this->__ws_call('get_discount_bundle_details', Array(
+                'bundle_no' => $bundle_no
+        ));
+    }
+
+    /**
+     * Lists all the discount rules for the client
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rule_no Specifies the no for the discount rule.<br>string rule_id Specifies client rule id for Discount Rule<br>string description Specifies description for the Discount Rule<br>string ext_description Specifies description that can be added to invoice/statment and is visible to account holder.<br>int flat_percent_ind Specifies whether the discount is going to be flat or percentage based.<br>double amount Specifies the amount of discount.<br>string currency 
+     */
+    public function get_discount_rules()
+    {
+        return $this->__ws_call('get_discount_rules', Array(
+                
+        ));
+    }
+
+    /**
+     * Lists all the details of a given discount rule
+     * @param int $rule_no Specifies the rule number
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rule_no Specifies the no for the discount rule.<br>string rule_id Specifies client rule id for Discount Rule<br>string description Specifies description for the Discount Rule<br>string ext_description Specifies description that can be added to invoice/statment and is visible to account holder.<br>int flat_percent_ind Specifies whether the discount is going to be flat or percentage based.<br>double amount Specifies the amount of discount.<br>string currency Specifies the currency code of the rule<br>string duration_type_ind Specifies the duration type. Valid values are [ U, M] for uses and months<br>int max_applicable_months Specifies the duration of the discount in months.<br>int max_applications_per_acct Specifies the number of times the discount can be applied.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>int service_code_to_use Specifies which service code to use.<br>int alt_service_no_2_apply Specifies the specific service code to use.<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array service_no <br>array item_no 
+     */
+    public function get_discount_rule_details($rule_no)
+    {
+        return $this->__ws_call('get_discount_rule_details', Array(
+                'rule_no' => $rule_no
+        ));
+    }
+
+    /**
+     * Deletes the rules.
+     * @param array $rule_nos Specifies the rule numbers to be deleted. Eg rule_nos[0]=10012341&amp;rule_nos[1]=10023432 etc
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function delete_rules($rule_nos = null)
+    {
+        return $this->__ws_call('delete_rules', Array(
+                'rule_nos' => $rule_nos
+        ));
+    }
+
+    /**
+     * Deletes the bundles.
+     * @param array $bundle_nos Specifies the bundle numbers to be deleted. Eg bundle_nos[0]=10012341&amp;bundle_nos[1]=10023432 etc
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function delete_bundles($bundle_nos = null)
+    {
+        return $this->__ws_call('delete_bundles', Array(
+                'bundle_nos' => $bundle_nos
+        ));
+    }
+
+    /**
      * Returns all service plans for client
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array plans 
      */
@@ -795,7 +949,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $plan_type Specifies Plan Type. Valid values are [ &#039;Master Recurring Plan&#039;, &#039;Master Pre-paid Plan&#039;, &#039;Master Free Plan&#039;, &#039;Supplemental Recurring Plan&#039;, &#039;Supplemental Free Plan&#039;]
      * @param string $currency Specifies the currency code of plan
      * @param string $billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually
-     * @param array $plan_groups 
+     * @param array $plan_group 
      * @param string $usage_billing_interval 
      * @param int $active Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active
      * @param string $rollover_months Specifies rollover months. Valid values are from 0 to 24
@@ -819,7 +973,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $supplemental_obj_field 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $plan_groups = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $template_no = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
+    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $plan_group = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $template_no = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
     {
         return $this->__ws_call('create_new_plan', Array(
                 'plan_name' => $plan_name,
@@ -827,7 +981,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'plan_type' => $plan_type,
                 'currency' => $currency,
                 'billing_interval' => $billing_interval,
-                'plan_groups' => $plan_groups,
+                'plan_group' => $plan_group,
                 'usage_billing_interval' => $usage_billing_interval,
                 'active' => $active,
                 'rollover_months' => $rollover_months,
@@ -860,7 +1014,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually
      * @param string $currency Specifies the currency code
      * @param string $plan_description Specifies plan description
-     * @param array $plan_groups 
+     * @param array $plan_group 
      * @param int $active Specifies Plan Status.Valid values are &quot;1&quot; or &quot;0&quot; 1 - Active 0 - Inactive
      * @param string $usage_billing_interval Usage billing Interval [ can be either of 1, 3, 6, 12 or custom ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually. For custom the user can provide any number but not greater than 36 months. Also the usage billing interval cannot be greater than the plan billing_interval
      * @param int $template_no Specifies invoice template class associated with master plan
@@ -885,7 +1039,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $supplemental_obj_field 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function edit_plan($plan_no, $plan_name, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_groups = null, $active = null, $usage_billing_interval = null, $template_no = null, $rollover_months = null, $rollover_plan = null, $dunning_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
+    public function edit_plan($plan_no, $plan_name, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_group = null, $active = null, $usage_billing_interval = null, $template_no = null, $rollover_months = null, $rollover_plan = null, $dunning_plan_no = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $exclusion_plans = null, $supplemental_obj_field = null)
     {
         return $this->__ws_call('edit_plan', Array(
                 'plan_no' => $plan_no,
@@ -894,7 +1048,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'billing_interval' => $billing_interval,
                 'currency' => $currency,
                 'plan_description' => $plan_description,
-                'plan_groups' => $plan_groups,
+                'plan_group' => $plan_group,
                 'active' => $active,
                 'usage_billing_interval' => $usage_billing_interval,
                 'template_no' => $template_no,
