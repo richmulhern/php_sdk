@@ -1,6 +1,6 @@
 #Aria PHP SDK
 
-The Aria Systems PHP SDK is a collection of classes that make it easy to use the [Aria Systems](http://www.ariasystems.com/) REST and SOAP web services in your PHP application. The PHP SDK works with Aria System's Core, Object-Query, and Admintools APIs.
+The Aria Systems PHP SDK is a collection of classes that make it easy to use the [Aria Systems](http://www.ariasystems.com/) REST and SOAP web services in your PHP application. The PHP SDK works with Aria Systems Core, Object-Query, and Admintools APIs.
 
 ##Installation
 
