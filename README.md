@@ -33,4 +33,4 @@ print_r($result); // Array ( [error_code] => 0, [error_msg] => OK )
 
 ##More Information
 
-For more information check out [Aria Systems Developer Central](http://developer.ariasystems.net) for details on [Aria Systems](http://www.ariasystems.com/) services, features, and support.
+For more information check out [Aria Systems Developer Central](http://developer.ariasystems.net) for more examples, details, and support on [Aria Systems](http://www.ariasystems.com/) services and features.
