@@ -14,7 +14,7 @@ require_once('class/ariabillingcomplete.php');
 
 The PHP SDK includes classes for each series of web services and a complete class that includes a method for each Core API. To make a service call, instantiate the complete class or the
 class for the service you want to use with the URL of environment to call and a configuration array. Each API call is made as a method on your class. A successful call will return an array
-with 'error_code' and 'error_msg' keys and values of 0 and OK.
+including 'error_code' and 'error_msg' keys with the values of 0 and OK.
 
 ```php
 require_once('class/ariabillingcomplete.php');
