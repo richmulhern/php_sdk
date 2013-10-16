@@ -157,30 +157,6 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     }
 
     /**
-     * Exports all the plans and related data belonging to specified client
-     * @param array $plan_nos 
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string serialized_data 
-     */
-    public function plan_export($plan_nos = null)
-    {
-        return $this->__ws_call('plan_export', Array(
-                'plan_nos' => $plan_nos
-        ));
-    }
-
-    /**
-     * Import all the plans and related data resulting from plan_export. If data required by the plan does not already exist, this method will create these data.
-     * @param file $import_file File containing the output of a successful call to plan_export
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
-     */
-    public function plan_import($import_file)
-    {
-        return $this->__ws_call('plan_import', Array(
-                'import_file' => $import_file
-        ));
-    }
-
-    /**
      * Returns list of inventory items created for client
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array inventory_items 
      */
@@ -572,7 +548,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     /**
      * Returns details of specified coupon
      * @param string $coupon_cd Coupon Code
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Specifies Coupon Code<br>string coupon_desc Specifies Coupon description<br>string coupon_msg Specifies Coupon Message<br>int status_ind Specifies Coupon status. Valid values are [0, 1]1 indicates coupon is Active. 0 indicates coupon Inactive<br>int no_of_uses Specifies number of uses after which coupon get expires.Related to coupon expiry detail<br>string start_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>string end_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>array credit_template <br>int eligible_plan_no Eligible service plan number. If eligible_plan_no is present then eligible_service_no is also set and vice-versa. This means that coupon can only be applied against a specific type of charge. But If both values are null then it means that coupon can be applied against any change.<br>int eligible_service_no Eligible service number<br>int no_of_credits This parameter is related to information about generation frequency. i.e. Number of credits If this value is set along with time_between_credits, then it means that generation frequency is multiple.<br>int time_between_credits Time interval between credits<br>int discount_type Specifies discount type. Valid values are [1 or 2] 1 - Indicates flat rate 2 - Indicates percentage<br>double discount_amt Specifies discount amount. If discount_type is set to 1, then this range of valid values of this parameter is &gt; 0 to 9999, but if its set to &quot;2&quot; then its range is &gt; 0 to 100&#039;<br>int percentage_plan_no Specifies Percentage plan number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int percentage_service_no Specifies Percentage service number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>int alt_service_no Specifies Alternative service number. If this value is null, then for coupon can be Service code to use is standard<br>array discount_rule <br>array discount_bundle 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string coupon_cd Specifies Coupon Code<br>string coupon_desc Specifies Coupon description<br>string coupon_msg Specifies Coupon Message<br>int status_ind Specifies Coupon status. Valid values are [0, 1]1 indicates coupon is Active. 0 indicates coupon Inactive<br>int no_of_uses Specifies number of uses after which coupon get expires.Related to coupon expiry detail<br>string start_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>string end_date Specifies start date. The date is in the format &quot;yyyy-mm-dd&quot;Related to coupon expiry detail<br>array credit_template <br>array discount_rule <br>array discount_bundle 
      */
     public function get_coupon_details($coupon_cd)
     {
@@ -928,17 +904,6 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     {
         return $this->__ws_call('get_plan_details', Array(
                 'plan_no' => $plan_no
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function create_plan()
-    {
-        return $this->__ws_call('create_plan', Array(
-                
         ));
     }
 
@@ -1417,50 +1382,6 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     {
         return $this->__ws_call('delete_plan_group', Array(
                 'group_list' => $group_list
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function view_processor_config()
-    {
-        return $this->__ws_call('view_processor_config', Array(
-                
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function edit_processor_config()
-    {
-        return $this->__ws_call('edit_processor_config', Array(
-                
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function delete_processor_config()
-    {
-        return $this->__ws_call('delete_processor_config', Array(
-                
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function add_processor_config()
-    {
-        return $this->__ws_call('add_processor_config', Array(
-                
         ));
     }
 

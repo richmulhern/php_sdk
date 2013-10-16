@@ -17,7 +17,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.14';
+    protected $__wsdl_version = '6.13';
     
     /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
@@ -83,7 +83,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * get an array of values for an array of input web replacement strings
-     * @param string $filter_currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
+     * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
      * @return mixed[] array client_items <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
@@ -99,26 +99,24 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns a list of inventory items associated with a client. The information returned includes prices, services, images, supplemental fields, and classes associated with the items.
-     * @param string $filter_currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
+     * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
-     * @param string $include_inactive_items Specifies whether inactive inventory items need to be included or not
      * @return mixed[] array all_client_items <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_items_all($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null)
+    public function get_client_items_all($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null)
     {
         return $this->__ws_call('get_client_items_all', Array(
                 'filter_currency_cd' => $filter_currency_cd,
                 'return_no_cost_items' => $return_no_cost_items,
-                'filter_item_no' => $filter_item_no,
-                'include_inactive_items' => $include_inactive_items
+                'filter_item_no' => $filter_item_no
         ));
     }
 
     /**
      * Returns a list of prices for inventory item.
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
-     * @param string $filter_currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
+     * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @return mixed[] array all_item_prices <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
@@ -325,7 +323,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
     /**
      * Returns a list of rate schedules associated with a specified plan. The plan&#039;s default rate schedule will always be the first rate schedule returned and the remaining rate schedules will be sorted by schedule number.
      * @param int $plan_no The unique plan identifier.
-     * @param string $currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
+     * @param string $currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array rate_sched An array of the rate schedules for the requested plan
      */
     public function get_rate_schedules_for_plan($plan_no, $currency_cd = null)
@@ -363,19 +361,17 @@ class AriaBillingSystemServices extends BaseAriaBilling
 
     /**
      * Returns a list of inventory items associated with a client.
-     * @param string $filter_currency_cd The 3-digit ISO currency code for monetary values used in the context of this API method.
+     * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
-     * @param string $include_inactive_items Specifies whether inactive inventory items need to be included or not
      * @return mixed[] array items_basic <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_items_basic($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null)
+    public function get_client_items_basic($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null)
     {
         return $this->__ws_call('get_client_items_basic', Array(
                 'filter_currency_cd' => $filter_currency_cd,
                 'return_no_cost_items' => $return_no_cost_items,
-                'filter_item_no' => $filter_item_no,
-                'include_inactive_items' => $include_inactive_items
+                'filter_item_no' => $filter_item_no
         ));
     }
 
