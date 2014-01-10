@@ -17,7 +17,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.14';
+    protected $__wsdl_version = '6.18';
     
     /**
      * Returns the invoice number associated with a specified balance transfer.
@@ -103,9 +103,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_email Email of the billing contact
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_extension Phone extension of the billing contact
@@ -182,9 +182,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_email Email of the billing contact
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_extension Phone extension of the billing contact
@@ -256,9 +256,9 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_email Email of the billing contact
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_extension Phone extension of the billing contact
@@ -466,7 +466,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param double $usage_units The volume of usage consumed by the account holder.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $userid Client(or user)-assigned account identifier. If &quot;acct_no&quot; is not provided, must correctly identify the account to which the given usage record is to be assigned. All usage records must identify either an &quot;acct_no&quot; or a &quot;userid&quot;.
-     * @param int $usage_type Aria assigned identifier for the type of usage being recorded. Please consult Aria support representatives for a list of allowable usage_type values for the given client.
+     * @param int $usage_type Aria assigned identifier for the type of usage being recorded. Either this field  OR &quot;usage_type_code&quot; must be passed into the API to denote which usage type to  record. Please consult Aria support representatives for a list of allowable  usage_type values for the given client.
      * @param string $usage_date The date the usage was consumed by the account holder.
      * @param double $billable_units If the number of units of usage incurred differs from the number of units to be accrued for billing purposes, this fields provides for the optional designation of the billable units. If null, the number of units provided in &quot;usage_units&quot; will be billed.
      * @param double $amt Optional currency value (with up to 2 positions after the decimal) denoting a specific total amount for which the account holder should be charged for this specific usage record. If this field (and field &quot;&quot;rate&quot;&quot;) are null (the standard case) the system will aggregate the number of units on this usage record with all other usage records of the same type on this account within the same billing period at invoicing time and bill the account holder for the aggregate total per the rate structures defined by their applicable service plans.This field should not be used under normal circumstances.&quot;
@@ -481,7 +481,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $qualifier_3 Client-defined string of any value meant for internal use and/or display to customers in statements.
      * @param string $qualifier_4 Client-defined string of any value meant for internal use and/or display to customers in statements.
      * @param int $parent_usage_rec_no The Aria assigned parent usage record identifier for a child account.
-     * @param string $usage_type_code Client-assigned identifier for the type of usage being recorded.
+     * @param string $usage_type_code Client-assigned identifier for the type of usage being recorded.  Either this field OR &quot;usage_type&quot; must be passed into the API to denote  which usage type to record.
      * @param string $client_record_id Client-provided unique identifier for a given usage record
      * @param string $caller_id Client-provided unique identifier for a given account
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int usage_rec_no Aria assigned usage record identifier
@@ -582,7 +582,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $address1 First address line of the contact
      * @param string $address2 second address line of the contact
      * @param string $city City of the contact
-     * @param string $state_prov_code State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $state_prov_code State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $zip_code Postal/Zip code for the contact address.
      * @param string $country_code Country of the contact
      * @param string $currency_code The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
@@ -656,7 +656,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     }
 
     /**
-     * eturns a statement associated with a specified account and invoice.
+     * Returns a statement associated with a specified account and invoice.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param int $invoice_no The unique identifer of a given invoice.
      * @param string $do_encoding True indicates to acquire the message size after doing MIME encoding, False acquires message size without MIME encoding.
@@ -763,7 +763,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
      * @param string $bill_country ISO-compliant 2-country code abbreviation for the billing address country in uppercase.
      * @param string $bill_email Email of the billing contact
@@ -876,7 +876,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
      * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_email Email of the billing contact

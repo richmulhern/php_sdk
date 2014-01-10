@@ -17,7 +17,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.14';
+    protected $__wsdl_version = '6.18';
     
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
@@ -58,7 +58,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $address2 Second address line of the contact
      * @param string $city City of the contact
      * @param string $locality Locality of the contact
-     * @param string $state_prov State or Province of the contact address. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $state_prov State or Province of the contact address. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $postal_code Postal/Zip code for the contact address.
      * @param string $intl_phone This is the international phone number of the contact
@@ -162,7 +162,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $address2 Second address line of the contact
      * @param string $city City of the contact
      * @param string $locality Locality of the contact
-     * @param string $state State or Province of the contact address. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $state State or Province of the contact address. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $zip The contact&#039;s zip/postal code.
      * @param string $intl_phone This is the international phone number of the contact
@@ -348,9 +348,9 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $bill_address2 Second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $bill_zip Zip Code of the billing contact
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_email Email of the billing contact
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_extension Phone extension of the billing contact
@@ -612,14 +612,16 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param int $account_number Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param array $plan_no_to_remove 
      * @param string $remove_all_queued_plan_no Boolean &#039;true&#039; or &#039;false&#039; indicator informing user whether or not to actually perform all plans cancellation at the account level. If &#039;false&#039; is passed in this field, the queued_plan_no should be populated with Aria plan number(s).
+     * @param string $remove_terminate_pending Boolean &#039;true&#039; or &#039;false&#039; indicator informing user whether or not to actually cancel queued plans in Terminate Pending status. If &#039;true&#039; is passed in this field, the API should remove queued plan in Terminate Pending status.  Other possible values are &#039;false&#039; or not to enter any value (leave it as blank).
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function cancel_queued_service_plan($account_number, $plan_no_to_remove = null, $remove_all_queued_plan_no = null)
+    public function cancel_queued_service_plan($account_number, $plan_no_to_remove = null, $remove_all_queued_plan_no = null, $remove_terminate_pending = null)
     {
         return $this->__ws_call('cancel_queued_service_plan', Array(
                 'account_number' => $account_number,
                 'plan_no_to_remove' => $plan_no_to_remove,
-                'remove_all_queued_plan_no' => $remove_all_queued_plan_no
+                'remove_all_queued_plan_no' => $remove_all_queued_plan_no,
+                'remove_terminate_pending' => $remove_terminate_pending
         ));
     }
 
@@ -712,7 +714,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns all available information about an account such as contact information, demographic information, dates associated with the account, account status, plan, notification method, password, and billing information.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @return mixed[] string first_name Contact Fist name<br>string mi Middle initial of the contact<br>string last_name Contact Last name<br>string userid The users unique identifier.<br>string birthdate Contact date of birth<br>string job_title The job title of the contact.<br>string salutation The contact&#039;s salutation (such as Mr., Ms., Dr., etc.)<br>string senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.<br>string client_acct_id This is the client-assigned identifier for the account.<br>string resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.<br>string is_test_acct A Boolean value indicating that the account is a test account.<br>string alt_email Alternate email address for contact.<br>string address1 First address line of the contact<br>string address2 Second address line of the contact<br>string city City of the contact<br>string state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.<br>string locality Locality of the contact<br>string postal_code Postal/Zip code for the contact address.<br>string country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.<br>string company_name Company name of the contact<br>string cell_phone_npa Cell phone Numbering Plan Area value (also known as area code).<br>string cell_phone_nxx Cell phone Exchange (first 3 numbers following the area code/NPA).<br>string cell_phone_suffix Cell phone number (this is the number on the exchange/NXX for the target phone).<br>string fax_phone The FAX phone number for the contact.<br>string intl_cell_phone The international cell phone number of the contact.<br>string intl_phone This is the international phone number of the contact<br>string phone_extension The extension for the contact&#039;s phone number.<br>string phone_npa Phone Numbering Plan Area value (also known as area code).<br>string phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string work_phone The full work phone number<br>string work_phone_extension The office/desk extension of the contact&#039;s work phone, if any.<br>string work_phone_npa Phone Numbering Plan Area value (also known as area code).<br>string work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string bill_day The billing anniversary day.<br>string created Date the account was created.<br>string date_to_expire The date the account is scheduled to expire.<br>string date_to_suspend The date the account is scheduled to be suspended.<br>string last_arrears_bill_thru_date The most recent date at which the account was fully billed in arrears<br>string last_bill_date The last date the account was billed<br>string last_bill_thru_date The date through which the account has been billed.<br>string next_bill_date The next bill date for the account.<br>string plan_date The date the plan assigned to the account.<br>string status_date This is the date the status on the account was set.<br>string status_degrade_date The date the account status was degraded.<br>string status_cd This is the status of the object inquestion for the current API call.<br>string status_label This is the human-readbale status of the account.<br>string plan_no The unique plan identifier.<br>string plan_name Name of the Master Subscription Plan for this account<br>string plan_units The number of plan units to assign.<br>string notify_method If notification method is not provided, value will default to 1 (HTML email).<br>string notify_method_name The name of the notify method to be used in communicating with the account holder.<br>string PASSWORD The account&#039;s reg/uss password<br>string pin Persinal Identification number<br>string secret_question The users secret question recorded to recover a password.<br>string secret_question_answer The response to a users &#039;secret_question&#039;<br>string pay_method This is the method_id corresponding to a payment method such as credit card, Electronic Check, Pre-Paid, Net Terms, etc.<br>string pay_method_name The human-readable name of the payment method.<br>string currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.<br>string tax_id This is the Tax Identification Number or EIN of the account holder.<br>string billing_email The email address of the billing contact, or the general billing email address.<br>string billing_first_name The first name of the billing contact for the account.<br>string billing_middle_initial The middle initial of the billing contact.<br>string billing_last_name The last name of the billing contact.<br>string billing_address1 Street address (number and name) of the billing contact address.<br>string billing_address2 The second billing address line (for example: bldg, suite, apt., etc.)<br>string billing_city The city name of the billing contact address.<br>string billing_state The state or province of the billing contact&#039;s address. The official  postal-service codes for all United States and Canada states, provinces, and  territories.<br>string billing_locality The billing contact&#039;s locality (for example: county, rural unincorporated area name).<br>string billing_zip The zip or postal code for the billing contact&#039;s address.<br>string billing_country The country for the billing contact&#039;s address. The ISO-compliant 2-character country code abbreviation in uppercase.<br>string cc_suffix The last 4 digits of the credit card number<br>string cc_expire_mm Expiration month for the credit card payment instrument.<br>string cc_expire_yyyy Expiration year for the credit card payment instrument.<br>string cc_id A numeric code indicating the type of credit card<br>string bank_acct_suffix The last 4 digits of the bank account<br>string bank_routing_no This is the ABA (American Banking Association) unique identifier for the fincancial institution.<br>string billing_cell_phone The billing cell phone area code.<br>string billing_cell_phone_npa The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_nxx The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_suffix The cell phone number. Digits following the NXX exchange digits.<br>string billing_company_name The company or DBA name of the billing contact.<br>string billing_intl_phone The international phone number of the billing contact.<br>string billing_phone_extension The office, desk or group extension for the billing contact&#039;s phone number.<br>string billing_phone_npa The billing contact&#039;s area code.<br>string billing_phone_nxx The exchange number for the billing contact phone. (The NXX follows the NPA and preceeds the phone number).<br>string billing_phone_suffix The last digits of the billing contact&#039;s phone number, immediately following the NPA and NXX (also referred to as the phone number).<br>string billing_work_phone The full billing work phone number<br>string billing_work_phone_extension The extension of the billing contact work phone.<br>string billing_work_phone_npa The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_nxx The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_suffix The last digits of the billing contact&#039;s work phone (immediately follows the NPA and NXX), also referred to as the &quot;phone number&quot;.<br>string balance The outstanding balance for this account.<br>string acct_create_client_receipt_id The client-specified receipt ID, returned for this account creation in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string plan_client_receipt_id The client-specified receipt ID, returned for this plan creation or assignment in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string status_client_receipt_id The client-specified receipt ID, returned for this account status change in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string taxpayer_id Taxpayer Identification number.<br>int alt_msg_template_no Email template number assigned to this account.<br>int seq_func_group_no Functional account group number specifically designated for statement sequence number assignment.<br>string promo_cd This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides access to a custom set of reduced-rate plans.<br>string address3 The third line of the address<br>string billing_address3 The third line of the billing address<br>string address_verification_code The address verification code for account contact address<br>double address_match_score The score of match for account contact address verification code<br>string billing_address_verification_code The address verification code for account billing address<br>double billing_address_match_score The score of match for account billing address verification code<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     * @return mixed[] string first_name Contact Fist name<br>string mi Middle initial of the contact<br>string last_name Contact Last name<br>string userid The users unique identifier.<br>string birthdate Contact date of birth<br>string job_title The job title of the contact.<br>string salutation The contact&#039;s salutation (such as Mr., Ms., Dr., etc.)<br>string senior_acct_no The senior_acct_no is the unique account number for the parent account and is used in establishing parent-child billing relationships.<br>string client_acct_id This is the client-assigned identifier for the account.<br>string resp_level_cd The responsibility level code. These are values 1 through 4 as described in the legend for this argument.<br>string is_test_acct A Boolean value indicating that the account is a test account.<br>string alt_email Alternate email address for contact.<br>string address1 First address line of the contact<br>string address2 Second address line of the contact<br>string city City of the contact<br>string state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.<br>string locality Locality of the contact<br>string postal_code Postal/Zip code for the contact address.<br>string country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.<br>string company_name Company name of the contact<br>string cell_phone_npa Cell phone Numbering Plan Area value (also known as area code).<br>string cell_phone_nxx Cell phone Exchange (first 3 numbers following the area code/NPA).<br>string cell_phone_suffix Cell phone number (this is the number on the exchange/NXX for the target phone).<br>string fax_phone The FAX phone number for the contact.<br>string intl_cell_phone The international cell phone number of the contact.<br>string intl_phone This is the international phone number of the contact<br>string phone_extension The extension for the contact&#039;s phone number.<br>string phone_npa Phone Numbering Plan Area value (also known as area code).<br>string phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string work_phone The full work phone number<br>string work_phone_extension The office/desk extension of the contact&#039;s work phone, if any.<br>string work_phone_npa Phone Numbering Plan Area value (also known as area code).<br>string work_phone_nxx Phone Exchange (first 3 numbers following the area code/NPA).<br>string work_phone_suffix Phone number (this is the number on the exchange/NXX for the target phone).<br>string bill_day The billing anniversary day.<br>string created Date the account was created.<br>string date_to_expire The date the account is scheduled to expire.<br>string date_to_suspend The date the account is scheduled to be suspended.<br>string last_arrears_bill_thru_date The most recent date at which the account was fully billed in arrears<br>string last_bill_date The last date the account was billed<br>string last_bill_thru_date The date through which the account has been billed.<br>string next_bill_date The next bill date for the account.<br>string plan_date The date the plan assigned to the account.<br>string status_date This is the date the status on the account was set.<br>string status_degrade_date The date the account status was degraded.<br>string status_cd This is the status of the object inquestion for the current API call.<br>string status_label This is the human-readbale status of the account.<br>string plan_no The unique plan identifier.<br>string plan_name Name of the Master Subscription Plan for this account<br>string plan_units The number of plan units to assign.<br>string notify_method If notification method is not provided, value will default to 1 (HTML email).<br>string notify_method_name The name of the notify method to be used in communicating with the account holder.<br>string PASSWORD The account&#039;s reg/uss password<br>string pin Persinal Identification number<br>string secret_question The users secret question recorded to recover a password.<br>string secret_question_answer The response to a users &#039;secret_question&#039;<br>string pay_method This is the method_id corresponding to a payment method such as credit card, Electronic Check, Pre-Paid, Net Terms, etc.<br>string pay_method_name The human-readable name of the payment method.<br>string currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.<br>string tax_id This is the Tax Identification Number or EIN of the account holder.<br>string billing_email The email address of the billing contact, or the general billing email address.<br>string billing_first_name The first name of the billing contact for the account.<br>string billing_middle_initial The middle initial of the billing contact.<br>string billing_last_name The last name of the billing contact.<br>string billing_address1 Street address (number and name) of the billing contact address.<br>string billing_address2 The second billing address line (for example: bldg, suite, apt., etc.)<br>string billing_city The city name of the billing contact address.<br>string billing_state The state or province of the billing contact&#039;s address. The official postal-service codes for all United States and Canada states, provinces, and territories.<br>string billing_locality The billing contact&#039;s locality (for example: county, rural unincorporated area name).<br>string billing_zip The zip or postal code for the billing contact&#039;s address.<br>string billing_country The country for the billing contact&#039;s address. The ISO-compliant 2-character country code abbreviation in uppercase.<br>string cc_suffix The last 4 digits of the credit card number<br>string cc_expire_mm Expiration month for the credit card payment instrument.<br>string cc_expire_yyyy Expiration year for the credit card payment instrument.<br>string cc_id A numeric code indicating the type of credit card<br>string bank_acct_suffix The last 4 digits of the bank account<br>string bank_routing_no This is the ABA (American Banking Association) unique identifier for the fincancial institution.<br>string billing_cell_phone The billing cell phone area code.<br>string billing_cell_phone_npa The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_nxx The 3 digit exchange number for the billing contact&#039;s cell phone.<br>string billing_cell_phone_suffix The cell phone number. Digits following the NXX exchange digits.<br>string billing_company_name The company or DBA name of the billing contact.<br>string billing_intl_phone The international phone number of the billing contact.<br>string billing_phone_extension The office, desk or group extension for the billing contact&#039;s phone number.<br>string billing_phone_npa The billing contact&#039;s area code.<br>string billing_phone_nxx The exchange number for the billing contact phone. (The NXX follows the NPA and preceeds the phone number).<br>string billing_phone_suffix The last digits of the billing contact&#039;s phone number, immediately following the NPA and NXX (also referred to as the phone number).<br>string billing_work_phone The full billing work phone number<br>string billing_work_phone_extension The extension of the billing contact work phone.<br>string billing_work_phone_npa The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_nxx The exchange number of the billing contact&#039;s work phone (immediately follows the NPA).<br>string billing_work_phone_suffix The last digits of the billing contact&#039;s work phone (immediately follows the NPA and NXX), also referred to as the &quot;phone number&quot;.<br>string balance The outstanding balance for this account.<br>string acct_create_client_receipt_id The client-specified receipt ID, returned for this account creation in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string plan_client_receipt_id The client-specified receipt ID, returned for this plan creation or assignment in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string status_client_receipt_id The client-specified receipt ID, returned for this account status change in any API which returns receipt IDs at this level.  Useful for auditing and tracking<br>string taxpayer_id Taxpayer Identification number.<br>int alt_msg_template_no Email template number assigned to this account.<br>int seq_func_group_no Functional account group number specifically designated for statement sequence number assignment.<br>string promo_cd This is the code provided the client  and used by the account holder during registration or when executing a transaction. A promotion generally provides access to a custom set of reduced-rate plans.<br>string address3 The third line of the address<br>string billing_address3 The third line of the billing address<br>string address_verification_code The address verification code for account contact address<br>double address_match_score The score of match for account contact address verification code<br>string billing_address_verification_code The address verification code for account billing address<br>double billing_address_match_score The score of match for account billing address verification code<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
     public function get_acct_details_all($acct_no)
     {
@@ -766,7 +768,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $address1 First address line of the contact
      * @param string $address2 second address line of the contact
      * @param string $city City of the contact
-     * @param string $state State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $state State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $zip The contact&#039;s zip/postal code
      * @param string $country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param int $cc_expire_mm Expiration month for the credit card payment instrument.
@@ -1337,7 +1339,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $address2 second address line of the contact
      * @param string $city City of the contact
      * @param string $locality Locality of the contact
-     * @param string $state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $postal_cd Postal/Zip code for the contact address.
      * @param string $phone The phone number of the contact
@@ -1355,8 +1357,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $bill_address2 second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_postal_cd This is the postal code for the billing contact address.
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -1529,7 +1531,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a1_address2 second address line of the contact
      * @param string $a1_city City of the contact
      * @param string $a1_locality Locality of the contact
-     * @param string $a1_state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $a1_state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $a1_country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a1_postal_cd Postal/Zip code for the contact address.
      * @param string $a1_phone The phone number of the contact
@@ -1547,8 +1549,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a1_bill_address2 second address line of the billing contact
      * @param string $a1_bill_city City of the billing contact
      * @param string $a1_bill_locality Locality of the billing contact
-     * @param string $a1_bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
-     * @param string $a1_bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $a1_bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $a1_bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a1_bill_postal_cd This is the postal code for the billing contact address.
      * @param string $a1_bill_phone Phone of the billing contact
      * @param string $a1_bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -1616,7 +1618,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a2_address2 second address line of the contact
      * @param string $a2_city City of the contact
      * @param string $a2_locality Locality of the contact
-     * @param string $a2_state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $a2_state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $a2_country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a2_postal_cd Postal/Zip code for the contact address.
      * @param string $a2_phone The phone number of the contact
@@ -1634,8 +1636,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a2_bill_address2 second address line of the billing contact
      * @param string $a2_bill_city City of the billing contact
      * @param string $a2_bill_locality Locality of the billing contact
-     * @param string $a2_bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
-     * @param string $a2_bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $a2_bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $a2_bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a2_bill_postal_cd This is the postal code for the billing contact address.
      * @param string $a2_bill_phone Phone of the billing contact
      * @param string $a2_bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -1703,7 +1705,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a3_address2 second address line of the contact
      * @param string $a3_city City of the contact
      * @param string $a3_locality Locality of the contact
-     * @param string $a3_state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $a3_state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $a3_country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a3_postal_cd Postal/Zip code for the contact address.
      * @param string $a3_phone The phone number of the contact
@@ -1721,8 +1723,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a3_bill_address2 second address line of the billing contact
      * @param string $a3_bill_city City of the billing contact
      * @param string $a3_bill_locality Locality of the billing contact
-     * @param string $a3_bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
-     * @param string $a3_bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $a3_bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $a3_bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a3_bill_postal_cd This is the postal code for the billing contact address.
      * @param string $a3_bill_phone Phone of the billing contact
      * @param string $a3_bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -1790,7 +1792,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a4_address2 second address line of the contact
      * @param string $a4_city City of the contact
      * @param string $a4_locality Locality of the contact
-     * @param string $a4_state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $a4_state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $a4_country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a4_postal_cd Postal/Zip code for the contact address.
      * @param string $a4_phone The phone number of the contact
@@ -1808,8 +1810,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a4_bill_address2 second address line of the billing contact
      * @param string $a4_bill_city City of the billing contact
      * @param string $a4_bill_locality Locality of the billing contact
-     * @param string $a4_bill_state_prov State or Province of the billing contact. The official postal-service codes  for all United States and Canada states, provinces, and territories.
-     * @param string $a4_bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $a4_bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $a4_bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a4_bill_postal_cd This is the postal code for the billing contact address.
      * @param string $a4_bill_phone Phone of the billing contact
      * @param string $a4_bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -1877,7 +1879,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a5_address2 second address line of the contact
      * @param string $a5_city City of the contact
      * @param string $a5_locality Locality of the contact
-     * @param string $a5_state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $a5_state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $a5_country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a5_postal_cd Postal/Zip code for the contact address.
      * @param string $a5_phone The phone number of the contact
@@ -1895,8 +1897,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $a5_bill_address2 second address line of the billing contact
      * @param string $a5_bill_city City of the billing contact
      * @param string $a5_bill_locality Locality of the billing contact
-     * @param string $a5_bill_state_prov State or Province of the billing contact. The official postal-service codes for all  United States and Canada states, provinces, and territories&#039;
-     * @param string $a5_bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $a5_bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories&#039;
+     * @param string $a5_bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $a5_bill_postal_cd This is the postal code for the billing contact address.
      * @param string $a5_bill_phone Phone of the billing contact
      * @param string $a5_bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -2667,7 +2669,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $address2 second address line of the contact
      * @param string $city City of the contact
      * @param string $locality Locality of the contact
-     * @param string $state_prov State or Province of the contact. The official postal-service codes for all  United States and Canada states, provinces, and territories.
+     * @param string $state_prov State or Province of the contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
      * @param string $country Country of the contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $postal_cd Postal/Zip code for the contact address.
      * @param string $phone The phone number of the contact
@@ -2685,8 +2687,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $bill_address2 second address line of the billing contact
      * @param string $bill_city City of the billing contact
      * @param string $bill_locality Locality of the billing contact
-     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for  all United States and Canada states, provinces, and territories.
-     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code  abbreviation in uppercase.
+     * @param string $bill_state_prov State or Province of the billing contact. The official postal-service codes for all United States and Canada states, provinces, and territories.
+     * @param string $bill_country Country of the billing contact. The ISO-compliant 2-character country code abbreviation in uppercase.
      * @param string $bill_postal_cd This is the postal code for the billing contact address.
      * @param string $bill_phone Phone of the billing contact
      * @param string $bill_phone_ext This is the billing contacts extension for the bill_phone given.
@@ -3730,7 +3732,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param array $usage_qualifier_2 
      * @param array $usage_qualifier_3 
      * @param array $usage_qualifier_4 
-     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string start_date The start-date of the given date range<br>string start_time The start-time of the given time range<br>string end_date The end-date of the given date range<br>string end_time The end-time of the given time range<br>array usage_summary_records Usage summary records of the account (and optional specified usage type)  for given date range
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string start_date The start-date of the given date range<br>string start_time The start-time of the given time range<br>string end_date The end-date of the given date range<br>string end_time The end-time of the given time range<br>array usage_summary_records Usage summary records of the account (and optional specified usage type) for given date range
      */
     public function get_usage_summary_by_type($acct_no = null, $user_id = null, $usage_type_filter = null, $date_filter_start_date = null, $date_filter_start_time = null, $date_filter_end_date = null, $date_filter_end_time = null, $billed_filter = null, $billing_period_flag = null, $usage_qualifier_1 = null, $usage_qualifier_2 = null, $usage_qualifier_3 = null, $usage_qualifier_4 = null)
     {
