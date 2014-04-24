@@ -17,7 +17,7 @@ class AriaBillingAuthenticationServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.19';
+    protected $__wsdl_version = '6.20';
     
     /**
      * Verify a client number and auth key combination

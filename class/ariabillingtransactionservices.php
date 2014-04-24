@@ -17,7 +17,7 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.19';
+    protected $__wsdl_version = '6.20';
     
     /**
      * Returns the invoice number associated with a specified balance transfer.
@@ -320,8 +320,8 @@ class AriaBillingTransactionServices extends BaseAriaBilling
     /**
      * Records a payment transaction for a payment collected from an account holder without using Aria.
      * @param int $account_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param double $payment_amount The amount of the payment being/to-be made against the outstanding account balance
      * @param string $reference_code This code provides a reference correlation to the external payment.
+     * @param double $payment_amount The amount of the payment being/to-be made against the outstanding account balance
      * @param string $comments Additional explanatory text relating to this API call.
      * @param string $client_receipt_id Client defined unique identifier used to track related system actions
      * @param array $specific_charge_transaction_id A list of specific charges, see below
@@ -329,12 +329,12 @@ class AriaBillingTransactionServices extends BaseAriaBilling
      * @param string $external_id The ID of the corresponding record to this payment in the external system
      * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function record_external_payment($account_no, $payment_amount, $reference_code = null, $comments = null, $client_receipt_id = null, $specific_charge_transaction_id = null, $external_destination_id = null, $external_id = null)
+    public function record_external_payment($account_no, $reference_code, $payment_amount, $comments = null, $client_receipt_id = null, $specific_charge_transaction_id = null, $external_destination_id = null, $external_id = null)
     {
         return $this->__ws_call('record_external_payment', Array(
                 'account_no' => $account_no,
-                'payment_amount' => $payment_amount,
                 'reference_code' => $reference_code,
+                'payment_amount' => $payment_amount,
                 'comments' => $comments,
                 'client_receipt_id' => $client_receipt_id,
                 'specific_charge_transaction_id' => $specific_charge_transaction_id,
