@@ -17,7 +17,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.18';
+    protected $__wsdl_version = '6.19';
     
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
@@ -171,9 +171,10 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_acct_billing_contact', Array(
                 'account_no' => $account_no,
@@ -193,7 +194,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
                 'reset_dates_after_status' => $reset_dates_after_status,
-                'address3' => $address3
+                'address3' => $address3,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -231,9 +233,10 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
     {
         return $this->__ws_call('set_pay_method_bank_draft', Array(
                 'account_no' => $account_no,
@@ -241,7 +244,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'bank_acct_num' => $bank_acct_num,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -254,9 +258,10 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
     {
         return $this->__ws_call('set_pay_method_cc', Array(
                 'account_no' => $account_no,
@@ -265,7 +270,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'cc_number' => $cc_number,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -792,9 +798,10 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_existing_billing_info($acct_no, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_existing_billing_info($acct_no, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_existing_billing_info', Array(
                 'acct_no' => $acct_no,
@@ -825,7 +832,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
                 'reset_dates_after_status' => $reset_dates_after_status,
-                'address3' => $address3
+                'address3' => $address3,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -2557,8 +2565,8 @@ class AriaBillingAccountServices extends BaseAriaBilling
     /**
      * Returns the usage records associated with a specified account for a particular date range.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $specified_usage_type_no The Aria assigned usage type number to use when searching for usage history records.
      * @param string $date_range_start The start-date of the given date range.
+     * @param int $specified_usage_type_no The Aria assigned usage type number to use when searching for usage history records.
      * @param string $date_range_end The end-date of the given date range
      * @param string $specified_usage_type_code Optional client-defined usage type code
      * @param array $usage_qualifier_1 
@@ -2567,12 +2575,12 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * @param array $usage_qualifier_4 
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array usage_history_records A multidimensional array of usage history records attached to the account (and optional specified usage type) for given date range
      */
-    public function get_usage_history($acct_no, $specified_usage_type_no = null, $date_range_start = null, $date_range_end = null, $specified_usage_type_code = null, $usage_qualifier_1 = null, $usage_qualifier_2 = null, $usage_qualifier_3 = null, $usage_qualifier_4 = null)
+    public function get_usage_history($acct_no, $date_range_start, $specified_usage_type_no = null, $date_range_end = null, $specified_usage_type_code = null, $usage_qualifier_1 = null, $usage_qualifier_2 = null, $usage_qualifier_3 = null, $usage_qualifier_4 = null)
     {
         return $this->__ws_call('get_usage_history', Array(
                 'acct_no' => $acct_no,
-                'specified_usage_type_no' => $specified_usage_type_no,
                 'date_range_start' => $date_range_start,
+                'specified_usage_type_no' => $specified_usage_type_no,
                 'date_range_end' => $date_range_end,
                 'specified_usage_type_code' => $specified_usage_type_code,
                 'usage_qualifier_1' => $usage_qualifier_1,

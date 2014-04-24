@@ -17,7 +17,7 @@ class AriaBillingComplete extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.18';
+    protected $__wsdl_version = '6.19';
 
     /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
@@ -865,9 +865,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_acct_billing_contact($account_no, $first_name = null, $last_name = null, $middle_initial = null, $company_name = null, $address1 = null, $address2 = null, $city = null, $locality = null, $state = null, $country = null, $zip = null, $intl_phone = null, $email = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_acct_billing_contact', Array(
                 'account_no' => $account_no,
@@ -887,7 +888,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
                 'reset_dates_after_status' => $reset_dates_after_status,
-                'address3' => $address3
+                'address3' => $address3,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -925,9 +927,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_bank_draft($account_no, $bank_routing_num = null, $bank_acct_num = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
     {
         return $this->__ws_call('set_pay_method_bank_draft', Array(
                 'account_no' => $account_no,
@@ -935,7 +938,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'bank_acct_num' => $bank_acct_num,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -948,9 +952,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $do_collect If &#039;true&#039;, a collection will be attempted after updating electronic billing information on accounts with outstanding balances.
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null)
+    public function set_pay_method_cc($account_no, $cc_expire_mm, $cc_expire_yyyy, $cc_number = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $client_receipt_id = null)
     {
         return $this->__ws_call('set_pay_method_cc', Array(
                 'account_no' => $account_no,
@@ -959,7 +964,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'cc_number' => $cc_number,
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
-                'reset_dates_after_status' => $reset_dates_after_status
+                'reset_dates_after_status' => $reset_dates_after_status,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -1486,9 +1492,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $change_status_after_coll This argument indicates if the account status is to change after collection is completed.
      * @param string $reset_dates_after_status This allows you to reset the billing dates after an account status change.
      * @param string $address3 The third line of the address
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor
      */
-    public function update_existing_billing_info($acct_no, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null)
+    public function update_existing_billing_info($acct_no, $seq_no = null, $address1 = null, $address2 = null, $city = null, $state = null, $zip = null, $country = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $phone_npa = null, $phone_nxx = null, $phone_suffix = null, $phone_ext = null, $phone_country_cd = null, $intl_phone = null, $email = null, $locality = null, $cell_phone_npa = null, $cell_phone_nxx = null, $cell_phone_suffix = null, $work_phone_npa = null, $work_phone_nxx = null, $work_phone_suffix = null, $work_phone_ext = null, $do_collect = null, $change_status_after_coll = null, $reset_dates_after_status = null, $address3 = null, $client_receipt_id = null)
     {
         return $this->__ws_call('update_existing_billing_info', Array(
                 'acct_no' => $acct_no,
@@ -1519,7 +1526,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'do_collect' => $do_collect,
                 'change_status_after_coll' => $change_status_after_coll,
                 'reset_dates_after_status' => $reset_dates_after_status,
-                'address3' => $address3
+                'address3' => $address3,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -3251,8 +3259,8 @@ class AriaBillingComplete extends BaseAriaBilling
     /**
      * Returns the usage records associated with a specified account for a particular date range.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
-     * @param int $specified_usage_type_no The Aria assigned usage type number to use when searching for usage history records.
      * @param string $date_range_start The start-date of the given date range.
+     * @param int $specified_usage_type_no The Aria assigned usage type number to use when searching for usage history records.
      * @param string $date_range_end The end-date of the given date range
      * @param string $specified_usage_type_code Optional client-defined usage type code
      * @param array $usage_qualifier_1 
@@ -3261,12 +3269,12 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param array $usage_qualifier_4 
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array usage_history_records A multidimensional array of usage history records attached to the account (and optional specified usage type) for given date range
      */
-    public function get_usage_history($acct_no, $specified_usage_type_no = null, $date_range_start = null, $date_range_end = null, $specified_usage_type_code = null, $usage_qualifier_1 = null, $usage_qualifier_2 = null, $usage_qualifier_3 = null, $usage_qualifier_4 = null)
+    public function get_usage_history($acct_no, $date_range_start, $specified_usage_type_no = null, $date_range_end = null, $specified_usage_type_code = null, $usage_qualifier_1 = null, $usage_qualifier_2 = null, $usage_qualifier_3 = null, $usage_qualifier_4 = null)
     {
         return $this->__ws_call('get_usage_history', Array(
                 'acct_no' => $acct_no,
-                'specified_usage_type_no' => $specified_usage_type_no,
                 'date_range_start' => $date_range_start,
+                'specified_usage_type_no' => $specified_usage_type_no,
                 'date_range_end' => $date_range_end,
                 'specified_usage_type_code' => $specified_usage_type_code,
                 'usage_qualifier_1' => $usage_qualifier_1,
@@ -4499,13 +4507,15 @@ class AriaBillingComplete extends BaseAriaBilling
      * Transfers the balance from one account to another account.
      * @param int $source_account_no The Source account is the account who&#039;s entire balance will be credited and a the amount applied to the specified Target account.
      * @param int $target_account_no The Target account is the account that will received a debit for the entire balance of the Source account.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int transaction_id The unique identifier for a given transaction<br>double balance_transferred The amount of money transferred from the Source to the Target account for this transaction.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function transfer_account_balance($source_account_no, $target_account_no)
+    public function transfer_account_balance($source_account_no, $target_account_no, $client_receipt_id = null)
     {
         return $this->__ws_call('transfer_account_balance', Array(
                 'source_account_no' => $source_account_no,
-                'target_account_no' => $target_account_no
+                'target_account_no' => $target_account_no,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -4625,9 +4635,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $force_balance_scope Determines what constitutes the account collectible balance for this transaction
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int transaction_id The unique identifier for a given transaction<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function settle_account_balance($account_no, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $force_balance_scope = null)
+    public function settle_account_balance($account_no, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $bill_address3 = null, $alt_client_acct_group_id = null, $track_data1 = null, $track_data2 = null, $force_balance_scope = null, $client_receipt_id = null)
     {
         return $this->__ws_call('settle_account_balance', Array(
                 'account_no' => $account_no,
@@ -4659,7 +4670,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'alt_client_acct_group_id' => $alt_client_acct_group_id,
                 'track_data1' => $track_data1,
                 'track_data2' => $track_data2,
-                'force_balance_scope' => $force_balance_scope
+                'force_balance_scope' => $force_balance_scope,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -4810,16 +4822,18 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $credit_reason_code The reason a given credt was/is to be applied to the account.
      * @param string $comments Additional explanatory text relating to this API call.
      * @param array $specific_charge_transaction_id A list of specific charges, see below
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int transaction_id The unique identifier for a given transaction<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function apply_cash_credit($account_no, $credit_amount, $credit_reason_code, $comments = null, $specific_charge_transaction_id = null)
+    public function apply_cash_credit($account_no, $credit_amount, $credit_reason_code, $comments = null, $specific_charge_transaction_id = null, $client_receipt_id = null)
     {
         return $this->__ws_call('apply_cash_credit', Array(
                 'account_no' => $account_no,
                 'credit_amount' => $credit_amount,
                 'credit_reason_code' => $credit_reason_code,
                 'comments' => $comments,
-                'specific_charge_transaction_id' => $specific_charge_transaction_id
+                'specific_charge_transaction_id' => $specific_charge_transaction_id,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -5207,9 +5221,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $bill_address3 The third line of the billing address
      * @param string $track_data1 The raw &quot;track 1&quot; data from a swiped credit card used in a card-present transaction to initiate this request
      * @param string $track_data2 The raw &quot;track 2&quot; data from a swiped credit card used in a card-present transaction to initiate this request
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int new_invoice_no The new invoice number generated.<br>int collection_error_code If a collection is attempted, returns the error code associated with the collection.<br>string collection_error_msg The error message associated with collection_error_code.<br>int statement_error_code Error code for statement generation failure.<br>string statement_error_msg The text message associated with &#039;statement_error_code&#039;<br>string proc_cvv_response The processor return code from CVV validation (deprecated)<br>string proc_avs_response Processor return code from address validation<br>string proc_cavv_response The processors return code for security validation (includes cvv)<br>string proc_status_code The processor status code<br>string proc_status_text The processors status description<br>string proc_payment_id The processor payment id<br>string proc_auth_code Authorization code provided by the issuing bank<br>string proc_merch_comments Additional information passed to payment processor<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function manage_pending_invoice($invoice_no = null, $acct_no = null, $action_directive = null, $bill_seq = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $alt_collect_on_approve = null, $alt_send_statement_on_approve = null, $cancel_orders_on_discard = null, $bill_address3 = null, $track_data1 = null, $track_data2 = null)
+    public function manage_pending_invoice($invoice_no = null, $acct_no = null, $action_directive = null, $bill_seq = null, $alt_pay_method = null, $cc_number = null, $cc_expire_mm = null, $cc_expire_yyyy = null, $bank_routing_num = null, $bank_acct_num = null, $bill_company_name = null, $bill_first_name = null, $bill_middle_initial = null, $bill_last_name = null, $bill_address1 = null, $bill_address2 = null, $bill_city = null, $bill_locality = null, $bill_state_prov = null, $bill_zip = null, $bill_country = null, $bill_email = null, $bill_phone = null, $bill_phone_extension = null, $bill_cell_phone = null, $bill_work_phone = null, $bill_work_phone_extension = null, $cvv = null, $alt_collect_on_approve = null, $alt_send_statement_on_approve = null, $cancel_orders_on_discard = null, $bill_address3 = null, $track_data1 = null, $track_data2 = null, $client_receipt_id = null)
     {
         return $this->__ws_call('manage_pending_invoice', Array(
                 'invoice_no' => $invoice_no,
@@ -5245,7 +5260,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'cancel_orders_on_discard' => $cancel_orders_on_discard,
                 'bill_address3' => $bill_address3,
                 'track_data1' => $track_data1,
-                'track_data2' => $track_data2
+                'track_data2' => $track_data2,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -5400,9 +5416,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param string $do_write If is is set to &#039;FALSE&#039;, this API will function as in preview mode. No refund and/or reversal will be written to database. The function will merely return the reversal line items including calculated taxes.  If it is set to &#039;true&#039;, the refund and reversal, if any, will be commited.
      * @param string $auto_calc_refund This indicates if the refund amount is to be calculated based on reversal line itmes. If auto_calc_refund is set to &#039;true&#039; and if do_write is &#039;true&#039;, if the total_refund_amount is not null, process will use the input total_refund_amount, but if the total_refund_amount is null, then the total_refund_amount will be equal to the calculated total reversal amount.  However, do_write = &#039;true&#039; and auto_calc_refund = &#039;false&#039; is not a valid combination and will error out.
      * @param array $invoices_to_reverse 
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>double applied_total_refund_amount The total amount that has been refunded.  If inAuto is TRUE, this amount will equal to the total reversal amount.<br>double applied_total_reversal_amount The total amount that has been reversed on this invoice line. This amount is calculated for relevant tax lines.<br>int transaction_id Event number that was recorded in the account transaction table for this refund.<br>array reversed_invoice_lines 
      */
-    public function issue_refund_to_acct($acct_no, $payment_transaction_id, $reason_code, $total_refund_amount = null, $refund_check_number = null, $comments = null, $do_write = null, $auto_calc_refund = null, $invoices_to_reverse = null)
+    public function issue_refund_to_acct($acct_no, $payment_transaction_id, $reason_code, $total_refund_amount = null, $refund_check_number = null, $comments = null, $do_write = null, $auto_calc_refund = null, $invoices_to_reverse = null, $client_receipt_id = null)
     {
         return $this->__ws_call('issue_refund_to_acct', Array(
                 'acct_no' => $acct_no,
@@ -5413,7 +5430,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'comments' => $comments,
                 'do_write' => $do_write,
                 'auto_calc_refund' => $auto_calc_refund,
-                'invoices_to_reverse' => $invoices_to_reverse
+                'invoices_to_reverse' => $invoices_to_reverse,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -5539,9 +5557,10 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $reason_code Reason code to writeoff/dispute.
      * @param string $comments Comments to writeoff/dispute.
      * @param int $do_dispute Specifies whether to dispute or not.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute created date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies Write-off or dispute.<br>string can_unsettle Specifies if this dispute can be unsettled.
      */
-    public function create_writeoff_or_dispute($acct_no, $invoice_no, $amount, $reason_code, $comments, $do_dispute = null)
+    public function create_writeoff_or_dispute($acct_no, $invoice_no, $amount, $reason_code, $comments, $do_dispute = null, $client_receipt_id = null)
     {
         return $this->__ws_call('create_writeoff_or_dispute', Array(
                 'acct_no' => $acct_no,
@@ -5549,7 +5568,8 @@ class AriaBillingComplete extends BaseAriaBilling
                 'amount' => $amount,
                 'reason_code' => $reason_code,
                 'comments' => $comments,
-                'do_dispute' => $do_dispute
+                'do_dispute' => $do_dispute,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
@@ -5587,15 +5607,17 @@ class AriaBillingComplete extends BaseAriaBilling
      * @param int $dispute_no Dispute number.
      * @param int $settlement_action The amount need to be writeoff/dispute.
      * @param string $comments Comments to settle dispute.
+     * @param string $client_receipt_id Client defined unique identifier used to track related system actions.
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rec_no Write-off/dispute record number.<br>string created_by Write-off/dispute creator name.<br>double amount Write-off/dispute amount.<br>int invoice_no The unique identifer of a given invoice.<br>string invoice_date Invoice date.<br>double invoice_amt Invoice amount.<br>string dispute_creation_date Dispute create date.<br>string dispute_exp_date Dispute expiration date.<br>string comments Write-off/dispute comments.<br>int reason_code Write-off/dispute reason code.<br>int secondary_reason_code Dispute reason code.<br>int dispute_ind Specifies dispute or writeoff<br>string can_unsettle Specifies if this dispute can be unsettled.
      */
-    public function settle_dispute_hold($acct_no, $dispute_no, $settlement_action, $comments = null)
+    public function settle_dispute_hold($acct_no, $dispute_no, $settlement_action, $comments = null, $client_receipt_id = null)
     {
         return $this->__ws_call('settle_dispute_hold', Array(
                 'acct_no' => $acct_no,
                 'dispute_no' => $dispute_no,
                 'settlement_action' => $settlement_action,
-                'comments' => $comments
+                'comments' => $comments,
+                'client_receipt_id' => $client_receipt_id
         ));
     }
 
