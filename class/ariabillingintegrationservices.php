@@ -17,7 +17,7 @@ class AriaBillingIntegrationServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.20';
+    protected $__wsdl_version = '6.21';
     
     /**
      * Gets detailed account level information for all accounts matching specified query.
