@@ -548,7 +548,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
 
     /**
      * Returns list of client created coupons
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array services 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array coupons 
      */
     public function get_coupons()
     {
@@ -680,7 +680,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns details of credit template
      * @param int $credit_template_no Specifies the Inventory item number
      * @param string $client_credit_template_id Client defined unique id
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int recurring_credit_template_no Specifies currently assigned recurring credit template associated with coupon. All of the remaining parameters are dependent on this.<br>string credit_template_name Recurring credit template name<br>string client_credit_template_id Client defined unique id<br>int eligible_plan_no Eligible service plan number. If eligible_plan_no is present then eligible_service_no is also set and vice-versa. This means that coupon can only be applied against a specific type of charge. But If both values are null then it means that coupon can be applied against any change.<br>string eligible_client_plan_id Specifies Client defined unique id<br>int eligible_service_no Eligible service number<br>string eligible_client_service_id Specifies Client defined unique id<br>array eligible_service_types Service type code for which the credit is applicable.<br>int no_of_credits This parameter is related to information about generation frequency. i.e. Number of credits If this value is set along with time_between_credits, then it means that generation frequency is multiple.<br>int time_between_credits Time interval between credits<br>int discount_type Specifies discount type. Valid values are [1 or 2] 1 - Indicates flat rate 2 - Indicates percentage<br>double discount_amt Specifies discount amount<br>int percentage_plan_no Specifies Percentage plan number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>string percentage_client_plan_id Specifies Client defined unique id<br>int percentage_service_no Specifies Percentage service number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>string percentage_client_service_id Specifies Client defined unique id<br>int alt_service_no Specifies Alternative service number. If this value is null, then for coupon can be Service code to use is standard<br>string alt_client_service_id Specifies Client defined unique id<br>array coupons 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int recurring_credit_template_no Specifies currently assigned recurring credit template associated with coupon. All of the remaining parameters are dependent on this.<br>string credit_template_name Recurring credit template name<br>string client_credit_template_id Client defined unique id<br>int eligible_plan_no Eligible service plan number. If eligible_plan_no is present then eligible_service_no is also set and vice-versa. This means that coupon can only be applied against a specific type of charge. But If both values are null then it means that coupon can be applied against any change.<br>string eligible_client_plan_id Specifies Client defined unique id<br>int eligible_service_no Eligible service number<br>string eligible_client_service_id Specifies Client defined unique id<br>array eligible_service_types Service type code for which the credit is applicable.<br>int no_of_credits This parameter is related to information about generation frequency. i.e. Number of credits If this value is set along with time_between_credits, then it means that generation frequency is multiple.<br>int time_between_credits Time interval between credits<br>string discount_type Specifies discount type as &#039;Flat&#039; or &#039;Percentage&#039;. Valid values are [1 or 2] 1 - Indicates flat rate 2 - Indicates percentage<br>double discount_amt Specifies discount amount<br>int percentage_plan_no Specifies Percentage plan number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>string percentage_client_plan_id Specifies Client defined unique id<br>int percentage_service_no Specifies Percentage service number. This value is only set if discount_type is 2 i.e. discount type is Percentage<br>string percentage_client_service_id Specifies Client defined unique id<br>int alt_service_no Specifies Alternative service number. If this value is null, then for coupon can be Service code to use is standard<br>string alt_client_service_id Specifies Client defined unique id<br>array coupons 
      */
     public function get_recurring_credit_template_details($credit_template_no, $client_credit_template_id)
     {
@@ -816,7 +816,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $max_applicable_months Specifies the duration of the discount in months.
      * @param int $max_applications_per_acct Specifies the number of times the discount can be applied.
      * @param int $alt_service_no_2_apply Specifies the specific service code to use.
-     * @param int $alt_service_id_2_apply Specifies the specific service code to use.
+     * @param string $alt_service_id_2_apply Specifies the specific service code to use.
      * @param string $applicable_trans_scope Specifies whether the discount is applied to each or all transactions.
      * @param array $plan_no Aria-assigned unique plan identifier
      * @param array $client_plan_id 
@@ -918,7 +918,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Lists all the details of a given discount rule
      * @param int $rule_no Specifies the rule number
      * @param string $client_rule_id Client defined unique identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rule_no Specifies the no for the discount rule.<br>string rule_id Specifies client rule id for Discount Rule<br>string description Specifies description for the Discount Rule<br>string ext_description Specifies description that can be added to invoice/statment and is visible to account holder.<br>int flat_percent_ind Specifies whether the discount is going to be flat or percentage based.<br>double amount Specifies the amount of discount.<br>string currency Specifies the currency code of the rule<br>string duration_type_ind Specifies the duration type. Valid values are [ U, M] for uses and months<br>int max_applicable_months Specifies the duration of the discount in months.<br>int max_applications_per_acct Specifies the number of times the discount can be applied.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>int service_code_to_use Specifies which service code to use.<br>int alt_service_no_2_apply Specifies the specific service code to use.<br>int alt_service_id_2_apply Specifies the client defined id for specific service code to use.<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array client_plan_id <br>array service_no <br>array client_service_id <br>array item_no <br>array client_item_id 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int rule_no Specifies the no for the discount rule.<br>string rule_id Specifies client rule id for Discount Rule<br>string description Specifies description for the Discount Rule<br>string ext_description Specifies description that can be added to invoice/statment and is visible to account holder.<br>int flat_percent_ind Specifies whether the discount is going to be flat or percentage based.<br>double amount Specifies the amount of discount.<br>string currency Specifies the currency code of the rule<br>string duration_type_ind Specifies the duration type. Valid values are [ U, M] for uses and months<br>int max_applicable_months Specifies the duration of the discount in months.<br>int max_applications_per_acct Specifies the number of times the discount can be applied.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>int service_code_to_use Specifies which service code to use.<br>int alt_service_no_2_apply Specifies the specific service code to use.<br>string alt_service_id_2_apply Specifies the client defined id for specific service code to use.<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array client_plan_id <br>array service_no <br>array client_service_id <br>array item_no <br>array client_item_id 
      */
     public function get_discount_rule_details($rule_no, $client_rule_id)
     {
@@ -967,7 +967,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns details for specified service plan
      * @param int $plan_no Plan Number
      * @param string $client_plan_id Client defined unique identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>int rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>int dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>int template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>array surcharges 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>string rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>string dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>string template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>array surcharges 
      */
     public function get_plan_details($plan_no, $client_plan_id)
     {
@@ -1434,8 +1434,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
     /**
      * Returns details of specified plan group
      * @param int $group_no Plan group number
-     * @param int $client_plan_change_group_id Client defined identifier for Plan group number
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int group_no Unique identifier for plan group<br>string group_name Name of plan group<br>string group_desc Description of plan group<br>string client_plan_change_group_id Client defined unique identifier<br>string group_usage Indicate usage of plan group. Possible values are: 1 – CSR only 2 – USS only 3 – Both CSR and USS<br>array plans 
+     * @param string $client_plan_change_group_id Client defined identifier for Plan group number
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int group_no Unique identifier for plan group<br>string group_name Name of plan group<br>string group_desc Description of plan group<br>string client_plan_change_group_id Client defined unique identifier<br>string group_usage Indicate usage of plan group. Possible values are: 1 - CSR only 2 - USS only 3 - Both CSR and USS<br>array plans 
      */
     public function get_plan_group_details($group_no, $client_plan_change_group_id)
     {
@@ -1449,10 +1449,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Creates a new plan group
      * @param string $group_name Name of plan group
      * @param string $group_desc Description of plan group
-     * @param string $group_usage Indicate usage of plan group. Possible values are: 1 – CSR only 2 – USS only 3 – Both CSR and USS
+     * @param string $group_usage Indicate usage of plan group. Possible values are: 1 - CSR only 2 - USS only 3 - Both CSR and USS
      * @param string $client_plan_change_group_id Client defined unique identifier
-     * @param string $group_plans “|” separated list of plans to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
-     * @param string $group_plan_ids “|” separated list of client plan ids to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
+     * @param string $group_plans &quot;|&quot; separated list of plans to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
+     * @param string $group_plan_ids &quot;|&quot; separated list of client plan ids to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int group_no Unique identifier for plan group
      */
     public function create_plan_group($group_name, $group_desc, $group_usage, $client_plan_change_group_id = null, $group_plans = null, $group_plan_ids = null)
@@ -1472,10 +1472,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $group_no Unique identifier for plan group
      * @param string $group_name Name of plan group
      * @param string $group_desc Description of plan group
-     * @param string $group_usage Indicate usage of plan group. Possible values are: 1 – CSR only 2 – USS only 3 – Both CSR and USS
+     * @param string $group_usage Indicate usage of plan group. Possible values are: 1 - CSR only 2 - USS only 3 - Both CSR and USS
      * @param string $client_plan_change_group_id Client defined unique identifier
-     * @param string $group_plans “|” separated list of plans to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
-     * @param string $group_plan_ids “|” separated list of client plan ids to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
+     * @param string $group_plans &quot;|&quot; separated list of plans to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
+     * @param string $group_plan_ids &quot;|&quot; separated list of client plan ids to be associated to this plan group. Please note that this list must contain valid plan numbers for that particular client number or the API will error
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int group_no Unique identifier for plan group
      */
     public function update_plan_group($group_no, $group_name, $group_desc, $group_usage, $client_plan_change_group_id, $group_plans = null, $group_plan_ids = null)
@@ -1493,7 +1493,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
 
     /**
      * Creates a new plan group
-     * @param string $group_list “|” separated list of plan groups to be deleted
+     * @param string $group_list &quot;|&quot; separated list of plan groups to be deleted&#039;
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array plan_groups 
      */
     public function delete_plan_group($group_list)
@@ -1571,7 +1571,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns the details of a surcharge
      * @param int $surcharge_no Specifies Surcharge No
      * @param string $client_surcharge_id Specifies the client defined id for surcharge
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int surcharge_no Specifies Surcharge No<br>string surcharge_name Specifies Surcharge Name<br>string client_surcharge_id Specifies client defined id for Surcharge<br>string description Specifies description for the Surcharge<br>string ext_description Specifies description that can be added to statment and is visible to the user.<br>string currency_cd Specifies the currency code of the surcharge<br>string surcharge_type_cd Specifies whether the discount is going to be fixed or percentage based.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>string apply_b4_or_after_discount_cd Specifies whether the surcharge should consider item totals before or after discounts are applied<br>int apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.<br>int tax_group Specifies the tax group to be used while calculating surcharge.<br>string gl_cd Specifies the revenue account chart of access code<br>string ar_gl_cd Specifies the account recievable chart of access code<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array client_plan_id <br>array service_no <br>array client_service_id <br>array item_no <br>array client_item_id <br>array plan_service <br>array tier 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int surcharge_no Specifies Surcharge No<br>string surcharge_name Specifies Surcharge Name<br>string client_surcharge_id Specifies client defined id for Surcharge<br>string description Specifies description for the Surcharge<br>string ext_description Specifies description that can be added to statment and is visible to the user.<br>string currency_cd Specifies the currency code of the surcharge<br>string surcharge_type_cd Specifies whether the discount is going to be fixed or percentage based.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>string apply_b4_or_after_discount_cd Specifies whether the surcharge should consider item totals before or after discounts are applied<br>int apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.<br>int tax_group Specifies the tax group to be used while calculating surcharge.<br>string gl_cd Specifies the revenue account chart of access code<br>string ar_gl_cd Specifies the account recievable chart of access code<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array client_plan_id <br>array service_no <br>array client_service_id <br>array item_no <br>array client_item_id <br>array plan_service <br>array surcharge_tier 
      */
     public function get_surcharge_details($surcharge_no, $client_surcharge_id)
     {
@@ -1591,7 +1591,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $inline_offset_ind Specifies how the discount will be displayed in the invoice.
      * @param string $apply_b4_or_after_discount_cd Specifies whether the surcharge should consider item totals before or after discounts are applied
      * @param int $scope_no Specifies the charges eligible for the discount.
-     * @param array $tier 
+     * @param array $surcharge_tier 
      * @param string $client_surcharge_id Specifies client defined id for Surcharge
      * @param int $apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.
      * @param int $tax_group Specifies the tax group to be used while calculating surcharge.
@@ -1605,7 +1605,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $client_item_id 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
      */
-    public function create_surcharge($surcharge_name, $description, $ext_description, $currency_cd, $surcharge_type_cd, $inline_offset_ind, $apply_b4_or_after_discount_cd, $scope_no, $tier, $client_surcharge_id = null, $apply_to_zero_invoice_ind = null, $tax_group = null, $gl_cd = null, $ar_gl_cd = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    public function create_surcharge($surcharge_name, $description, $ext_description, $currency_cd, $surcharge_type_cd, $inline_offset_ind, $apply_b4_or_after_discount_cd, $scope_no, $surcharge_tier, $client_surcharge_id = null, $apply_to_zero_invoice_ind = null, $tax_group = null, $gl_cd = null, $ar_gl_cd = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
     {
         return $this->__ws_call('create_surcharge', Array(
                 'surcharge_name' => $surcharge_name,
@@ -1616,7 +1616,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'inline_offset_ind' => $inline_offset_ind,
                 'apply_b4_or_after_discount_cd' => $apply_b4_or_after_discount_cd,
                 'scope_no' => $scope_no,
-                'tier' => $tier,
+                'surcharge_tier' => $surcharge_tier,
                 'client_surcharge_id' => $client_surcharge_id,
                 'apply_to_zero_invoice_ind' => $apply_to_zero_invoice_ind,
                 'tax_group' => $tax_group,
@@ -1640,7 +1640,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $ext_description Specifies description that can be added to statment and is visible to the user.
      * @param string $currency_cd Specifies the currency code of the surcharge
      * @param int $scope_no Specifies the charges eligible for the discount.
-     * @param array $tier 
+     * @param array $surcharge_tier 
      * @param int $apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.
      * @param array $plan_no Aria-assigned unique plan identifier
      * @param array $client_plan_id 
@@ -1650,7 +1650,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $client_item_id 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
      */
-    public function edit_surcharge($surcharge_no, $surcharge_name, $client_surcharge_id, $description, $ext_description, $currency_cd, $scope_no, $tier, $apply_to_zero_invoice_ind = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    public function edit_surcharge($surcharge_no, $surcharge_name, $client_surcharge_id, $description, $ext_description, $currency_cd, $scope_no, $surcharge_tier, $apply_to_zero_invoice_ind = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
     {
         return $this->__ws_call('edit_surcharge', Array(
                 'surcharge_no' => $surcharge_no,
@@ -1660,7 +1660,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'ext_description' => $ext_description,
                 'currency_cd' => $currency_cd,
                 'scope_no' => $scope_no,
-                'tier' => $tier,
+                'surcharge_tier' => $surcharge_tier,
                 'apply_to_zero_invoice_ind' => $apply_to_zero_invoice_ind,
                 'plan_no' => $plan_no,
                 'client_plan_id' => $client_plan_id,
