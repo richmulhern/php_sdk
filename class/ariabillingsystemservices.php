@@ -17,7 +17,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.21';
+    protected $__wsdl_version = '6.22';
     
     /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
@@ -29,9 +29,11 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @param array $supp_field_values 
      * @param string $include_all_rate_schedules If set to &quot;true&quot;, will retrieve all of the rates and rate schedules associated with a particular plan. If left blank, will default to &quot;false&quot;.
      * @param string $include_plan_hierarchy You can use this input parameter to specify whether to retrieve the child plans associated with the returned plans or with the plan_no or parent_plan_no that you specified. If you set the include_plan_hierarchy parameter to true , then all of the child plans down to the bottom level of your plan hierarchy will be returned.
+     * @param string $client_plan_id Client defined Plan ID for which to query available child plans
+     * @param string $client_parent_plan_id Client defined unique parent Plan ID
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array all_client_plans A multidimensional array containing all client plans.
      */
-    public function get_client_plans_all($plan_no = null, $acct_no = null, $promo_code = null, $parent_plan_no = null, $supp_field_names = null, $supp_field_values = null, $include_all_rate_schedules = null, $include_plan_hierarchy = null)
+    public function get_client_plans_all($plan_no = null, $acct_no = null, $promo_code = null, $parent_plan_no = null, $supp_field_names = null, $supp_field_values = null, $include_all_rate_schedules = null, $include_plan_hierarchy = null, $client_plan_id = null, $client_parent_plan_id = null)
     {
         return $this->__ws_call('get_client_plans_all', Array(
                 'plan_no' => $plan_no,
@@ -41,7 +43,9 @@ class AriaBillingSystemServices extends BaseAriaBilling
                 'supp_field_names' => $supp_field_names,
                 'supp_field_values' => $supp_field_values,
                 'include_all_rate_schedules' => $include_all_rate_schedules,
-                'include_plan_hierarchy' => $include_plan_hierarchy
+                'include_plan_hierarchy' => $include_plan_hierarchy,
+                'client_plan_id' => $client_plan_id,
+                'client_parent_plan_id' => $client_parent_plan_id
         ));
     }
 
@@ -86,14 +90,16 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
+     * @param string $client_filter_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array client_items <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_items($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null)
+    public function get_client_items($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $client_filter_item_id = null)
     {
         return $this->__ws_call('get_client_items', Array(
                 'filter_currency_cd' => $filter_currency_cd,
                 'return_no_cost_items' => $return_no_cost_items,
-                'filter_item_no' => $filter_item_no
+                'filter_item_no' => $filter_item_no,
+                'client_filter_item_id' => $client_filter_item_id
         ));
     }
 
@@ -103,55 +109,63 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
      * @param string $include_inactive_items Specifies whether inactive inventory items need to be included or not
+     * @param string $filter_client_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array all_client_items <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_items_all($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null)
+    public function get_client_items_all($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null, $filter_client_item_id = null)
     {
         return $this->__ws_call('get_client_items_all', Array(
                 'filter_currency_cd' => $filter_currency_cd,
                 'return_no_cost_items' => $return_no_cost_items,
                 'filter_item_no' => $filter_item_no,
-                'include_inactive_items' => $include_inactive_items
+                'include_inactive_items' => $include_inactive_items,
+                'filter_client_item_id' => $filter_client_item_id
         ));
     }
 
     /**
      * Returns a list of prices for inventory item.
-     * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
      * @param string $filter_currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
+     * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
+     * @param string $filter_client_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array all_item_prices <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_item_prices($filter_item_no, $filter_currency_cd = null, $return_no_cost_items = null)
+    public function get_client_item_prices($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $filter_client_item_id = null)
     {
         return $this->__ws_call('get_client_item_prices', Array(
-                'filter_item_no' => $filter_item_no,
                 'filter_currency_cd' => $filter_currency_cd,
-                'return_no_cost_items' => $return_no_cost_items
+                'return_no_cost_items' => $return_no_cost_items,
+                'filter_item_no' => $filter_item_no,
+                'filter_client_item_id' => $filter_client_item_id
         ));
     }
 
     /**
      * Returns a list of supplemental fields for inventory item.
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
+     * @param string $filter_client_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array all_item_supp_fields <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_item_supp_fields($filter_item_no)
+    public function get_client_item_supp_fields($filter_item_no = null, $filter_client_item_id = null)
     {
         return $this->__ws_call('get_client_item_supp_fields', Array(
-                'filter_item_no' => $filter_item_no
+                'filter_item_no' => $filter_item_no,
+                'filter_client_item_id' => $filter_client_item_id
         ));
     }
 
     /**
      * Returns a list of classes for inventory item.
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
+     * @param string $filter_client_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array all_item_classes <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_item_classes($filter_item_no)
+    public function get_client_item_classes($filter_item_no = null, $filter_client_item_id = null)
     {
         return $this->__ws_call('get_client_item_classes', Array(
-                'filter_item_no' => $filter_item_no
+                'filter_item_no' => $filter_item_no,
+                'filter_client_item_id' => $filter_client_item_id
         ));
     }
 
@@ -170,24 +184,28 @@ class AriaBillingSystemServices extends BaseAriaBilling
     /**
      * Returns a summary list of all plans associated with a client.
      * @param int $plan_no The unique plan identifier, if only one plan is desired.
+     * @param string $client_plan_id Client defined Plan ID for which to query available child plans
      * @return mixed[] array plans_basic <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_plans_basic($plan_no = null)
+    public function get_client_plans_basic($plan_no = null, $client_plan_id = null)
     {
         return $this->__ws_call('get_client_plans_basic', Array(
-                'plan_no' => $plan_no
+                'plan_no' => $plan_no,
+                'client_plan_id' => $client_plan_id
         ));
     }
 
     /**
      * Returns information about the rates for a particular service in a specified plan.
      * @param int $plan_no The unique plan identifier.
+     * @param string $client_plan_id Client defined Plan ID for which to query available child plans
      * @return mixed[] array plan_services <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_plan_services($plan_no)
+    public function get_client_plan_services($plan_no = null, $client_plan_id = null)
     {
         return $this->__ws_call('get_client_plan_services', Array(
-                'plan_no' => $plan_no
+                'plan_no' => $plan_no,
+                'client_plan_id' => $client_plan_id
         ));
     }
 
@@ -196,14 +214,20 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @param int $plan_no The unique plan identifier.
      * @param int $service_no Aria assigned unique service identifier
      * @param int $alt_rate_schedule_no Alternative Rate Schedule Number. The alt_rate_schedule_no is the unique identifier for an alternative rate schedule that can be assigned to the account holder in place of the default rate schedule. This is often done by CSR&#039;s to provide special compensation or discounts as incentives to account holders.
+     * @param string $client_plan_id Client defined Plan ID for which to query available child plans
+     * @param string $client_service_id A multidimensional array of client defiend Service id for this plan.
+     * @param string $client_alt_rate_schedule_id Client defined alternate rate schedule number to assign (if any). If none is specified, the default rate schedule number will be used.
      * @return mixed[] array plan_service_rates Represents the rates for the default rate schedule for the default currency for the plan<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_plan_service_rates($plan_no, $service_no, $alt_rate_schedule_no = null)
+    public function get_client_plan_service_rates($plan_no = null, $service_no = null, $alt_rate_schedule_no = null, $client_plan_id = null, $client_service_id = null, $client_alt_rate_schedule_id = null)
     {
         return $this->__ws_call('get_client_plan_service_rates', Array(
                 'plan_no' => $plan_no,
                 'service_no' => $service_no,
-                'alt_rate_schedule_no' => $alt_rate_schedule_no
+                'alt_rate_schedule_no' => $alt_rate_schedule_no,
+                'client_plan_id' => $client_plan_id,
+                'client_service_id' => $client_service_id,
+                'client_alt_rate_schedule_id' => $client_alt_rate_schedule_id
         ));
     }
 
@@ -326,13 +350,15 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * Returns a list of rate schedules associated with a specified plan. The plan&#039;s default rate schedule will always be the first rate schedule returned and the remaining rate schedules will be sorted by schedule number.
      * @param int $plan_no The unique plan identifier.
      * @param string $currency_cd The 3-character ISO-compliant currency code in lowercase for monetary values used in the context of this API method.
+     * @param string $client_plan_id Client defined Plan ID for which to query available child plans
      * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array rate_sched An array of the rate schedules for the requested plan
      */
-    public function get_rate_schedules_for_plan($plan_no, $currency_cd = null)
+    public function get_rate_schedules_for_plan($plan_no = null, $currency_cd = null, $client_plan_id = null)
     {
         return $this->__ws_call('get_rate_schedules_for_plan', Array(
                 'plan_no' => $plan_no,
-                'currency_cd' => $currency_cd
+                'currency_cd' => $currency_cd,
+                'client_plan_id' => $client_plan_id
         ));
     }
 
@@ -367,15 +393,17 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * @param string $return_no_cost_items A boolean value that asserts the API call should include no-cost items in its returned results (true/1=yes, false/0=no).
      * @param int $filter_item_no Aria assigned unique identifier indicating Client Inventory Item.
      * @param string $include_inactive_items Specifies whether inactive inventory items need to be included or not
+     * @param string $filter_client_item_id Client assigned unique identifier indicating client Inventory Item.
      * @return mixed[] array items_basic <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_items_basic($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null)
+    public function get_client_items_basic($filter_currency_cd = null, $return_no_cost_items = null, $filter_item_no = null, $include_inactive_items = null, $filter_client_item_id = null)
     {
         return $this->__ws_call('get_client_items_basic', Array(
                 'filter_currency_cd' => $filter_currency_cd,
                 'return_no_cost_items' => $return_no_cost_items,
                 'filter_item_no' => $filter_item_no,
-                'include_inactive_items' => $include_inactive_items
+                'include_inactive_items' => $include_inactive_items,
+                'filter_client_item_id' => $filter_client_item_id
         ));
     }
 
@@ -543,12 +571,14 @@ class AriaBillingSystemServices extends BaseAriaBilling
     /**
      * Returns all images associated with a given inventory item
      * @param int $item_no The item number by which to search for images
+     * @param string $client_item_id The client defiend item id to search for images
      * @return mixed[] array item_images <br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
      */
-    public function get_client_item_images($item_no)
+    public function get_client_item_images($item_no = null, $client_item_id = null)
     {
         return $this->__ws_call('get_client_item_images', Array(
-                'item_no' => $item_no
+                'item_no' => $item_no,
+                'client_item_id' => $client_item_id
         ));
     }
 
@@ -710,6 +740,20 @@ class AriaBillingSystemServices extends BaseAriaBilling
                 'object_id' => $object_id,
                 'external_id' => $external_id,
                 'action_directive' => $action_directive
+        ));
+    }
+
+    /**
+     * Collects the surcharge for the specified account holder.
+     * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
+     * @param string $include_detail_ind Whether or not this is to retrieve the surcharge rate details
+     * @return mixed[] array all_acct_surcharges An array containing surcharges.<br>int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function get_acct_surcharges($acct_no, $include_detail_ind = null)
+    {
+        return $this->__ws_call('get_acct_surcharges', Array(
+                'acct_no' => $acct_no,
+                'include_detail_ind' => $include_detail_ind
         ));
     }
 

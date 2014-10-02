@@ -967,7 +967,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns details for specified service plan
      * @param int $plan_no Plan Number
      * @param string $client_plan_id Client defined unique identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>int rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>int dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>int template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval <br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>int rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts <br>int dunning_plan_no Specifies dunning plan associated with this plan<br>int dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months <br>int acct_status_cd <br>int rollover_status_days <br>int rollover_status_cd <br>int template_no Specifies invoice template class associated with master plan<br>int template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee <br>string is_deletable <br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>array surcharges 
      */
     public function get_plan_details($plan_no, $client_plan_id)
     {
@@ -1016,9 +1016,11 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $child_plans 
      * @param string $notification_template_group_no This field is used to associate an existing notification template group to the plan.
      * @param string $credit_note_template_no This field is used to associate an existing credit note template to the plan.
+     * @param array $surcharge_no 
+     * @param array $client_surcharge_id 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $client_plan_id = null, $plan_group = null, $plan_group_id = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $template_no = null, $client_email_template_id = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $template_ind = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null)
+    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $client_plan_id = null, $plan_group = null, $plan_group_id = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $template_no = null, $client_email_template_id = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $template_ind = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null)
     {
         return $this->__ws_call('create_new_plan', Array(
                 'plan_name' => $plan_name,
@@ -1057,7 +1059,9 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'template_ind' => $template_ind,
                 'child_plans' => $child_plans,
                 'notification_template_group_no' => $notification_template_group_no,
-                'credit_note_template_no' => $credit_note_template_no
+                'credit_note_template_no' => $credit_note_template_no,
+                'surcharge_no' => $surcharge_no,
+                'client_surcharge_id' => $client_surcharge_id
         ));
     }
 
@@ -1101,9 +1105,11 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $child_plans 
      * @param string $notification_template_group_no This field is used to associate an existing notification template group to the plan.
      * @param string $credit_note_template_no This field is used to associate an existing credit note template to the plan.
+     * @param array $surcharge_no 
+     * @param array $client_surcharge_id 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function edit_plan($plan_no, $plan_name, $client_plan_id, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_group = null, $plan_group_id = null, $active = null, $usage_billing_interval = null, $template_no = null, $client_email_template_id = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null)
+    public function edit_plan($plan_no, $plan_name, $client_plan_id, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_group = null, $plan_group_id = null, $active = null, $usage_billing_interval = null, $template_no = null, $client_email_template_id = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null)
     {
         return $this->__ws_call('edit_plan', Array(
                 'plan_no' => $plan_no,
@@ -1143,7 +1149,9 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'supplemental_obj_field' => $supplemental_obj_field,
                 'child_plans' => $child_plans,
                 'notification_template_group_no' => $notification_template_group_no,
-                'credit_note_template_no' => $credit_note_template_no
+                'credit_note_template_no' => $credit_note_template_no,
+                'surcharge_no' => $surcharge_no,
+                'client_surcharge_id' => $client_surcharge_id
         ));
     }
 
@@ -1545,6 +1553,135 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'coa_id' => $coa_id,
                 'coa_code' => $coa_code,
                 'coa_description' => $coa_description
+        ));
+    }
+
+    /**
+     * Returns all surcharges for a client
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array surcharges 
+     */
+    public function get_surcharges()
+    {
+        return $this->__ws_call('get_surcharges', Array(
+                
+        ));
+    }
+
+    /**
+     * Returns the details of a surcharge
+     * @param int $surcharge_no Specifies Surcharge No
+     * @param string $client_surcharge_id Specifies the client defined id for surcharge
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int surcharge_no Specifies Surcharge No<br>string surcharge_name Specifies Surcharge Name<br>string client_surcharge_id Specifies client defined id for Surcharge<br>string description Specifies description for the Surcharge<br>string ext_description Specifies description that can be added to statment and is visible to the user.<br>string currency_cd Specifies the currency code of the surcharge<br>string surcharge_type_cd Specifies whether the discount is going to be fixed or percentage based.<br>string inline_offset_ind Specifies how the discount will be displayed in the invoice.<br>string apply_b4_or_after_discount_cd Specifies whether the surcharge should consider item totals before or after discounts are applied<br>int apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.<br>int tax_group Specifies the tax group to be used while calculating surcharge.<br>string gl_cd Specifies the revenue account chart of access code<br>string ar_gl_cd Specifies the account recievable chart of access code<br>int scope_no Specifies the charges eligible for the discount.<br>array plan_no Aria-assigned unique plan identifier<br>array client_plan_id <br>array service_no <br>array client_service_id <br>array item_no <br>array client_item_id <br>array plan_service <br>array tier 
+     */
+    public function get_surcharge_details($surcharge_no, $client_surcharge_id)
+    {
+        return $this->__ws_call('get_surcharge_details', Array(
+                'surcharge_no' => $surcharge_no,
+                'client_surcharge_id' => $client_surcharge_id
+        ));
+    }
+
+    /**
+     * Creates a surcharge
+     * @param string $surcharge_name Specifies Surcharge Name
+     * @param string $description Specifies description for the Surcharge
+     * @param string $ext_description Specifies description that can be added to statment and is visible to the user.
+     * @param string $currency_cd Specifies the currency code of the surcharge
+     * @param string $surcharge_type_cd Specifies whether the discount is going to be fixed or percentage based.
+     * @param string $inline_offset_ind Specifies how the discount will be displayed in the invoice.
+     * @param string $apply_b4_or_after_discount_cd Specifies whether the surcharge should consider item totals before or after discounts are applied
+     * @param int $scope_no Specifies the charges eligible for the discount.
+     * @param array $tier 
+     * @param string $client_surcharge_id Specifies client defined id for Surcharge
+     * @param int $apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.
+     * @param int $tax_group Specifies the tax group to be used while calculating surcharge.
+     * @param string $gl_cd Specifies the revenue account chart of access code
+     * @param string $ar_gl_cd Specifies the account recievable chart of access code
+     * @param array $plan_no Aria-assigned unique plan identifier
+     * @param array $client_plan_id 
+     * @param array $service_no 
+     * @param array $client_service_id 
+     * @param array $item_no 
+     * @param array $client_item_id 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
+     */
+    public function create_surcharge($surcharge_name, $description, $ext_description, $currency_cd, $surcharge_type_cd, $inline_offset_ind, $apply_b4_or_after_discount_cd, $scope_no, $tier, $client_surcharge_id = null, $apply_to_zero_invoice_ind = null, $tax_group = null, $gl_cd = null, $ar_gl_cd = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    {
+        return $this->__ws_call('create_surcharge', Array(
+                'surcharge_name' => $surcharge_name,
+                'description' => $description,
+                'ext_description' => $ext_description,
+                'currency_cd' => $currency_cd,
+                'surcharge_type_cd' => $surcharge_type_cd,
+                'inline_offset_ind' => $inline_offset_ind,
+                'apply_b4_or_after_discount_cd' => $apply_b4_or_after_discount_cd,
+                'scope_no' => $scope_no,
+                'tier' => $tier,
+                'client_surcharge_id' => $client_surcharge_id,
+                'apply_to_zero_invoice_ind' => $apply_to_zero_invoice_ind,
+                'tax_group' => $tax_group,
+                'gl_cd' => $gl_cd,
+                'ar_gl_cd' => $ar_gl_cd,
+                'plan_no' => $plan_no,
+                'client_plan_id' => $client_plan_id,
+                'service_no' => $service_no,
+                'client_service_id' => $client_service_id,
+                'item_no' => $item_no,
+                'client_item_id' => $client_item_id
+        ));
+    }
+
+    /**
+     * Creates a surcharge
+     * @param string $surcharge_no Surcharge No
+     * @param string $surcharge_name Specifies Surcharge Name
+     * @param string $client_surcharge_id Specifies client defined id for Surcharge
+     * @param string $description Specifies description for the Surcharge
+     * @param string $ext_description Specifies description that can be added to statment and is visible to the user.
+     * @param string $currency_cd Specifies the currency code of the surcharge
+     * @param int $scope_no Specifies the charges eligible for the discount.
+     * @param array $tier 
+     * @param int $apply_to_zero_invoice_ind Specifies whether the minimum surcharge should apply to zero dollar invoice or not.
+     * @param array $plan_no Aria-assigned unique plan identifier
+     * @param array $client_plan_id 
+     * @param array $service_no 
+     * @param array $client_service_id 
+     * @param array $item_no 
+     * @param array $client_item_id 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
+     */
+    public function edit_surcharge($surcharge_no, $surcharge_name, $client_surcharge_id, $description, $ext_description, $currency_cd, $scope_no, $tier, $apply_to_zero_invoice_ind = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    {
+        return $this->__ws_call('edit_surcharge', Array(
+                'surcharge_no' => $surcharge_no,
+                'surcharge_name' => $surcharge_name,
+                'client_surcharge_id' => $client_surcharge_id,
+                'description' => $description,
+                'ext_description' => $ext_description,
+                'currency_cd' => $currency_cd,
+                'scope_no' => $scope_no,
+                'tier' => $tier,
+                'apply_to_zero_invoice_ind' => $apply_to_zero_invoice_ind,
+                'plan_no' => $plan_no,
+                'client_plan_id' => $client_plan_id,
+                'service_no' => $service_no,
+                'client_service_id' => $client_service_id,
+                'item_no' => $item_no,
+                'client_item_id' => $client_item_id
+        ));
+    }
+
+    /**
+     * Deletes the surcharge.
+     * @param array $surcharge_no Specifies the coupon numbers to be deleted. Eg surcharge_no[0]=10012341&amp;surcharge_no[1]=10023432 etc
+     * @param array $client_surcharge_id Specifies client defined id for Surcharge. Eg surcharge_no[0]=10012341&amp;surcharge_no[1]=10023432 etc
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function delete_surcharge($surcharge_no, $client_surcharge_id)
+    {
+        return $this->__ws_call('delete_surcharge', Array(
+                'surcharge_no' => $surcharge_no,
+                'client_surcharge_id' => $client_surcharge_id
         ));
     }
 
