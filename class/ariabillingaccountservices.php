@@ -17,7 +17,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.24';
+    protected $__wsdl_version = '6.25';
     
     /**
      * Get coupon detailed information including credit templates, discount rules, discount bundles.
@@ -1055,7 +1055,7 @@ class AriaBillingAccountServices extends BaseAriaBilling
      * Returns the values for a particular supplemental field associated with a specified account.
      * @param int $acct_no Aria assigned account identifier. This value is unique across all Aria-managed accounts.
      * @param string $field_name The supplemental field name.
-     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array supp_field_values 
+     * @return mixed[] int error_code Aria assigned error identifier. 0 indicates no error.<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>array supp_field_values <br>array acct_supp_field_values 
      */
     public function get_supp_field_values($acct_no, $field_name = null)
     {
