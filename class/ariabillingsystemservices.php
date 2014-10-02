@@ -17,7 +17,7 @@ class AriaBillingSystemServices extends BaseAriaBilling
      * WSDL Version for SOAP calls
      * @var string $__wsdl_version Version of the WSDL.
      */
-    protected $__wsdl_version = '6.23';
+    protected $__wsdl_version = '6.24';
     
     /**
      * Returns a detailed list of all plans associated with a client. The information returned includes the services and rate schedules associated with the plans.
