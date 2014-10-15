@@ -207,21 +207,22 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param int $invoice_advancement_months Specifies months of invoice advancement for the Inventory item
      * @param int $plan_no Specifies Master Plan number for the Inventory item
      * @param string $client_plan_id Specifies Client defined unique id for the plan
-     * @param boolean $tax_inclusive_ind This flag denotes if a rate is inclusive of the taxes. Value of 1 means  tax inclusive rates and a value of 0 (default) means tax exclusive rates.
+     * @param boolean $tax_inclusive_ind This flag denotes if a rate is inclusive of the taxes. Value of 1 means tax inclusive rates and a value of 0 (default) means tax exclusive rates.
      * @param string $modify_price_ind Specifies if CSR&#039;s may modify Inventory item price. Valid values are: Y - Yes and N - No
      * @param int $subunit_qty Subunit Quantity If item_type=0 and subunit_label is not null then this field is required
      * @param string $subunit_label Subunit Label If item_type=0 and quantity_per_item is not null then this field is required
      * @param int $days_to_expiry Specifies the number of days to expiration for resources on this SKU. If item_type=2 then this field is required
      * @param string $resource_type_no The assigned identifier for a resource
      * @param string $resource_units Number of units of resource
-     * @param int $stock_level_track Specifies whether the stock level can be adjusted or not.  Allowed values are 1 or 0
+     * @param int $stock_level_track Specifies whether the stock level can be adjusted or not. Allowed values are 1 or 0
      * @param double $stock_level_adjust Specifies the number to adjust the stock level with
      * @param array $image 
      * @param array $parent_class 
      * @param array $supplemental_obj_field 
+     * @param string $commodity_cd Commodity Code
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string item_no Specifies the Inventory item number<br>string currency_cd Specifies the currency code of Inventory item
      */
-    public function create_inventory_item($item_type, $item_name, $item_desc, $service, $client_sku, $currency_cd, $item_price, $client_item_id = null, $active_ind = null, $invoice_advancement_months = null, $plan_no = null, $client_plan_id = null, $tax_inclusive_ind = null, $modify_price_ind = null, $subunit_qty = null, $subunit_label = null, $days_to_expiry = null, $resource_type_no = null, $resource_units = null, $stock_level_track = null, $stock_level_adjust = null, $image = null, $parent_class = null, $supplemental_obj_field = null)
+    public function create_inventory_item($item_type, $item_name, $item_desc, $service, $client_sku, $currency_cd, $item_price, $client_item_id = null, $active_ind = null, $invoice_advancement_months = null, $plan_no = null, $client_plan_id = null, $tax_inclusive_ind = null, $modify_price_ind = null, $subunit_qty = null, $subunit_label = null, $days_to_expiry = null, $resource_type_no = null, $resource_units = null, $stock_level_track = null, $stock_level_adjust = null, $image = null, $parent_class = null, $supplemental_obj_field = null, $commodity_cd = null)
     {
         return $this->__ws_call('create_inventory_item', Array(
                 'item_type' => $item_type,
@@ -247,7 +248,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'stock_level_adjust' => $stock_level_adjust,
                 'image' => $image,
                 'parent_class' => $parent_class,
-                'supplemental_obj_field' => $supplemental_obj_field
+                'supplemental_obj_field' => $supplemental_obj_field,
+                'commodity_cd' => $commodity_cd
         ));
     }
 
@@ -375,7 +377,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Retrieve details on specified service
      * @param int $service_no Specifies the Service number
      * @param string $client_service_id Client defined unique id
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Specifies the Service number<br>string client_service_id Client defined unique id<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>string gl_cd Specifies chart of access code<br>string taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string client_tax_group_id Client defined unique identifier<br>int usage_type Specifies usage type associated with service
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Specifies the Service number<br>string client_service_id Client defined unique id<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>string gl_cd Specifies chart of access code<br>string taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string client_tax_group_id Client defined unique identifier<br>int usage_type Specifies usage type associated with service<br>string commodity_cd Commodity Code
      */
     public function get_service_details($service_no, $client_service_id)
     {
@@ -391,7 +393,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $client_service_id Client defined unique id
      * @param int $plan_no Plan Number
      * @param string $client_plan_id Client defined unique id
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique id<br>string currency_cd Specifies the currency code of plan<br>int service_no Specifies the Service number<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>string client_service_id Client defined unique id<br>int taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string client_tax_group_id Client defined unique identifier<br>string gl_cd Specifies chart of access code<br>int usage_type Specifies usage type associated with service<br>string rate_type Specifies the rate type. Valid values are:&#039;Flat Rate&#039; and &#039;Tiered Pricing&#039;<br>array rate_schedules <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique id<br>string currency_cd Specifies the currency code of plan<br>int service_no Specifies the Service number<br>string service_name Specifies the service name<br>string service_type Specifies Service types. Valid values are: &quot;Usage Based&quot;, &quot;Recurring&quot;, &quot;Activation&quot;<br>string client_service_id Client defined unique id<br>int taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.<br>string tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0<br>string client_tax_group_id Client defined unique identifier<br>string gl_cd Specifies chart of access code<br>int usage_type Specifies usage type associated with service<br>string rate_type Specifies the rate type. Valid values are:&#039;Flat Rate&#039; and &#039;Tiered Pricing&#039;<br>array rate_schedules <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>string commodity_cd Commodity Code
      */
     public function get_plan_service_details($service_no, $client_service_id, $plan_no, $client_plan_id)
     {
@@ -413,9 +415,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $usage_type Specifies usage type associated with service. If service_type is Usage then this field is required.
      * @param string $client_service_id Client defined unique id
      * @param array $supplemental_obj_field 
+     * @param string $commodity_cd Commodity Code
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Aria-assigned unique identifier for service
      */
-    public function create_service($service_name, $service_type, $gl_cd, $taxable_ind = null, $tax_group = null, $usage_type = null, $client_service_id = null, $supplemental_obj_field = null)
+    public function create_service($service_name, $service_type, $gl_cd, $taxable_ind = null, $tax_group = null, $usage_type = null, $client_service_id = null, $supplemental_obj_field = null, $commodity_cd = null)
     {
         return $this->__ws_call('create_service', Array(
                 'service_name' => $service_name,
@@ -425,7 +428,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'tax_group' => $tax_group,
                 'usage_type' => $usage_type,
                 'client_service_id' => $client_service_id,
-                'supplemental_obj_field' => $supplemental_obj_field
+                'supplemental_obj_field' => $supplemental_obj_field,
+                'commodity_cd' => $commodity_cd
         ));
     }
 
@@ -439,9 +443,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $taxable_ind Indicates If The service has tax associated with it [can be 0 or 1]; 1 indicates taxable and 0 indicates non taxable.
      * @param string $tax_group Specifies tax group associated with service. This will be null if taxable_ind is set to 0
      * @param string $usage_type Specifies usage type associated with service. If service_type is Usage then this field is required.
+     * @param string $commodity_cd Commodity Code
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int service_no Specifies the service number
      */
-    public function update_service($service_no, $service_name, $service_type, $client_service_id, $gl_cd = null, $taxable_ind = null, $tax_group = null, $usage_type = null)
+    public function update_service($service_no, $service_name, $service_type, $client_service_id, $gl_cd = null, $taxable_ind = null, $tax_group = null, $usage_type = null, $commodity_cd = null)
     {
         return $this->__ws_call('update_service', Array(
                 'service_no' => $service_no,
@@ -451,7 +456,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'gl_cd' => $gl_cd,
                 'taxable_ind' => $taxable_ind,
                 'tax_group' => $tax_group,
-                'usage_type' => $usage_type
+                'usage_type' => $usage_type,
+                'commodity_cd' => $commodity_cd
         ));
     }
 
@@ -967,7 +973,7 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * Returns details for specified service plan
      * @param int $plan_no Plan Number
      * @param string $client_plan_id Client defined unique identifier
-     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval Usage billing Interval [ can be either of 1, 3, 6, 12 or custom ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually. For custom the user can provide any number but not greater than 36 months. Also the usage billing interval cannot be greater than the plan billing_interval<br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>string rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts Specifies whether a plan can have child accounts or not. Valid values are &quot;1&quot; or &quot;0&quot; 1 - Yes 0 - No. The parameter has been depreciated. Value will be overrided to 1<br>int dunning_plan_no Specifies dunning plan associated with this plan<br>string dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months Specifies initial free month. Valid values are : 1 to 12.<br>int acct_status_cd Specifies the status of an account when the plan is assigned to a account. Valid values are ( 1- Active, 61 - Active non-billable, 41 - Active trial, 31- Installation pending, 99 - Permanent, 32- Registered pending activation )<br>int rollover_status_days Specifies the number of days the newly created account will remain in its initial status. Valid value are 1 through 28<br>int rollover_status_cd Specifies the status the account will be in after its initial status. Valid values are ( 1 -&gt; Active, 99-&gt;Permanent, -1 -&gt; suspened, -3 -&gt; terminated)<br>int template_no Specifies invoice template class associated with master plan<br>string template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee Specifies when to apply min fee. Valid values are 0 which means &#039;All Invoices&#039; and 1 which means &#039;After first invoice&#039;.<br>string is_deletable Specifies whether or not this plan can be deleted<br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>array surcharges 
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int plan_no Plan Number<br>string client_plan_id Client defined unique identifier<br>string plan_name Plan Name<br>int plan_level Plan Level. [can be 0 or 1]; 0 - Master plan 1 - indicates Supplemental Plan<br>string plan_type Specifies Plan Type. Valid values are [ Recurring, Free, Pre-paid, Unknown ]<br>string plan_description Specifies plan description<br>array plan_groups <br>array plan_group_ids <br>string currency_cd Specifies the currency code of plan<br>string billing_interval Billing Interval [ can be either of 1, 3, 6 or 12 ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually<br>string usage_billing_interval Usage billing Interval [ can be either of 1, 3, 6, 12 or custom ) 1 - Monthly 3 - Quarterly 6 - Semi-Annually 12 - Annually. For custom the user can provide any number but not greater than 36 months. Also the usage billing interval cannot be greater than the plan billing_interval<br>int active_ind Specifies if inventory item is active or inactive. Valid values are: 0 - Inactive and 1 - Active<br>string rollover_months Specifies rollover months. Valid values are from 0 to 24<br>int rollover_plan_no Plan number<br>string rollover_client_plan_id Client defined identifier for rollover plan number<br>string allow_child_accounts Specifies whether a plan can have child accounts or not. Valid values are &quot;1&quot; or &quot;0&quot; 1 - Yes 0 - No. The parameter has been depreciated. Value will be overrided to 1<br>int dunning_plan_no Specifies dunning plan associated with this plan<br>string dunning_client_plan_id Specifies client defined identifier of the dunning plan associated with this plan<br>int free_trial_type Specifies free trial duration.Valid values are : &quot;days&quot; or &quot;months&quot;<br>int free_trial_duration Specifies free trial duration.Valid values are from 0 to 99<br>int initial_free_months Specifies initial free month. Valid values are : 1 to 12.<br>int acct_status_cd Specifies the status of an account when the plan is assigned to a account. Valid values are ( 1- Active, 61 - Active non-billable, 41 - Active trial, 31- Installation pending, 99 - Permanent, 32- Registered pending activation )<br>int rollover_status_days Specifies the number of days the newly created account will remain in its initial status. Valid value are 1 through 28<br>int rollover_status_cd Specifies the status the account will be in after its initial status. Valid values are ( 1 -&gt; Active, 99-&gt;Permanent, -1 -&gt; suspened, -3 -&gt; terminated)<br>int template_no Specifies invoice template class associated with master plan<br>string template_id Specifies client defined identifier for the invoice template class associated with master plan<br>int plan_cancel_min_month Specifies the minimum term months for cancellation service<br>string how_to_apply_min_fee Specifies when to apply min fee. Valid values are 0 which means &#039;All Invoices&#039; and 1 which means &#039;After first invoice&#039;.<br>string is_deletable Specifies whether or not this plan can be deleted<br>array services <br>array resources <br>array parent_plans <br>array parent_plan_ids <br>array exclusion_plans <br>array supplemental_obj_fields <br>array surcharges <br>string proration_invoice_timing_cd Specifies whether to create a separate invoice for prorated charges immediately, or defer to the next anniversary date.
      */
     public function get_plan_details($plan_no, $client_plan_id)
     {
@@ -1012,15 +1018,16 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $parent_client_plan_ids 
      * @param array $exclusion_plans 
      * @param array $supplemental_obj_field 
-     * @param boolean $template_ind This flag is used to create a plan template. Value of 1 creates the plan as a  template. Value of 0 (default) creates a regular plan.
+     * @param boolean $template_ind This flag is used to create a plan template. Value of 1 creates the plan as a template. Value of 0 (default) creates a regular plan.
      * @param array $child_plans 
      * @param string $notification_template_group_no This field is used to associate an existing notification template group to the plan.
      * @param string $credit_note_template_no This field is used to associate an existing credit note template to the plan.
      * @param array $surcharge_no 
      * @param array $client_surcharge_id 
+     * @param string $proration_invoice_timing_cd Determines whether to create a separate invoice for prorated charges immediately, or defer to the next anniversary date.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $client_plan_id = null, $plan_group = null, $plan_group_id = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $template_no = null, $client_email_template_id = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $template_ind = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null)
+    public function create_new_plan($plan_name, $plan_description, $plan_type, $currency, $billing_interval, $client_plan_id = null, $plan_group = null, $plan_group_id = null, $usage_billing_interval = null, $active = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $template_no = null, $client_email_template_id = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $template_ind = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null, $proration_invoice_timing_cd = null)
     {
         return $this->__ws_call('create_new_plan', Array(
                 'plan_name' => $plan_name,
@@ -1061,7 +1068,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'notification_template_group_no' => $notification_template_group_no,
                 'credit_note_template_no' => $credit_note_template_no,
                 'surcharge_no' => $surcharge_no,
-                'client_surcharge_id' => $client_surcharge_id
+                'client_surcharge_id' => $client_surcharge_id,
+                'proration_invoice_timing_cd' => $proration_invoice_timing_cd
         ));
     }
 
@@ -1107,9 +1115,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param string $credit_note_template_no This field is used to associate an existing credit note template to the plan.
      * @param array $surcharge_no 
      * @param array $client_surcharge_id 
+     * @param string $proration_invoice_timing_cd Determines whether to create a separate invoice for prorated charges immediately, or defer to the next anniversary date.
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string plan_no Plan Number
      */
-    public function edit_plan($plan_no, $plan_name, $client_plan_id, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_group = null, $plan_group_id = null, $active = null, $usage_billing_interval = null, $template_no = null, $client_email_template_id = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null)
+    public function edit_plan($plan_no, $plan_name, $client_plan_id, $plan_type, $billing_interval, $currency, $plan_description = null, $plan_group = null, $plan_group_id = null, $active = null, $usage_billing_interval = null, $template_no = null, $client_email_template_id = null, $rollover_months = null, $rollover_plan_no = null, $rollover_client_plan_id = null, $dunning_plan_no = null, $dunning_client_plan_id = null, $initial_free_months = null, $acct_status_cd = null, $rollover_status_days = null, $rollover_status_cd = null, $allow_child_accts = null, $apply_cancellation = null, $plan_cancel_min_month = null, $apply_minimum_fee = null, $how_to_apply_minimum_fee = null, $schedule = null, $service = null, $resource = null, $arc_service_no = null, $parent_plans = null, $parent_client_plan_ids = null, $exclusion_plans = null, $supplemental_obj_field = null, $child_plans = null, $notification_template_group_no = null, $credit_note_template_no = null, $surcharge_no = null, $client_surcharge_id = null, $proration_invoice_timing_cd = null)
     {
         return $this->__ws_call('edit_plan', Array(
                 'plan_no' => $plan_no,
@@ -1151,7 +1160,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'notification_template_group_no' => $notification_template_group_no,
                 'credit_note_template_no' => $credit_note_template_no,
                 'surcharge_no' => $surcharge_no,
-                'client_surcharge_id' => $client_surcharge_id
+                'client_surcharge_id' => $client_surcharge_id,
+                'proration_invoice_timing_cd' => $proration_invoice_timing_cd
         ));
     }
 
@@ -1182,28 +1192,6 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'client_plan_id' => $client_plan_id,
                 'plan_name' => $plan_name,
                 'new_client_plan_id' => $new_client_plan_id
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function update_master_plan()
-    {
-        return $this->__ws_call('update_master_plan', Array(
-                
-        ));
-    }
-
-    /**
-     * 
-     * @return mixed[] 
-     */
-    public function update_supplemental_plan()
-    {
-        return $this->__ws_call('update_supplemental_plan', Array(
-                
         ));
     }
 
@@ -1603,9 +1591,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $client_service_id 
      * @param array $item_no 
      * @param array $client_item_id 
+     * @param array $schedule 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
      */
-    public function create_surcharge($surcharge_name, $description, $ext_description, $currency_cd, $surcharge_type_cd, $inline_offset_ind, $apply_b4_or_after_discount_cd, $scope_no, $surcharge_tier, $client_surcharge_id = null, $apply_to_zero_invoice_ind = null, $tax_group = null, $gl_cd = null, $ar_gl_cd = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    public function create_surcharge($surcharge_name, $description, $ext_description, $currency_cd, $surcharge_type_cd, $inline_offset_ind, $apply_b4_or_after_discount_cd, $scope_no, $surcharge_tier, $client_surcharge_id = null, $apply_to_zero_invoice_ind = null, $tax_group = null, $gl_cd = null, $ar_gl_cd = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null, $schedule = null)
     {
         return $this->__ws_call('create_surcharge', Array(
                 'surcharge_name' => $surcharge_name,
@@ -1627,7 +1616,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'service_no' => $service_no,
                 'client_service_id' => $client_service_id,
                 'item_no' => $item_no,
-                'client_item_id' => $client_item_id
+                'client_item_id' => $client_item_id,
+                'schedule' => $schedule
         ));
     }
 
@@ -1648,9 +1638,10 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
      * @param array $client_service_id 
      * @param array $item_no 
      * @param array $client_item_id 
+     * @param array $schedule 
      * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>string surcharge_no Surcharge No
      */
-    public function edit_surcharge($surcharge_no, $surcharge_name, $client_surcharge_id, $description, $ext_description, $currency_cd, $scope_no, $surcharge_tier, $apply_to_zero_invoice_ind = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null)
+    public function edit_surcharge($surcharge_no, $surcharge_name, $client_surcharge_id, $description, $ext_description, $currency_cd, $scope_no, $surcharge_tier, $apply_to_zero_invoice_ind = null, $plan_no = null, $client_plan_id = null, $service_no = null, $client_service_id = null, $item_no = null, $client_item_id = null, $schedule = null)
     {
         return $this->__ws_call('edit_surcharge', Array(
                 'surcharge_no' => $surcharge_no,
@@ -1667,7 +1658,8 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
                 'service_no' => $service_no,
                 'client_service_id' => $client_service_id,
                 'item_no' => $item_no,
-                'client_item_id' => $client_item_id
+                'client_item_id' => $client_item_id,
+                'schedule' => $schedule
         ));
     }
 
@@ -1682,6 +1674,91 @@ class AriaBillingAdministrationServices extends BaseAriaBilling
         return $this->__ws_call('delete_surcharge', Array(
                 'surcharge_no' => $surcharge_no,
                 'client_surcharge_id' => $client_surcharge_id
+        ));
+    }
+
+    /**
+     * Returns all the revrec profiles for a client
+     * @return mixed[] int profile_id Profile Id<br>string profile_name Specifies Profile Name<br>string client_profile_id Specifies client defined id for Profile<br>string profile_desc Specifies description for the Profile
+     */
+    public function get_revrec_profiles()
+    {
+        return $this->__ws_call('get_revrec_profiles', Array(
+                
+        ));
+    }
+
+    /**
+     * Return the details of a revrec profile
+     * @param int $profile_id Profile Id
+     * @param string $client_profile_id Client defined identifier for profile.
+     * @return mixed[] string profile_name Specifies Profile Name<br>string client_profile_id Specifies client defined id for Profile<br>string profile_desc Specifies description for the Profile<br>int on_plan_payment_date Specifies whether to recognise revenue on Plan Payment Dates or not. Valid values are 0 or 1<br>int on_order_payment_date Specifies whether to recognise revenue on Order Payment Dates or not. Valid values are 0 or 1<br>int on_order_fulfill_date Specifies whether to recognise revenue on Order Fulfilled Dates or not. Valid values are 0 or 1
+     */
+    public function get_revrec_profile_details($profile_id, $client_profile_id)
+    {
+        return $this->__ws_call('get_revrec_profile_details', Array(
+                'profile_id' => $profile_id,
+                'client_profile_id' => $client_profile_id
+        ));
+    }
+
+    /**
+     * Creates a revrec profile
+     * @param string $profile_name Specifies Profile Name
+     * @param string $client_profile_id Specifies client defined id for Profile
+     * @param string $profile_desc Specifies description for the Profile
+     * @param int $on_plan_payment_date Specifies whether to recognise revenue on Plan Payment Dates or not. Valid values are 0 or 1
+     * @param int $on_order_payment_date Specifies whether to recognise revenue on Order Payment Dates or not. Valid values are 0 or 1
+     * @param int $on_order_fulfill_date Specifies whether to recognise revenue on Order Fulfilled Dates or not. Valid values are 0 or 1
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int profile_id Profile Id
+     */
+    public function create_revrec_profile($profile_name, $client_profile_id = null, $profile_desc = null, $on_plan_payment_date = null, $on_order_payment_date = null, $on_order_fulfill_date = null)
+    {
+        return $this->__ws_call('create_revrec_profile', Array(
+                'profile_name' => $profile_name,
+                'client_profile_id' => $client_profile_id,
+                'profile_desc' => $profile_desc,
+                'on_plan_payment_date' => $on_plan_payment_date,
+                'on_order_payment_date' => $on_order_payment_date,
+                'on_order_fulfill_date' => $on_order_fulfill_date
+        ));
+    }
+
+    /**
+     * Updates a revrec profile
+     * @param int $profile_id Profile Id
+     * @param string $profile_name Specifies Profile Name
+     * @param string $client_profile_id Specifies client defined id for Profile
+     * @param string $profile_desc Specifies description for the Profile
+     * @param int $on_plan_payment_date Specifies whether to recognise revenue on Plan Payment Dates or not. Valid values are 0 or 1
+     * @param int $on_order_payment_date Specifies whether to recognise revenue on Order Payment Dates or not. Valid values are 0 or 1
+     * @param int $on_order_fulfill_date Specifies whether to recognise revenue on Order Fulfilled Dates or not. Valid values are 0 or 1
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.<br>int profile_id Profile Id
+     */
+    public function update_revrec_profile($profile_id, $profile_name, $client_profile_id, $profile_desc = null, $on_plan_payment_date = null, $on_order_payment_date = null, $on_order_fulfill_date = null)
+    {
+        return $this->__ws_call('update_revrec_profile', Array(
+                'profile_id' => $profile_id,
+                'profile_name' => $profile_name,
+                'client_profile_id' => $client_profile_id,
+                'profile_desc' => $profile_desc,
+                'on_plan_payment_date' => $on_plan_payment_date,
+                'on_order_payment_date' => $on_order_payment_date,
+                'on_order_fulfill_date' => $on_order_fulfill_date
+        ));
+    }
+
+    /**
+     * Deletes a revrec profile
+     * @param int $profile_id Specifies Profile Id
+     * @param string $client_profile_id Specifies client defined id for Profile
+     * @return mixed[] int error_code Aria-assigned error identifier. 0 indicates no error<br>string error_msg Textual description of any error that occurred.  &quot;OK&quot; if there was no error.
+     */
+    public function delete_revrec_profile($profile_id, $client_profile_id)
+    {
+        return $this->__ws_call('delete_revrec_profile', Array(
+                'profile_id' => $profile_id,
+                'client_profile_id' => $client_profile_id
         ));
     }
 
